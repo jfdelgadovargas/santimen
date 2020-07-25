@@ -22,7 +22,7 @@ export class DetailmodalPage implements OnInit {
     this.subtotal = this.precio;
   }
 
-  cerrar(blPide, cantidad){
+  cerrar(blPide){
     if(blPide){
       this.modalCtrl.dismiss({
       cantidad: this.cantidad * 1,

@@ -25,13 +25,13 @@
           <ion-select-option *ngFor="let cantidad of [1,2,3,4,5,6,7,8,9,10]" class="lista-item" value={{cantidad}}>{{cantidad}}</ion-select-option>
         </ion-select></div> -->
         <div class="step-component">
-          <div class="remove" [ngClass]="{'no-active':cantidad === 1}" (click)="restar(id, cantidad)">
+          <div class="remove" [ngClass]="{'no-active':cantidad === 1}" (click)="restar()">
             <ion-icon name="remove-outline"></ion-icon>
           </div>
           <div class="number">
             {{cantidad}}
           </div>
-          <div class="add" (click)="adicionar(id)">
+          <div class="add" (click)="adicionar()">
             <ion-icon name="add-outline"></ion-icon>
           </div>
         </div>
