@@ -98,3 +98,27 @@ ion-grid{
           opacity: 0.2;
       }
   }
+
+  .total-button{
+    display: flex;
+    color: #ffffff;
+    justify-content: space-between;
+    background-image: var(--main-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin:0.5rem;
+    .num-products{
+      background-color: #ff4e00;
+      border-radius: 5px;
+      text-align: center;
+      padding: 0.2rem 0.5rem;
+      align-self: center;
+    }
+    .icon-text{
+      font-weight: bold;
+      align-self: center;
+    }
+    .price{
+      align-self: center;
+    }
+  }

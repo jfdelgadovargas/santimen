@@ -63,3 +63,40 @@ img{
   .action-sheet-button.sc-ion-action-sheet-ios{
       color: var(--text-color) !important;
   }
+  .step-component{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0), 0 1px 2px rgba(0,0,0,0.10);
+    .add, .remove{
+      font-weight: bold;
+        margin: 0 1rem;
+        font-size: 1.5rem;
+    }
+    .no-active{
+        opacity: 0.2;
+    }
+}
+.total-button{
+    display: flex;
+    color: #ffffff;
+    justify-content: space-between;
+    background-image: var(--main-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin:0.5rem;
+    .num-products{
+      background-color: #ff4e00;
+      border-radius: 5px;
+      text-align: center;
+      padding: 0.2rem 0.5rem;
+      align-self: center;
+    }
+    .icon-text{
+      font-weight: bold;
+      align-self: center;
+    }
+    .price{
+      align-self: center;
+    }
+  }

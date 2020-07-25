@@ -36,7 +36,7 @@
     </ion-item>
   </ion-list>
 </ion-content>
-<ion-footer>
+<!-- <ion-footer>
   <ion-toolbar>
     <ion-row>
       <ion-col size="6">
@@ -49,6 +49,19 @@
         <ion-button class="basket-button" mode="ios" (click)="pedir()">
           Hacer pedido ({{totalProductos}})
         </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer> -->
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="12" class="col-button">
+        <div class="total-button" (click)="pedir()">
+          <div class="num-products">{{totalProductos}}</div>
+          <div class="icon-text">Hacer pedido</div>
+          <div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency"></span></div>
+        </div>
       </ion-col>
     </ion-row>
   </ion-toolbar>

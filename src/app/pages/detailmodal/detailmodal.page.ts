@@ -44,4 +44,16 @@ export class DetailmodalPage implements OnInit {
     this.subtotal = this.precio * $event.detail.value;
     this.cantidad = $event.detail.value;
     }
+
+    restar(){
+      if(this.cantidad === 1){
+        return;
+      }
+      this.cantidad -= 1;
+      this.subtotal = this.precio * this.cantidad;
+    }
+    adicionar(){
+      this.cantidad += 1;
+      this.subtotal = this.precio * this.cantidad;
+    }
 }

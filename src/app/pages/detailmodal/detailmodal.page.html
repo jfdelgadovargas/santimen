@@ -21,28 +21,35 @@
         Cantidad:
         </ion-col>
         <ion-col size="4">
-        <div><ion-select class="seleccion-cantidad" interface="action-sheet" mode="ios" value=1 (ionChange)="seleccionaCantidad($event)">
+        <!-- <div><ion-select class="seleccion-cantidad" interface="action-sheet" mode="ios" value=1 (ionChange)="seleccionaCantidad($event)">
           <ion-select-option *ngFor="let cantidad of [1,2,3,4,5,6,7,8,9,10]" class="lista-item" value={{cantidad}}>{{cantidad}}</ion-select-option>
-        </ion-select></div>
+        </ion-select></div> -->
+        <div class="step-component">
+          <div class="remove" [ngClass]="{'no-active':cantidad === 1}" (click)="restar(id, cantidad)">
+            <ion-icon name="remove-outline"></ion-icon>
+          </div>
+          <div class="number">
+            {{cantidad}}
+          </div>
+          <div class="add" (click)="adicionar(id)">
+            <ion-icon name="add-outline"></ion-icon>
+          </div>
+        </div>
         </ion-col>
       </ion-row>
       </ion-grid>
   </div>
 </ion-content>
-<ion-footer>
-	<ion-toolbar>
-	  <ion-row>
-		<ion-col size="6" class="col-price">
-		  <div class="price-info">
-			<div class="price-text">Total:</div>
-			<div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' }} <span class="price-currency">COP</span></div>
-		  </div>
-		</ion-col>
-		<ion-col size="6">
-		  <ion-button shape="round" mode="ios" expand="full" (click)="cerrar(true)">
-			Agregar
-		  </ion-button>
-		</ion-col>
-	  </ion-row>
-	</ion-toolbar>
+  <ion-footer>
+    <ion-toolbar>
+      <ion-row>
+        <ion-col size="12" class="col-button">
+          <div class="total-button" (click)="cerrar(true)">
+            <div class="num-products">{{cantidad}}</div>
+            <div class="icon-text">Agregar</div>
+            <div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency"></span></div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
   </ion-footer>
