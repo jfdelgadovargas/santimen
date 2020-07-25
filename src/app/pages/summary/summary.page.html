@@ -1,0 +1,55 @@
+<ion-content>
+  <div class="close-button" (click)="cerrar()">
+    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+  </div> 
+  <div class="section-title">Tu canasta</div>
+  <div class="more-products" (click)="cerrar()"><ion-icon name="chevron-back-outline"></ion-icon>Volver al menú</div>
+  <ion-list>
+    <ion-item *ngFor="let producto of canasta" lines="none">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" class="food-image">
+            <ion-thumbnail item-start>
+              <img src={{producto.imagen}}>
+            </ion-thumbnail>
+            <div class="product">
+              <div class="food-title">{{producto.nombre}}</div>
+              <div class="food-text"><p>{{producto.total | currency:'COP':'symbol-narrow' : '1.0-0'}}</p></div>
+            </div>
+          </ion-col>
+          <ion-col size="6" class="step-col">
+            <div class="trash" (click)="removerProducto(producto.id)"><ion-icon name="trash-outline"></ion-icon></div>
+            <div class="step-component">
+              <div class="remove" [ngClass]="{'no-active':producto.cantidad === 1}" (click)="restar(producto.id, producto.cantidad)">
+                <ion-icon name="remove-outline"></ion-icon>
+              </div>
+              <div class="number">
+                {{producto.cantidad}}
+              </div>
+              <div class="add" (click)="adicionar(producto.id)">
+                <ion-icon name="add-outline"></ion-icon>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>     
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6">
+        <div class="price-info">
+          <div class="price-text">Subtotal</div>
+          <div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency">COP</span></div>
+        </div>
+      </ion-col>
+      <ion-col size="6" class="col-button">
+        <ion-button class="basket-button" mode="ios" (click)="pedir()">
+          Hacer pedido ({{totalProductos}})
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

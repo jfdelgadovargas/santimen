@@ -10,6 +10,13 @@
 ion-grid{
   padding: 0.5rem 0;
 }
+.adicionar-btn{
+  background-image: var(--main-color);
+    --border-radius: 5px;
+  color: #ffffff;
+  padding: 0.3rem 1rem;
+  border-radius: 7px;
+}
 .food-image{
   ion-thumbnail{
     width: 100%;
@@ -33,11 +40,12 @@ ion-grid{
   }
 }
 .add-button{
+  display: flex;
+  justify-content: flex-end;
   padding-top: 0;
   text-align: right;
-  ion-button{
-    font-size: 16px;
-  }
+  font-size: 1rem;
+  align-items: center;
 }
 
 p{
@@ -48,4 +56,26 @@ p{
    -webkit-box-orient: vertical;
    -webkit-line-clamp: 4;
    overflow: hidden;
+}
+.total-button{
+  display: flex;
+  color: #ffffff;
+  justify-content: space-between;
+  background-image: var(--main-color);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin:0.5rem;
+  .num-products{
+    background-color: #ff4e00;
+    border-radius: 5px;
+    text-align: center;
+    padding: 0.2rem 0.5rem;
+  }
+  .icon-text{
+    font-weight: bold;
+    align-self: center;
+  }
+  .price{
+    align-self: center;
+  }
 }

@@ -1,0 +1,65 @@
+.close-button{
+    font-size: 2rem;
+    text-align: right;
+    color: var(--text-color);
+    background-color: white;
+    opacity: 0.6;
+    height: 2rem;
+    width: 2rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 50%;
+}
+.image{
+display: block;
+height: 250px;
+width: 100%;
+img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    }
+}
+.name{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 0.7rem 1rem;
+}
+.description{
+    margin: 0;
+    p{
+        font-size: 1rem;
+        color: var(--text-color);
+        margin: 0.5rem 1rem;
+    }
+}
+.price{
+    margin: 0.5rem 1rem;
+    .amount{
+        font-weight: bold;
+    }
+}
+.cantidad{
+    margin: 1rem;
+    ion-grid, ion-col{
+        padding: 0;
+    }
+}
+.seleccion-cantidad{
+    border: solid 1px #cccccc;
+    border-radius: 5px;
+}
+.col-price{
+    padding: 0.5rem 1rem;
+}
+.price-info{
+    .price{
+        margin:0;
+        font-weight: bold;
+    }
+  }
+  .action-sheet-button.sc-ion-action-sheet-ios{
+      color: var(--text-color) !important;
+  }

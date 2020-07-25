@@ -1,0 +1,48 @@
+
+<ion-content>
+  <div class="close-button" (click)="cerrar(false)">
+    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+  </div> 
+  <div class="image">
+    <img src={{imagen}}>
+  </div>
+  <div class="name">{{nombre}}</div>
+  <div class="description">
+    <p>
+      {{descripcion}}
+    </p>
+  </div>
+  <div class="price">Precio: <span class="amount">{{precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span></div>
+  <div class="options">{{opciones}}</div>
+  <div class="cantidad">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="8">
+        Cantidad:
+        </ion-col>
+        <ion-col size="4">
+        <div><ion-select class="seleccion-cantidad" interface="action-sheet" mode="ios" value=1 (ionChange)="seleccionaCantidad($event)">
+          <ion-select-option *ngFor="let cantidad of [1,2,3,4,5,6,7,8,9,10]" class="lista-item" value={{cantidad}}>{{cantidad}}</ion-select-option>
+        </ion-select></div>
+        </ion-col>
+      </ion-row>
+      </ion-grid>
+  </div>
+</ion-content>
+<ion-footer>
+	<ion-toolbar>
+	  <ion-row>
+		<ion-col size="6" class="col-price">
+		  <div class="price-info">
+			<div class="price-text">Total:</div>
+			<div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' }} <span class="price-currency">COP</span></div>
+		  </div>
+		</ion-col>
+		<ion-col size="6">
+		  <ion-button shape="round" mode="ios" expand="full" (click)="cerrar(true)">
+			Agregar
+		  </ion-button>
+		</ion-col>
+	  </ion-row>
+	</ion-toolbar>
+  </ion-footer>
