@@ -58,7 +58,7 @@ ion-grid{
     align-self: center;
     .food-text{
         font-weight: bold;
-        margin: 0.2rem;
+        margin: 0.2rem 0;
         p{
             margin: 0em;
         }
@@ -121,4 +121,19 @@ ion-grid{
     .price{
       align-self: center;
     }
+  }
+  .clear{
+      margin: 1rem auto;
+      color: var(--ion-color-primary);
+  }
+  .alert-canasta .alert-wrapper{
+      
+          .alert-head{
+              .alert-title{
+                  h2{
+                      color: red !important;
+                  }
+              }
+          }
+      
   }

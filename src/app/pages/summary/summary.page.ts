@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-summary',
@@ -10,7 +10,7 @@ export class SummaryPage implements OnInit {
   @Input() canasta;
   @Input() totalProductos;
   @Input() subtotal;
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController, public alertCtrl: AlertController) { }
 
   ngOnInit() {
     console.log(this.canasta);
@@ -64,7 +64,39 @@ export class SummaryPage implements OnInit {
     }
   }
 
+  async vaciarCanasta(){
+    const alert = await this.alertCtrl.create({
+      cssClass: 'alert-canasta',
+      header: 'Atención',
+      mode: 'ios',
+      message: '¿Estás seguro que deseas eliminar todos los productos de la canasta?',
+      buttons: [
+        {
+          text: 'No, volver',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('cancel');
+          }
+        }, {
+          text: 'Sí, seguro',
+          handler: () => {
+            this.canasta = [];
+            this.subtotal = 0;
+            this.totalProductos = 0;
+            this.cerrar();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   pedir(){
     console.log('Hace el pedido');
   }
+
 }
+
+
