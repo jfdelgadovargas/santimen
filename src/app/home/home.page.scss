@@ -1,82 +1,36 @@
-
-.section-title{
-  font-size: 1.2rem;
+.logo{
+  width: 100px;
+  margin: 1rem auto;
+}
+.home-title{
+  font-size: 1.5rem;
   font-weight: bold;
-  color:#292929;
-  padding: 0.5rem;
-  background-color:#f5f5f5;
-  padding-left: 1.5rem;
+  color: var(--text-color);
+  margin: 1rem auto;
+  text-align: center;
+  font-family: "Roboto", Helvetica, sans-serif;
 }
-ion-grid{
-  padding: 0.5rem 0;
+.intro-text{
+  font-size: 1rem;
+  margin: 1rem 2rem;
+  color: var(--text-color);
+  font-family: "Roboto", Helvetica, sans-serif;
 }
-.adicionar-btn{
-  background-image: var(--main-color);
-    --border-radius: 5px;
-  color: #ffffff;
-  padding: 0.3rem 1rem;
-  border-radius: 7px;
+.category-card{
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
-.food-image{
-  ion-thumbnail{
+.category-image{
     width: 100%;
     height: 100%;
-    --border-radius:5px;
-    margin: 0;
-  }
+    object-fit: cover;
 }
-.food-title{
-  font-size: 16px;
-  font-weight: bold;
-  color: #292929;
-}
-.food-price{
-  font-size: 1rem;
-  font-weight: bold;
-  margin-right: 1rem;
-  color: #292929;
-  span{
-    vertical-align: sub;
-  }
-}
-.add-button{
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 0;
-  text-align: right;
-  font-size: 1rem;
-  align-items: center;
-}
-
-p{
-  font-size: 14px;
-  font-family: 'Lato', sans-serif;
-  color:#464646;
-  display: -webkit-box;
-   -webkit-box-orient: vertical;
-   -webkit-line-clamp: 4;
-   overflow: hidden;
-}
-.total-button{
-  display: flex;
-  color: #ffffff;
-  justify-content: space-between;
-  background-image: var(--main-color);
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  margin:0.5rem;
-  .num-products{
-    background-color: #ff4e00;
-    border-radius: 5px;
-    text-align: center;
-    padding: 0.2rem 0.5rem;
-    align-self: center;
-  }
-  .icon-text{
+.category-title{
+    font-size: 1rem;
     font-weight: bold;
-    align-self: center;
-  }
-  .price{
-    align-self: center;
-  }
+    margin: 0.5rem 0;
+    text-align: center;
+    color: var(--text-color);
 }

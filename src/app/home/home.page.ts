@@ -18,6 +18,7 @@ export class HomePage {
   pizzas: Observable<any[]>;
   otros: Observable<any[]>;
   bebidas: Observable<any[]>;
+  categorias: Observable<any[]>;
   subtotal: number;
   canasta = [];
   totalProductos = 0;
@@ -34,6 +35,7 @@ export class HomePage {
     // this.pizzas = this.menuService.getMenu('pizzas');
     // this.otros = this.menuService.getMenu('otros');
     // this.bebidas = this.menuService.getMenu('bebidas');
+    this.categorias = this.menuService.getCategorias();
     let totalizer = JSON.parse(localStorage.getItem('totalizer'));
     if(totalizer == null){
       console.log('inicializa totalizer');

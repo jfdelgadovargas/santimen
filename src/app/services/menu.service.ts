@@ -46,6 +46,21 @@ export class MenuService {
 		  
   }
 
+  getCategorias(): Observable<any[]> {
+		this.platosCollection = this.afs.collection<any>('categorias', ref => ref.orderBy('order', 'asc'));
+		this.platos = this.platosCollection.snapshotChanges().pipe(
+		  map(actions => {
+			return actions.map(a => {
+			  const data = a.payload.doc.data();
+			  const id = a.payload.doc.id;
+			  return { id, ...data };
+			});
+		  })
+		);
+		return this.platos;
+		  
+  }
+
   getPlato(id: string): Observable<any> {
     return this.platosCollection.doc<any>(id).collection(id)
     .snapshotChanges().pipe(
