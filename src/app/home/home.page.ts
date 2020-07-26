@@ -9,7 +9,7 @@ import { SummaryPage } from '../pages/summary/summary.page';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  styleUrls: ['home.page.scss', '../../theme/utilities.scss'],
 })
 export class HomePage {
   hamburguesas: Observable<any[]>;
@@ -29,12 +29,6 @@ export class HomePage {
 
   ngOnInit(){
     this.subtotal = 0;
-    // this.hamburguesas = this.menuService.getMenu('hamburguesas');
-    // this.perros = this.menuService.getMenu('perros');
-    // this.asados = this.menuService.getMenu('asados');
-    // this.pizzas = this.menuService.getMenu('pizzas');
-    // this.otros = this.menuService.getMenu('otros');
-    // this.bebidas = this.menuService.getMenu('bebidas');
     this.categorias = this.menuService.getCategorias();
     let totalizer = JSON.parse(localStorage.getItem('totalizer'));
     if(totalizer == null){

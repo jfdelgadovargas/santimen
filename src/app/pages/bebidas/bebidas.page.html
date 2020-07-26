@@ -1,7 +1,10 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons>
-      <ion-back-button (click)="atras()" slot="start" text="Atrás"></ion-back-button>
+      <ion-button (click)="atras()">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Atrás
+      </ion-button>
     </ion-buttons>
     <ion-title>Bebidas</ion-title>
   </ion-toolbar>

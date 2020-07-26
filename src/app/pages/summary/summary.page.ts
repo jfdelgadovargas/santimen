@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
@@ -10,7 +11,7 @@ export class SummaryPage implements OnInit {
   @Input() canasta;
   @Input() totalProductos;
   @Input() subtotal;
-  constructor(private modalCtrl: ModalController, public alertCtrl: AlertController) { }
+  constructor(private router: Router, private modalCtrl: ModalController, public alertCtrl: AlertController) { }
 
   ngOnInit() {
     console.log(this.canasta);
@@ -84,7 +85,13 @@ export class SummaryPage implements OnInit {
             this.canasta = [];
             this.subtotal = 0;
             this.totalProductos = 0;
+            localStorage.setItem('totalizer', JSON.stringify({
+              canasta: this.canasta,
+              subtotal: this.subtotal,
+              totalProductos: this. totalProductos
+            }));
             this.cerrar();
+            this.router.navigate(['home']);
           }
         }
       ]
