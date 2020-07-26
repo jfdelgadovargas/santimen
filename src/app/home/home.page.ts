@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuService, Plato } from '../services/menu.service';
+import { MenuService } from '../services/menu.service';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { DetailmodalPage } from '../pages/detailmodal/detailmodal.page';
