@@ -4,6 +4,7 @@ import { MenuService } from 'src/app/services/menu.service';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { DetailmodalPage } from '../detailmodal/detailmodal.page';
+import { SummaryPage } from '../summary/summary.page';
 
 @Component({
   selector: 'app-hamburguesas',
@@ -12,13 +13,21 @@ import { DetailmodalPage } from '../detailmodal/detailmodal.page';
 })
 export class HamburguesasPage implements OnInit {
   hamburguesas: Observable<any[]>;
-  subtotal: number;
+  subtotal: 0;
   canasta = [];
   totalProductos = 0;
-  constructor(private router: Router, private menuService: MenuService, private modalCtrl: ModalController) { }
+
+  constructor(private router: Router,
+              private menuService: MenuService,
+              private modalCtrl: ModalController) { }
 
   ngOnInit() {
     this.hamburguesas = this.menuService.getMenu('hamburguesas');
+    let totalizer =  JSON.parse(localStorage.getItem('totalizer'));
+    this.canasta = totalizer.canasta;
+    this.totalProductos = totalizer.totalProductos;
+    this.subtotal = totalizer.subtotal;
+    
   }
 
   async detail(item){
@@ -61,7 +70,41 @@ export class HamburguesasPage implements OnInit {
       }
 
       this.subtotal += data.data.total;
-      console.log('Su carrito va así:', this.canasta);
+      localStorage.setItem('totalizer', JSON.stringify({
+        canasta: this.canasta,
+        subtotal: this.subtotal,
+        totalProductos: this. totalProductos
+      }));
+      console.log('Su carrito en hamburguesas:', this.canasta);
     }
+  }
+
+  async resumen(){
+    console.log('Hace el pedido');
+    const modalResumen = await this.modalCtrl.create({
+      component: SummaryPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        canasta: this.canasta,
+        totalProductos: this.totalProductos,
+        subtotal: this.subtotal
+      }
+    });
+    await modalResumen.present();
+    const resumen = await modalResumen.onDidDismiss();
+    const nuevosProductos = resumen.data;
+    this.canasta = nuevosProductos.canasta;
+    this.totalProductos = nuevosProductos.totalProductos;
+    this.subtotal = nuevosProductos.subtotal;
+    localStorage.setItem('totalizer', JSON.stringify({
+      canasta: this.canasta,
+      subtotal: this.subtotal,
+      totalProductos: this. totalProductos
+    }));
+  }
+
+
+  atras(){
+    this.router.navigate(['/home']);
   }
 }

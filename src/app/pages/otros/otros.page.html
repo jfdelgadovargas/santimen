@@ -3,29 +3,29 @@
     <ion-buttons>
       <ion-back-button (click)="atras()" slot="start">Atrás</ion-back-button>
     </ion-buttons>
-    <ion-title>hamburguesas</ion-title>
+    <ion-title>otros</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="section-title"><h4>Hamburguesas</h4></div>
+  <div class="section-title"><h4>Más delicias</h4></div>
   <ion-list>
-    <ion-item *ngFor="let hamburguesa of (hamburguesas | async)">
+    <ion-item *ngFor="let otro of (otros | async)">
       <ion-grid>
         <ion-row>
           <ion-col size="4" class="food-image">
             <ion-thumbnail item-start>
-              <img src={{hamburguesa.imagen}}>
+              <img src={{otro.imagen}}>
             </ion-thumbnail>
           </ion-col>
           <ion-col size="8">
-            <div class="food-title">{{hamburguesa.nombre}}</div>
-            <div food-text><p>{{hamburguesa.descripcion}}</p></div>
+            <div class="food-title">{{otro.nombre}}</div>
+            <div food-text><p>{{otro.descripcion}}</p></div>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="12" class="add-button">
-            <span class="food-price">{{hamburguesa.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span><div class="adicionar-btn" (click)="detail(hamburguesa)">Agregar</div>
+            <span class="food-price">{{otro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span><div class="adicionar-btn" (click)="detail(otro)">Agregar</div>
           </ion-col>
         </ion-row>
       </ion-grid>     

@@ -1,52 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MenuService } from 'src/app/services/menu.service';
 import { Router } from '@angular/router';
-import { MenuService } from '../services/menu.service';
-import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
-import { DetailmodalPage } from '../pages/detailmodal/detailmodal.page';
-import { SummaryPage } from '../pages/summary/summary.page';
+import { Observable } from 'rxjs';
+import { SummaryPage } from '../summary/summary.page';
+import { DetailmodalPage } from '../detailmodal/detailmodal.page';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-asados',
+  templateUrl: './asados.page.html',
+  styleUrls: ['../../../theme/utilities.scss', './asados.page.scss'],
 })
-export class HomePage {
-  hamburguesas: Observable<any[]>;
-  perros: Observable<any[]>;
+export class AsadosPage implements OnInit {
   asados: Observable<any[]>;
-  pizzas: Observable<any[]>;
-  otros: Observable<any[]>;
-  bebidas: Observable<any[]>;
-  subtotal: number;
+  subtotal: 0;
   canasta = [];
   totalProductos = 0;
-
   constructor(private router: Router,
               private menuService: MenuService,
-              private modalCtrl: ModalController) {}
+              private modalCtrl: ModalController) { }
 
-  ngOnInit(){
-    this.subtotal = 0;
-    // this.hamburguesas = this.menuService.getMenu('hamburguesas');
-    // this.perros = this.menuService.getMenu('perros');
-    // this.asados = this.menuService.getMenu('asados');
-    // this.pizzas = this.menuService.getMenu('pizzas');
-    // this.otros = this.menuService.getMenu('otros');
-    // this.bebidas = this.menuService.getMenu('bebidas');
-    let totalizer = JSON.parse(localStorage.getItem('totalizer'));
-    if(totalizer == null){
-      console.log('inicializa totalizer');
-      localStorage.setItem('totalizer', JSON.stringify({
-        canasta: this.canasta,
-        subtotal: this.subtotal,
-        totalProductos: this. totalProductos
-      }));
-    }else{
-      this.canasta = totalizer.canasta;
-      this.subtotal = totalizer.subtotal;
-      this.totalProductos = totalizer.totalProductos;
-    }
+  ngOnInit() {
+    this.asados = this.menuService.getMenu('asados');
+    let totalizer =  JSON.parse(localStorage.getItem('totalizer'));
+    this.canasta = totalizer.canasta;
+    this.totalProductos = totalizer.totalProductos;
+    this.subtotal = totalizer.subtotal;
   }
 
   async detail(item){
@@ -66,15 +45,15 @@ export class HomePage {
 
     const data = await modal.onDidDismiss();
     const productos = this.canasta.length;
-    if(data.data){
+    if (data.data){
       const seleccion = data.data;
-      if(productos === 0){
+      if (productos === 0){
         this.canasta.push(data.data);
         this.totalProductos += data.data.cantidad;
       }else{
         let blFind = false;
-        for(let producto of this.canasta){
-          if(seleccion.id === producto.id){
+        for (const producto of this.canasta){
+          if (seleccion.id === producto.id){
             blFind = true;
             producto.cantidad += seleccion.cantidad;
             producto.total += seleccion.total;
@@ -82,15 +61,20 @@ export class HomePage {
             break;
           }
         }
-        if(blFind == false){
+        if (blFind === false){
           this.canasta.push(seleccion);
           this.totalProductos += seleccion.cantidad;
         }
       }
 
       this.subtotal += data.data.total;
-      console.log('Su carrito va así:', this.canasta);
-    } 
+      localStorage.setItem('totalizer', JSON.stringify({
+        canasta: this.canasta,
+        subtotal: this.subtotal,
+        totalProductos: this. totalProductos
+      }));
+      console.log('Su carrito en asados:', this.canasta);
+    }
   }
 
   async resumen(){
@@ -110,9 +94,16 @@ export class HomePage {
     this.canasta = nuevosProductos.canasta;
     this.totalProductos = nuevosProductos.totalProductos;
     this.subtotal = nuevosProductos.subtotal;
+    localStorage.setItem('totalizer', JSON.stringify({
+      canasta: this.canasta,
+      subtotal: this.subtotal,
+      totalProductos: this. totalProductos
+    }));
   }
 
-  goDetail(sectionName){
-    this.router.navigate([`${sectionName}`]);
+
+  atras(){
+    this.router.navigate(['/home']);
   }
+
 }
