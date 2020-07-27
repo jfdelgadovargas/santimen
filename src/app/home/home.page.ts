@@ -28,6 +28,7 @@ export class HomePage {
               private modalCtrl: ModalController) {}
 
   ngOnInit(){
+    console.log('ngOnInit');
     this.subtotal = 0;
     this.categorias = this.menuService.getCategorias();
     let totalizer = JSON.parse(localStorage.getItem('totalizer'));
@@ -110,5 +111,12 @@ export class HomePage {
 
   goDetail(sectionName){
     this.router.navigate([`${sectionName}`]);
+  }
+
+  ionViewDidEnter(){
+    const totalizer = JSON.parse(localStorage.getItem('totalizer'));
+    this.canasta = totalizer.canasta;
+    this.subtotal = totalizer.subtotal;
+    this.totalProductos = totalizer.totalProductos;
   }
 }
