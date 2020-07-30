@@ -61,8 +61,8 @@ export class MenuService {
 		  
   }
 
-  getPlato(id: string): Observable<any> {
-    return this.platosCollection.doc<any>(id).collection(id)
+  getMenuDetail(categoryID, id: string): Observable<any> {
+    return this.afs.collection<any>(categoryID).doc<any>(id).collection('opciones', ref => ref.orderBy('precio', 'asc'))
     .snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
