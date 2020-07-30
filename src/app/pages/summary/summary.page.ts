@@ -14,7 +14,8 @@ export class SummaryPage implements OnInit {
   constructor(private router: Router, private modalCtrl: ModalController, public alertCtrl: AlertController) { }
 
   ngOnInit() {
-    console.log(this.canasta);
+    console.log('canasta', this.canasta);
+    this.organizarCanasta();
   }
 
   cerrar(){
@@ -102,6 +103,12 @@ export class SummaryPage implements OnInit {
 
   pedir(){
     console.log('Hace el pedido');
+  }
+
+  organizarCanasta(){
+    for (const producto of this.canasta){
+      producto.simple = producto.arOpciones.length === 1;
+    }
   }
 
 }

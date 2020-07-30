@@ -13,17 +13,26 @@ export class DetailmodalPage implements OnInit {
   @Input() imagen;
   @Input() precio;
   @Input() opciones;
+  
   subtotal;
   cantidad = 1;
+  seleccion;
+  arrOpciones = [];
   
   constructor(private modalCtrl: ModalController) { }
   
   ngOnInit() {
     this.subtotal = this.precio;
+    this.opciones.subscribe(opciones => {
+      this.seleccion = opciones[0].id;
+      this.arrOpciones = opciones;
+      return opciones;
+    });
   }
 
   cerrar(blPide){
     if(blPide){
+      // console.log('cierra', this.seleccion);
       this.modalCtrl.dismiss({
       cantidad: this.cantidad * 1,
       id: this.id,
@@ -32,6 +41,7 @@ export class DetailmodalPage implements OnInit {
       imagen: this.imagen,
       precio: this.precio,
       opciones: this.opciones,
+      opcionSeleccionada: this.seleccion,
       total: this.subtotal
       });
     }else{
@@ -55,5 +65,16 @@ export class DetailmodalPage implements OnInit {
     adicionar(){
       this.cantidad += 1;
       this.subtotal = this.precio * this.cantidad;
+    }
+
+    seleccionar(id){
+      this.seleccion = id.detail.value;
+      // console.log('Seleccion en seleccionar()', this.seleccion);
+      for (const item of this.arrOpciones){
+        if (item.id === this.seleccion){
+          this.precio = item.precio;
+          this.subtotal = this.precio * this.cantidad;
+        }
+      }
     }
 }

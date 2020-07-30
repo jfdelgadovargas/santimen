@@ -28,12 +28,10 @@ export class HomePage {
               private modalCtrl: ModalController) {}
 
   ngOnInit(){
-    console.log('ngOnInit');
     this.subtotal = 0;
     this.categorias = this.menuService.getCategorias();
-    let totalizer = JSON.parse(localStorage.getItem('totalizer'));
+    const totalizer = JSON.parse(localStorage.getItem('totalizer'));
     if(totalizer == null){
-      console.log('inicializa totalizer');
       localStorage.setItem('totalizer', JSON.stringify({
         canasta: this.canasta,
         subtotal: this.subtotal,

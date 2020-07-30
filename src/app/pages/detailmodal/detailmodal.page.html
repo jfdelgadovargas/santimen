@@ -13,7 +13,6 @@
     </p>
   </div>
   <div class="price">Precio: <span class="amount">{{precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span></div>
-  <div class="options">{{opciones}}</div>
   <div class="cantidad">
     <ion-grid>
       <ion-row>
@@ -21,9 +20,6 @@
         Cantidad:
         </ion-col>
         <ion-col size="4">
-        <!-- <div><ion-select class="seleccion-cantidad" interface="action-sheet" mode="ios" value=1 (ionChange)="seleccionaCantidad($event)">
-          <ion-select-option *ngFor="let cantidad of [1,2,3,4,5,6,7,8,9,10]" class="lista-item" value={{cantidad}}>{{cantidad}}</ion-select-option>
-        </ion-select></div> -->
         <div class="step-component">
           <div class="remove" [ngClass]="{'no-active':cantidad === 1}" (click)="restar()">
             <ion-icon name="remove-outline"></ion-icon>
@@ -38,6 +34,17 @@
         </ion-col>
       </ion-row>
       </ion-grid>
+      <div class="options">
+      <ion-list>
+        <ion-radio-group ([ngModel])="seleccion" value="{{seleccion}}" (ionChange)="seleccionar($event)">
+          <ion-item class="option" *ngFor="let opcion of (opciones | async)">
+            <ion-label class="option-name">{{opcion.nombre}}</ion-label>
+            <ion-radio slot="start" mode="md" class="option-value" value="{{opcion.id}}">{{opcion.precio}}</ion-radio>{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+    </div>
+
   </div>
 </ion-content>
   <ion-footer>
