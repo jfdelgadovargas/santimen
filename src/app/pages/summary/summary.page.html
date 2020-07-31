@@ -9,9 +9,9 @@
     <div class="padre">
       
     </div>
-    <ion-item *ngFor="let producto of canasta" lines="none">
+    <ion-item *ngFor="let producto of canasta">
       <ng-template [ngIf]="producto.simple" [ngIfElse]="multiple">
-        <ion-grid>
+        <ion-grid class="normal-grid">
           <ion-row>
             <ion-col size="6" class="food-image">
               <ion-thumbnail item-start>
@@ -56,12 +56,23 @@
                 <ion-col size="6" class="step-col">
                   {{producto.cantidad}}
                 </ion-col>
+                <!-- <ion-col size="6" class="step-col">
+                  <div class="step-component">
+                    <div class="remove">
+                      <ion-icon name="remove-outline"></ion-icon>
+                    </div>
+                    <div class="number">
+                      {{producto.cantidad}}
+                    </div>
+                    <div class="add">
+                      <ion-icon name="add-outline"></ion-icon>
+                    </div>
+                  </div>
+                </ion-col> -->
               </ion-row>
             </ion-grid>
           </div>
-          <div class="opciones">
-            <div class="title">Detalle:</div>
-            
+          <div class="opciones">        
                <ion-grid>
           <ion-row *ngFor="let opcion of producto.arOpciones">
             <ion-col size="6" class="food-image">

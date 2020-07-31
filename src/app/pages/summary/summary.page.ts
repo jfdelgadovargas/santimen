@@ -107,7 +107,7 @@ export class SummaryPage implements OnInit {
 
   organizarCanasta(){
     for (const producto of this.canasta){
-      producto.simple = producto.arOpciones.length === 1;
+      producto.simple = producto.opciones.length === 1;
     }
   }
 

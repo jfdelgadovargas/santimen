@@ -18,6 +18,7 @@ export class DetailmodalPage implements OnInit {
   cantidad = 1;
   seleccion;
   arrOpciones = [];
+  blOpciones = false;
   
   constructor(private modalCtrl: ModalController) { }
   
@@ -26,6 +27,7 @@ export class DetailmodalPage implements OnInit {
     this.opciones.subscribe(opciones => {
       this.seleccion = opciones[0].id;
       this.arrOpciones = opciones;
+      this.blOpciones = opciones.length > 1;
       return opciones;
     });
   }
