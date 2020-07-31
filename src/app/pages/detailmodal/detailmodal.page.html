@@ -34,18 +34,17 @@
         </ion-col>
       </ion-row>
       </ion-grid>
-      <div class="options">
       <ion-list>
         <ion-radio-group ([ngModel])="seleccion" value="{{seleccion}}" (ionChange)="seleccionar($event)">
-          <ion-item class="option" *ngFor="let opcion of (opciones | async)">
-            <ion-label class="option-name">{{opcion.nombre}}</ion-label>
-            <ion-radio slot="start" mode="md" class="option-value" value="{{opcion.id}}">{{opcion.precio}}</ion-radio>{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}
-          </ion-item>
+          <div class="option" *ngFor="let opcion of (opciones | async)">
+          <ion-item *ngIf="opcion.default === false && blOpciones === true">
+              <ion-label class="option-name">{{opcion.nombre}}</ion-label>
+              <ion-radio slot="start" mode="md" class="option-value" value="{{opcion.id}}">{{opcion.precio}}</ion-radio>{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}
+            </ion-item>
+          </div>
         </ion-radio-group>
       </ion-list>
     </div>
-
-  </div>
 </ion-content>
   <ion-footer>
     <ion-toolbar>
