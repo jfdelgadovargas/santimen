@@ -99,6 +99,10 @@ ion-grid{
     align-self: center;
     margin-right: 1rem;
 }
+.step-component.multiple{
+    box-shadow: none;
+    font-weight: bold;
+}
   .step-component{
       display: flex;
       width: 100px;

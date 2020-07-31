@@ -36,6 +36,26 @@ export class SummaryPage implements OnInit {
         break;
       }
     }
+    this.actualizarCanasta();
+  }
+
+  adicionarMultiple(idProducto, idOpcion){
+    for (const producto of this.canasta){
+      if (idProducto === producto.id){
+        producto.cantidad += 1;
+        producto.total += producto.precio;
+        this.totalProductos += 1;
+        this.subtotal += producto.precio;
+        for (const opcion of producto.arOpciones){
+          if (idOpcion === opcion.id){
+            opcion.cantidad += 1;
+            break;
+          }
+        }
+        break;
+      }
+    }
+    this.actualizarCanasta();
   }
 
   removerProducto(id){
@@ -46,7 +66,41 @@ export class SummaryPage implements OnInit {
         this.canasta.splice(i, 1);
       }
     }
+    this.actualizarCanasta();
     if(this.canasta.length === 0){
+      this.cerrar();
+    }
+  }
+
+  removerOpcion(idProducto, cantidadProducto,  idOpcion){
+    if (cantidadProducto === 1){
+      console.log('Eliminar el producto');
+      for (const [i, producto] of this.canasta.entries()){
+        if (idProducto === producto.id){
+          this.subtotal -= producto.total;
+          this.totalProductos -= producto.cantidad;
+          this.canasta.splice(i, 1);
+        }
+      }
+    }else{
+      for (const [i, producto] of this.canasta.entries()){
+        if (idProducto === producto.id){
+          for (const [j, opcion] of producto.arOpciones.entries()){
+            if (idOpcion === opcion.id){
+              producto.total -= opcion.precio;
+              producto.cantidad -= opcion.cantidad;
+              this.subtotal -= opcion.precio;
+              this.totalProductos -= opcion.cantidad;
+              producto.arOpciones.splice(j, 1);
+              break;
+            }
+          }
+          break;
+        }
+      }
+    }
+    this.actualizarCanasta();
+    if (this.canasta.length === 0){
       this.cerrar();
     }
   }
@@ -64,6 +118,29 @@ export class SummaryPage implements OnInit {
         break;
       }
     }
+    this.actualizarCanasta();
+  }
+
+  restarMultiple(idProducto, idOpcion, cantidadProducto, cantidadOpcion){
+    if (cantidadOpcion === 1){
+      return;
+    }
+    for (const producto of this.canasta){
+      if (idProducto === producto.id){
+        producto.cantidad -= 1;
+        producto.total -= producto.precio;
+        this.totalProductos -= 1;
+        this.subtotal -= producto.precio;
+        for (const opcion of producto.arOpciones){
+          if (opcion.id === idOpcion){
+            opcion.cantidad -= 1;
+            break;
+          }
+        }
+        break;
+      }
+    }
+    this.actualizarCanasta();
   }
 
   async vaciarCanasta(){
@@ -109,6 +186,14 @@ export class SummaryPage implements OnInit {
     for (const producto of this.canasta){
       producto.simple = producto.opciones.length === 1;
     }
+  }
+
+  actualizarCanasta(){
+    localStorage.setItem('totalizer', JSON.stringify({
+      canasta: this.canasta,
+      subtotal: this.subtotal,
+      totalProductos: this. totalProductos
+    }));
   }
 
 }

@@ -54,21 +54,10 @@
                   </div>
                 </ion-col>
                 <ion-col size="6" class="step-col">
-                  {{producto.cantidad}}
-                </ion-col>
-                <!-- <ion-col size="6" class="step-col">
-                  <div class="step-component">
-                    <div class="remove">
-                      <ion-icon name="remove-outline"></ion-icon>
-                    </div>
-                    <div class="number">
-                      {{producto.cantidad}}
-                    </div>
-                    <div class="add">
-                      <ion-icon name="add-outline"></ion-icon>
-                    </div>
+                  <div class="step-component multiple">
+                    {{producto.cantidad}}
                   </div>
-                </ion-col> -->
+                </ion-col>
               </ion-row>
             </ion-grid>
           </div>
@@ -82,15 +71,15 @@
               </div>
             </ion-col>
             <ion-col size="6" class="step-col">
-              <div class="trash" (click)="removerProducto(producto.id)" *ngIf="producto.cantidad === 1"><ion-icon name="trash-outline"></ion-icon></div>
+              <div class="trash" (click)="removerOpcion(producto.id, producto.cantidad, opcion.id)" *ngIf="opcion.cantidad === 1"><ion-icon name="trash-outline"></ion-icon></div>
               <div class="step-component">
-                <div class="remove" [ngClass]="{'no-active':producto.cantidad === 1}" (click)="restar(producto.id, producto.cantidad)">
+                <div class="remove" [ngClass]="{'no-active':opcion.cantidad === 1}" (click)="restarMultiple(producto.id, opcion.id, producto.cantidad, opcion.cantidad)">
                   <ion-icon name="remove-outline"></ion-icon>
                 </div>
                 <div class="number">
                   {{opcion.cantidad}}
                 </div>
-                <div class="add" (click)="adicionar(producto.id)">
+                <div class="add" (click)="adicionarMultiple(producto.id, opcion.id)">
                   <ion-icon name="add-outline"></ion-icon>
                 </div>
               </div>

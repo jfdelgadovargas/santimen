@@ -34,7 +34,7 @@
         </ion-col>
       </ion-row>
       </ion-grid>
-      <ion-list>
+      <ion-list class="radio-group-list">
         <ion-radio-group ([ngModel])="seleccion" value="{{seleccion}}" (ionChange)="seleccionar($event)">
           <div class="option" *ngFor="let opcion of (opciones | async)">
           <ion-item *ngIf="opcion.default === false && blOpciones === true">
