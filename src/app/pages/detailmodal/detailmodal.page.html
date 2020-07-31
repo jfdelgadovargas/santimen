@@ -12,30 +12,10 @@
       {{descripcion}}
     </p>
   </div>
-  <div class="price">Precio: <span class="amount">{{precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span></div>
+  <div class="price"><span class="amount">{{precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span></div>
   <div class="cantidad">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="8">
-        Cantidad:
-        </ion-col>
-        <ion-col size="4">
-        <div class="step-component">
-          <div class="remove" [ngClass]="{'no-active':cantidad === 1}" (click)="restar()">
-            <ion-icon name="remove-outline"></ion-icon>
-          </div>
-          <div class="number">
-            {{cantidad}}
-          </div>
-          <div class="add" (click)="adicionar()">
-            <ion-icon name="add-outline"></ion-icon>
-          </div>
-        </div>
-        </ion-col>
-      </ion-row>
-      </ion-grid>
       <ion-list class="radio-group-list">
-        <ion-radio-group ([ngModel])="seleccion" value="{{seleccion}}" (ionChange)="seleccionar($event)">
+        <ion-radio-group allow-empty-selection ([ngModel])="seleccion" value="{{seleccion}}" (ionChange)="seleccionar($event)">
           <div class="option" *ngFor="let opcion of (opciones | async)">
           <ion-item *ngIf="opcion.default === false && blOpciones === true">
               <ion-label class="option-name">{{opcion.nombre}}</ion-label>
@@ -48,12 +28,24 @@
 </ion-content>
   <ion-footer>
     <ion-toolbar>
-      <ion-row>
-        <ion-col size="12" class="col-button">
-          <div class="total-button" (click)="cerrar(true)">
-            <div class="num-products">{{cantidad}}</div>
+      <ion-row class="total-container">
+        <ion-col size="5">
+          <div class="step-component">
+            <div class="remove" [ngClass]="{'no-active':cantidad === 1}" (click)="restar()">
+              <ion-icon name="remove-outline"></ion-icon>
+            </div>
+            <div class="number">
+              {{cantidad}}
+            </div>
+            <div class="add" (click)="adicionar()">
+              <ion-icon name="add-outline"></ion-icon>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col size="7" class="col-button">
+          <div class="total-button" (click)="cerrar(true)" [ngClass]="{'disable':blDisabled}">
             <div class="icon-text">Agregar</div>
-            <div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency"></span></div>
+            <div class="price-total">{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency"></span></div>
           </div>
         </ion-col>
       </ion-row>

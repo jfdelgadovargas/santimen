@@ -19,22 +19,27 @@ export class DetailmodalPage implements OnInit {
   seleccion;
   arrOpciones = [];
   blOpciones = false;
+  blDisabled = true;
   
   constructor(private modalCtrl: ModalController) { }
   
   ngOnInit() {
     this.subtotal = this.precio;
     this.opciones.subscribe(opciones => {
-      this.seleccion = opciones[0].id;
       this.arrOpciones = opciones;
       this.blOpciones = opciones.length > 1;
+      if (this.blOpciones === false){
+        this.seleccion = opciones[0].id;
+      }
       return opciones;
     });
   }
 
   cerrar(blPide){
+    if (this.blDisabled && blPide){
+      return;
+    }
     if(blPide){
-      // console.log('cierra', this.seleccion);
       this.modalCtrl.dismiss({
       cantidad: this.cantidad * 1,
       id: this.id,
@@ -70,8 +75,12 @@ export class DetailmodalPage implements OnInit {
     }
 
     seleccionar(id){
+      if(!id.detail.value){
+        this.blDisabled = true;
+        return;
+      }
+      this.blDisabled = false;
       this.seleccion = id.detail.value;
-      // console.log('Seleccion en seleccionar()', this.seleccion);
       for (const item of this.arrOpciones){
         if (item.id === this.seleccion){
           this.precio = item.precio;
