@@ -16,6 +16,7 @@ export class BebidasPage implements OnInit {
   subtotal: 0;
   canasta = [];
   totalProductos = 0;
+  opciones = [];
 
   constructor(private router: Router,
               private menuService: MenuService,
@@ -23,13 +24,17 @@ export class BebidasPage implements OnInit {
 
   ngOnInit() {
     this.bebidas = this.menuService.getMenu('bebidas');
-    let totalizer =  JSON.parse(localStorage.getItem('totalizer'));
+    const totalizer =  JSON.parse(localStorage.getItem('totalizer'));
     this.canasta = totalizer.canasta;
     this.totalProductos = totalizer.totalProductos;
     this.subtotal = totalizer.subtotal;
   }
 
   async detail(item){
+    this.menuService.getMenuDetail('bebidas', item.id).subscribe(opciones => {
+      this.opciones = opciones;
+      return opciones;
+    });
     const modal = await this.modalCtrl.create({
       component: DetailmodalPage,
       cssClass: 'my-custom-class',
@@ -48,34 +53,68 @@ export class BebidasPage implements OnInit {
     const data = await modal.onDidDismiss();
     const productos = this.canasta.length;
     if (data.data){
-      const seleccion = data.data;
-      if (productos === 0){
-        this.canasta.push(data.data);
-        this.totalProductos += data.data.cantidad;
-      }else{
-        let blFind = false;
-        for (const producto of this.canasta){
-          if (seleccion.id === producto.id){
-            blFind = true;
-            producto.cantidad += seleccion.cantidad;
-            producto.total += seleccion.total;
-            this.totalProductos += seleccion.cantidad;
-            break;
-          }
-        }
-        if (blFind === false){
+      data.data.opciones.subscribe(opciones => {
+        data.data.opciones = opciones;
+        const seleccion = data.data;
+        const idSeleccionado = seleccion.opcionSeleccionada;
+        if (productos === 0){
+          /**/
+          seleccion.arOpciones = [];
+          const nuevaOpcion = Object.assign({}, seleccion.opciones.find(elemento => elemento.id === idSeleccionado));
+          nuevaOpcion.cantidad = seleccion.cantidad;
+          seleccion.arOpciones.push(nuevaOpcion);
+          /**/
           this.canasta.push(seleccion);
           this.totalProductos += seleccion.cantidad;
+        }else{
+          let blFind = false;
+          let blFindOption = false;
+          for (const producto of this.canasta){
+            if (seleccion.id === producto.id){
+              blFind = true;
+              /**/
+              for (const opcion of producto.arOpciones){
+                if (opcion.id === idSeleccionado){
+                  blFindOption = true;
+                  opcion.cantidad += seleccion.cantidad;
+                  break;
+                }
+              }
+              if (blFindOption === false){
+                const nuevaOpcion = Object.assign({}, producto.opciones.find(elemento => elemento.id === idSeleccionado));
+                nuevaOpcion.cantidad = seleccion.cantidad;
+                producto.arOpciones.push(nuevaOpcion);
+              }
+              /**/
+              producto.cantidad += seleccion.cantidad;
+              producto.total += seleccion.total;
+              this.totalProductos += seleccion.cantidad;
+              break;
+            }
+          }
+          if (blFind === false){
+            /**/
+          seleccion.arOpciones = [];
+          for (const opcion of seleccion.opciones){
+            if (opcion.id === idSeleccionado){
+              const nuevaOpcion = Object.assign({}, opcion);
+              nuevaOpcion.cantidad = seleccion.cantidad;
+              seleccion.arOpciones.push(nuevaOpcion);
+              break;
+            }
+          }
+          /**/
+          this.canasta.push(seleccion);
+          this.totalProductos += seleccion.cantidad;
+          }
         }
-      }
-
-      this.subtotal += data.data.total;
-      localStorage.setItem('totalizer', JSON.stringify({
-        canasta: this.canasta,
-        subtotal: this.subtotal,
-        totalProductos: this. totalProductos
-      }));
-      console.log('Su carrito en bebidas:', this.canasta);
+        this.subtotal += seleccion.total;
+        localStorage.setItem('totalizer', JSON.stringify({
+          canasta: this.canasta,
+          subtotal: this.subtotal,
+          totalProductos: this. totalProductos
+        }));
+      });
     }
   }
 

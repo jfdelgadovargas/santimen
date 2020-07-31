@@ -114,7 +114,6 @@ export class HamburguesasPage implements OnInit {
           subtotal: this.subtotal,
           totalProductos: this. totalProductos
         }));
-        console.log('Su carrito en hamburguesas:', this.canasta);
       });
     }
   }
@@ -146,13 +145,5 @@ export class HamburguesasPage implements OnInit {
 
   atras(){
     this.router.navigate(['/home']);
-  }
-
-  /**
-   * Función para incluir la opción seleccionada de un producto dentro del carrito.
-   * @param producto Objeto con el producto seleccionado.
-   */
-  AdicionarOpcion(producto){
-    console.log('Producto:', producto);
   }
 }
