@@ -39,6 +39,7 @@ export class BebidasPage implements OnInit {
         descripcion: item.descripcion,
         precio: item.precio,
         imagen: item.imagen,
+        opciones: this.menuService.getMenuDetail('bebidas', item.id)
       }
     });
 

@@ -12,7 +12,7 @@
   <ion-list>
     <ion-item *ngFor="let otro of (otros | async)">
       <ion-grid>
-        <ion-row>
+        <ion-row (click)="detail(otro)">
           <ion-col size="4" class="food-image">
             <ion-thumbnail item-start>
               <img src={{otro.imagen}}>

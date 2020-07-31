@@ -38,6 +38,7 @@ export class PizzasPage implements OnInit {
         descripcion: item.descripcion,
         precio: item.precio,
         imagen: item.imagen,
+        opciones: this.menuService.getMenuDetail('pizzas', item.id)
       }
     });
 

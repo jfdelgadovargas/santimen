@@ -30,6 +30,18 @@ ion-item{
         margin: 0.2rem 1rem;
         font-weight: bold;
     }
+    .food-title{
+        font-size: 0.8rem;
+        color: var(--color-text);
+    }
+    .food-text{
+        font-weight: bold;
+        font-size: 0.8rem;
+        margin: 0.2rem 0;
+        p{
+            margin: 0em;
+        }
+    }
 }
 ion-grid{
     padding: 0;
