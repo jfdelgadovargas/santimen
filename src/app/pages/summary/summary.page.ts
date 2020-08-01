@@ -43,11 +43,11 @@ export class SummaryPage implements OnInit {
     for (const producto of this.canasta){
       if (idProducto === producto.id){
         producto.cantidad += 1;
-        producto.total += producto.precio;
         this.totalProductos += 1;
-        this.subtotal += producto.precio;
         for (const opcion of producto.arOpciones){
           if (idOpcion === opcion.id){
+            producto.total += opcion.precio;
+            this.subtotal += opcion.precio;
             opcion.cantidad += 1;
             break;
           }
@@ -128,11 +128,11 @@ export class SummaryPage implements OnInit {
     for (const producto of this.canasta){
       if (idProducto === producto.id){
         producto.cantidad -= 1;
-        producto.total -= producto.precio;
         this.totalProductos -= 1;
-        this.subtotal -= producto.precio;
         for (const opcion of producto.arOpciones){
           if (opcion.id === idOpcion){
+            producto.total -= opcion.precio;
+            this.subtotal -= opcion.precio;
             opcion.cantidad -= 1;
             break;
           }
