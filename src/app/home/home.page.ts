@@ -12,12 +12,6 @@ import { SummaryPage } from '../pages/summary/summary.page';
   styleUrls: ['home.page.scss', '../../theme/utilities.scss'],
 })
 export class HomePage {
-  hamburguesas: Observable<any[]>;
-  perros: Observable<any[]>;
-  asados: Observable<any[]>;
-  pizzas: Observable<any[]>;
-  otros: Observable<any[]>;
-  bebidas: Observable<any[]>;
   categorias: Observable<any[]>;
   subtotal: number;
   canasta = [];
@@ -108,7 +102,7 @@ export class HomePage {
   }
 
   goDetail(sectionName){
-    this.router.navigate([`${sectionName}`]);
+    this.router.navigate([`/categoria/${sectionName}`]);
   }
 
   ionViewDidEnter(){

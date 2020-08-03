@@ -1,37 +1,49 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MenuService } from 'src/app/services/menu.service';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonItem } from '@ionic/angular';
 import { DetailmodalPage } from '../detailmodal/detailmodal.page';
 import { SummaryPage } from '../summary/summary.page';
 
 @Component({
-  selector: 'app-hamburguesas',
-  templateUrl: './hamburguesas.page.html',
-  styleUrls: ['../../../theme/utilities.scss', './hamburguesas.page.scss'],
+  selector: 'app-categoria',
+  templateUrl: './categoria.page.html',
+  styleUrls: ['../../../theme/utilities.scss', './categoria.page.scss'],
 })
-export class HamburguesasPage implements OnInit {
-  hamburguesas: Observable<any[]>;
+export class CategoriaPage implements OnInit {
+  items: Observable<any[]>;
+  categoriaID;
+  nombreCategoria;
   subtotal: 0;
   canasta = [];
   totalProductos = 0;
   opciones = [];
-
   constructor(private router: Router,
               private menuService: MenuService,
-              private modalCtrl: ModalController) { }
+              private modalCtrl: ModalController,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.hamburguesas = this.menuService.getMenu('hamburguesas');
-    const totalizer =  JSON.parse(localStorage.getItem('totalizer'));
-    this.canasta = totalizer.canasta;
-    this.totalProductos = totalizer.totalProductos;
-    this.subtotal = totalizer.subtotal;
+    const categoriaID = this.activatedRoute.snapshot.paramMap.get('categoriaID');
+    if (categoriaID){
+      this.categoriaID = categoriaID;
+      this.items = this.menuService.getMenu(this.categoriaID);
+      this.nombreCategoria = this.menuService.getCategorias().subscribe(nombres => {
+        const categoria = nombres.find(elemento => elemento.nombre === categoriaID);
+        this.nombreCategoria = categoria.display;
+      });
+      const totalizer =  JSON.parse(localStorage.getItem('totalizer'));
+      this.canasta = totalizer.canasta;
+      this.totalProductos = totalizer.totalProductos;
+      this.subtotal = totalizer.subtotal;
+    }else{
+      this.atras();
+    }
   }
 
   async detail(item){
-    this.menuService.getMenuDetail('hamburguesas', item.id).subscribe(opciones => {
+    this.menuService.getMenuDetail(this.categoriaID, item.id).subscribe(opciones => {
       this.opciones = opciones;
       return opciones;
     });
@@ -44,7 +56,7 @@ export class HamburguesasPage implements OnInit {
         descripcion: item.descripcion,
         precio: item.precio,
         imagen: item.imagen,
-        opciones: this.menuService.getMenuDetail('hamburguesas', item.id)
+        opciones: this.menuService.getMenuDetail(this.categoriaID, item.id)
       }
     });
 
@@ -146,4 +158,5 @@ export class HamburguesasPage implements OnInit {
   atras(){
     this.router.navigate(['/home']);
   }
+
 }

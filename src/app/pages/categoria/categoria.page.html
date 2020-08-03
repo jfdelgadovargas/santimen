@@ -6,29 +6,28 @@
         Atrás
       </ion-button>
     </ion-buttons>
-    <ion-title>Perros calientes</ion-title>
+    <ion-title>{{nombreCategoria}}</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <div class="section-title"></div>
   <ion-list>
-    <ion-item *ngFor="let perro of (perros | async)">
+    <ion-item *ngFor="let item of (items | async)">
       <ion-grid>
-        <ion-row (click)="detail(perro)">
+        <ion-row (click)="detail(item)">
           <ion-col size="4" class="food-image">
             <ion-thumbnail item-start>
-              <img src={{perro.imagen}}>
+              <img src={{item.imagen}}>
             </ion-thumbnail>
           </ion-col>
           <ion-col size="8">
-            <div class="food-title">{{perro.nombre}}</div>
-            <div food-text><p>{{perro.descripcion}}</p></div>
+            <div class="food-title">{{item.nombre}}</div>
+            <div food-text><p>{{item.descripcion}}</p></div>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col size="12" class="add-button">
-            <span class="food-price">{{perro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span><div class="adicionar-btn" (click)="detail(perro)">Agregar</div>
+            <span class="food-price">{{item.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span><div class="adicionar-btn" (click)="detail(item)">Agregar</div>
           </ion-col>
         </ion-row>
       </ion-grid>     
