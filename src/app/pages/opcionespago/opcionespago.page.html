@@ -1,0 +1,117 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="atras()">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Atrás
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Datos de entrega</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="seccion">
+      <div class="titulo-seccion">Tipo de entrega</div>
+      <ion-radio-group ([ngModel])="opcionEnvio" value="{{opcionEnvio}}" (ionChange)="seleccionarEnvio($event)">
+        <ion-item>
+          <ion-label>
+            <ion-icon name="home-outline" slot="start"></ion-icon>
+            Servicio a domicilio
+          </ion-label>
+          <ion-radio mode="md" slot="end" value="domicilio"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-icon name="car-outline" slot="start"></ion-icon>
+            Retirar en el sitio
+          </ion-label>
+          <ion-radio mode="md" slot="end" value="autoservicio"></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <ion-icon name="restaurant-outline" slot="start"></ion-icon>
+            Consumir en el restaurante
+          </ion-label>
+          <ion-radio mode="md" slot="end" value="lugar"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </div>
+
+  <div class="seccion">
+    <div class="titulo-seccion">Opciones de pago</div>
+    <ion-grid class="grid-opciones">
+      <ion-row>
+        <ion-col size="8" class="opcion-pago">
+          <div>Efectivo</div>
+        </ion-col>
+        <ion-col size="4" class="cambiar">
+          <div>Cambiar</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <div class="seccion">
+    <div class="titulo-seccion">Datos de entrega</div>
+    <form onsubmit="processForm(event)">
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item *ngIf="blNombre">
+          <ion-label position="stacked">Nombre <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="blDireccion">
+          <ion-label position="stacked">Dirección <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text" oninput="handleFirstNameValue(event)"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="blTelefono">
+          <ion-label position="stacked">Teléfono <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="tel" oninput="handleFirstNameValue(event)"></ion-input>
+        </ion-item>
+        <div *ngIf="blMesa" class="item-help">
+          <ion-item>
+            <ion-label position="stacked">Número de mesa <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="number" oninput="handleFirstNameValue(event)"></ion-input>
+          </ion-item>
+          <div class="input-help">Ingresa el número que se encuentra impreso en la mesa.</div>
+        </div>
+      </ion-list>
+      </form>
+  </div>
+  <div class="seccion">
+    <div class="titulo-seccion">Resumen</div>
+    <ion-grid class="grid-opciones">
+      <ion-row>
+        <ion-col size="8" class="opcion-pago">
+          <div>Costo de productos</div>
+        </ion-col>
+        <ion-col size="4" class="cambiar">
+          <div>{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="blDomicilio">
+        <ion-col size="8" class="opcion-pago">
+          <div>Costo de envío</div>
+        </ion-col>
+        <ion-col size="4" class="cambiar">
+          {{ costoEnvio | currency: 'COP':'symbol-narrow' : '1.0-0'}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    </div>
+
+</ion-content>
+    <ion-footer>
+      <ion-toolbar>
+        <ion-row>
+          <ion-col size="12" class="col-button">
+            <div class="total-button" (click)="Enviarpedido()">
+              <div class="num-products">{{totalProductos}}</div>
+              <div class="icon-text">Enviar pedido</div>
+              <div class="price">{{ total | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency"></span></div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </ion-footer>

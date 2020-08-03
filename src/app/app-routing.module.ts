@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'categoria/:categoriaID',
     loadChildren: () => import('./pages/categoria/categoria.module').then( m => m.CategoriaPageModule)
+  },
+  {
+    path: 'opcionespago',
+    loadChildren: () => import('./pages/opcionespago/opcionespago.module').then( m => m.OpcionespagoPageModule)
   }
 
 

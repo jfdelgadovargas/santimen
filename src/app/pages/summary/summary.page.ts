@@ -179,7 +179,8 @@ export class SummaryPage implements OnInit {
   }
 
   pedir(){
-    console.log('Hace el pedido');
+    this.cerrar();
+    this.router.navigate(['/opcionespago']);
   }
 
   organizarCanasta(){

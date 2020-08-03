@@ -1,0 +1,71 @@
+ion-content{
+    --background: var(--custom-background);
+    font-family: "Roboto", Helvetica, sans-serif;
+}
+.titulo-resumen{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin: 2rem 0rem 1rem 1rem;
+}
+.seccion{
+    margin: 0.5rem 0;
+    background-color: white;
+    padding: 1rem 0 0;
+}
+ion-item{
+    --color: var(--text-color);
+}
+.item-help{
+    .input-help{
+        font-size: 11px;
+        font-style: italic;
+        display: block;
+        width: 100%;
+        padding: 0 0 0.2rem 0;
+        margin: 0 1rem;
+    }
+}
+ion-grid{ 
+    padding: 0;
+    padding: 0 1rem;
+    color: var(--text-color);
+    ion-row{
+        ion-col{
+            padding: 0.5rem 0;
+            &.cambiar{
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+}
+.titulo-seccion{
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 1rem 0.5rem 1rem;
+    color: var(--text-color);
+}
+.total-button{
+    display: flex;
+    color: #ffffff;
+    justify-content: space-between;
+    background-image: var(--main-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin:0.5rem;
+    .num-products{
+      background-color: #ff4e00;
+      border-radius: 5px;
+      text-align: center;
+      padding: 0.2rem 0.5rem;
+      align-self: center;
+    }
+    .icon-text{
+      font-weight: bold;
+      align-self: center;
+    }
+    .price{
+      align-self: center;
+    }
+  }

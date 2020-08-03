@@ -131,7 +131,6 @@ export class CategoriaPage implements OnInit {
   }
 
   async resumen(){
-    console.log('Hace el pedido');
     const modalResumen = await this.modalCtrl.create({
       component: SummaryPage,
       cssClass: 'my-custom-class',
