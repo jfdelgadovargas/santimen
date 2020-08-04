@@ -37,7 +37,32 @@
         </ion-item>
       </ion-radio-group>
     </div>
-
+  <div class="seccion">
+    <div class="titulo-seccion datos-entrega">Datos de entrega<div class="datos-requeridos" [ngClass]="{'datos-no-validos':!blFormValido}" >Obligatorio</div></div>
+      <ion-list lines="full" class="ion-no-margin ion-no-padding">
+        <ion-item *ngIf="blNombre">
+          <ion-label position="stacked">Nombre <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="text"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
+        </ion-item>
+        <ion-item *ngIf="blTelefono">
+          <ion-label position="stacked">Teléfono <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input required type="tel" maxlength="10" [(ngModel)]="telefonoForm" value="{{telefonoForm}}" (ionChange)="validaFormulario()" ></ion-input>
+        </ion-item>
+        <ion-item *ngIf="blDireccion">
+          <ion-label position="stacked">Dirección <ion-text color="danger">*</ion-text></ion-label>
+          <ion-input placeholder="Dirección" required  [(ngModel)]="direccionForm1" value="{{direccionForm1}}" class="address-line" (ionChange)="validaFormulario()"></ion-input>
+          <ion-input placeholder="Apartamento, Casa, etc. (Opcional)" maxlength="20" [(ngModel)]="direccionForm2" value="{{direccionForm2}}"></ion-input>
+        </ion-item>
+        
+        <div *ngIf="blMesa" class="item-help">
+          <ion-item>
+            <ion-label position="stacked">Número de mesa <ion-text color="danger">*</ion-text></ion-label>
+            <ion-input required type="number" [(ngModel)]="mesaForm" value="{{mesaForm}}" (ionChange)="validaFormulario()"></ion-input>
+          </ion-item>
+          <div class="input-help">Ingresa el número que se encuentra impreso en la mesa.</div>
+        </div>
+      </ion-list>
+  </div>
   <div class="seccion">
     <div class="titulo-seccion">Opciones de pago</div>
     <ion-grid class="grid-opciones">
@@ -53,33 +78,6 @@
     </ion-grid>
   </div>
 
-
-  <div class="seccion">
-    <div class="titulo-seccion datos-entrega">Datos de entrega<div class="datos-requeridos" [ngClass]="{'datos-no-validos':!blFormValido}" >Obligatorio</div></div>
-      <ion-list lines="full" class="ion-no-margin ion-no-padding">
-        <ion-item *ngIf="blNombre">
-          <ion-label position="stacked">Nombre <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="text"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
-        </ion-item>
-        <ion-item *ngIf="blTelefono">
-          <ion-label position="stacked">Teléfono <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input required type="tel" maxlength="10" [(ngModel)]="telefonoForm" value="{{telefonoForm}}" (ionChange)="validaFormulario()" ></ion-input>
-        </ion-item>
-        <ion-item *ngIf="blDireccion">
-          <ion-label position="stacked">Dirección <ion-text color="danger">*</ion-text></ion-label>
-          <ion-input placeholder="Dirección" required  [(ngModel)]="direccionForm1" value="{{direccionForm1}}" (ionChange)="validaFormulario()"></ion-input>
-          <ion-input placeholder="Apartamento, Casa, etc. (Opcional)" maxlength="20" [(ngModel)]="direccionForm2" value="{{direccionForm2}}"></ion-input>
-        </ion-item>
-        
-        <div *ngIf="blMesa" class="item-help">
-          <ion-item>
-            <ion-label position="stacked">Número de mesa <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input required type="number" [(ngModel)]="mesaForm" value="{{mesaForm}}" (ionChange)="validaFormulario()"></ion-input>
-          </ion-item>
-          <div class="input-help">Ingresa el número que se encuentra impreso en la mesa.</div>
-        </div>
-      </ion-list>
-  </div>
   <div class="seccion">
     <div class="titulo-seccion">Resumen</div>
     <ion-grid class="grid-opciones">

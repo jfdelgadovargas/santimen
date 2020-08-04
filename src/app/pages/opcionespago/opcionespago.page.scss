@@ -19,6 +19,11 @@ ion-item{
         font-size: 1rem;
         --placeholder-font-style: italic;
         --placeholder-opacity: 0.6;
+        --placeholder-color: #d3d3d3;
+        font-weight: lighter;
+        &.address-line{
+            border-bottom: solid 1px #cccccc;
+        }
     }
 }
 .item-help{
@@ -27,7 +32,7 @@ ion-item{
         font-style: italic;
         display: block;
         width: 100%;
-        padding: 0 0 0.2rem 0;
+        padding: 0.2rem 0;
         margin: 0 1rem;
     }
 }
