@@ -11,8 +11,10 @@ import { Observable } from 'rxjs';
 export class OpcionespagomodalPage implements OnInit {
   @Input() opcionPago;
   opciones: Observable<any[]>;
-  url;
-  display;
+  @Input() url;
+  @Input() display;
+  @Input() ayuda;
+  @Input() total;
   datos = [];
   constructor(private modalCtrl: ModalController,
               private menuService: MenuService) { }
@@ -28,7 +30,8 @@ export class OpcionespagomodalPage implements OnInit {
     this.modalCtrl.dismiss({
       opcionPago: this.opcionPago,
       url: this.url,
-      display: this.display
+      display: this.display,
+      ayuda: this.ayuda
     });
   }
 
@@ -42,6 +45,7 @@ export class OpcionespagomodalPage implements OnInit {
       return;
     }
     this.display = objetoSeleccionado.display;
+    this.ayuda = objetoSeleccionado.ayuda;
     this.url = `../../../assets/images/${seleccion}.svg`;
     this.cerrar();
 

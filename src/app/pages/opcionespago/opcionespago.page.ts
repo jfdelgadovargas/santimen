@@ -29,6 +29,7 @@ export class OpcionespagoPage implements OnInit {
   modoEnvio = 'domicilio';
   opcionPago = 'efectivo';
   url;
+  ayuda = '';
   display = 'Efectivo';
 
   /**
@@ -173,7 +174,11 @@ export class OpcionespagoPage implements OnInit {
       component: OpcionespagomodalPage,
       cssClass: 'opciones-pago-lista',
       componentProps: {
-        opcionPago: this.opcionPago
+        opcionPago: this.opcionPago,
+        url: this.url,
+        display: this.display,
+        ayuda: this.ayuda,
+        total: this.total
       }
     });
     await modal.present();
@@ -183,6 +188,7 @@ export class OpcionespagoPage implements OnInit {
     this.opcionPago = seleccion.opcionPago;
     this.url = seleccion.url;
     this.display = seleccion.display;
+    this.ayuda = seleccion.ayuda;
   }
 
 }
