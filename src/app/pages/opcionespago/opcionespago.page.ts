@@ -163,5 +163,9 @@ export class OpcionespagoPage implements OnInit {
   }
   }
 
+  cambiarMetodoPago(){
+    console.log('Cmabia el método de pago');
+  }
+
 }
 
