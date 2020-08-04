@@ -65,7 +65,7 @@ export class OpcionespagoPage implements OnInit {
         this.blNombre = true;
         this.blTelefono = true;
         this.blDireccion = true;
-        this.validaFormulario()
+        this.validaFormulario();
         break;
 
       case 'autoservicio':
@@ -73,7 +73,7 @@ export class OpcionespagoPage implements OnInit {
         this.blNombre = true;
         this.blTelefono = true;
         this.blDireccion = false;
-        this.validaFormulario()
+        this.validaFormulario();
         break;
 
       case 'lugar':
@@ -81,7 +81,7 @@ export class OpcionespagoPage implements OnInit {
         this.blNombre = true;
         this.blTelefono = false;
         this.blDireccion = false;
-        this.validaFormulario()
+        this.validaFormulario();
         break;
 
       default:
@@ -89,7 +89,7 @@ export class OpcionespagoPage implements OnInit {
         this.blNombre = true;
         this.blTelefono = true;
         this.blDireccion = true;
-        this.validaFormulario()
+        this.validaFormulario();
         break;
     }
     this.blDomicilio = modoEnvio === 'domicilio';
@@ -108,7 +108,7 @@ export class OpcionespagoPage implements OnInit {
     this.blNombreValido = this.nombreForm !== undefined && this.nombreForm !== '';
     this.blDireccionValido = this.direccionForm1 !== undefined && this.direccionForm1 !== '';
     this.blTelefonoValido = this.telefonoForm !== undefined && this.telefonoForm !== '';
-    this.blMesaValido = this.mesaForm !== undefined && this.mesaForm !== '';
+    this.blMesaValido = this.mesaForm !== undefined && this.mesaForm !== null;
 
     switch (this.modoEnvio) {
       case 'domicilio':
