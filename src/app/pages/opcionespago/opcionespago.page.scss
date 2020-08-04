@@ -15,6 +15,11 @@ ion-content{
 }
 ion-item{
     --color: var(--text-color);
+    ion-input{
+        font-size: 1rem;
+        --placeholder-font-style: italic;
+        --placeholder-opacity: 0.6;
+    }
 }
 .item-help{
     .input-help{
@@ -26,6 +31,11 @@ ion-item{
         margin: 0 1rem;
     }
 }
+.cash-icon{
+    width: 30px;
+    height: 30px;
+    margin-right: 0.5rem;
+}
 ion-grid{ 
     padding: 0;
     padding: 0 1rem;
@@ -33,9 +43,21 @@ ion-grid{
     ion-row{
         ion-col{
             padding: 0.5rem 0;
+            &.opcion-pago{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+            }
             &.cambiar{
                 display: flex;
                 justify-content: flex-end;
+                align-items: center;
+            }
+            &.cambiar.boton-cambiar{
+                color: var(--ion-color-primary);
+                display: flex;
+                justify-content: flex-end;
+                font-size: 0.9rem;
             }
         }
     }
@@ -45,6 +67,25 @@ ion-grid{
     font-weight: bold;
     margin: 0 1rem 0.5rem 1rem;
     color: var(--text-color);
+    &.datos-entrega{
+        display: flex;
+        justify-content: space-between; 
+    }
+}
+.datos-requeridos{
+    background-color: #e8e8e8;;
+    border: none;
+    color: #757575;
+    padding: 0.2rem 0.5rem;
+    width: fit-content;
+    border-radius: 1rem;
+    font-size: 0.7rem;
+    font-weight: lighter;
+}
+.datos-no-validos{
+    background-color: #ffdadf;
+    color: var(--ion-color-danger);
+    border: solid 1px var(--ion-color-danger);
 }
 .total-button{
     display: flex;
@@ -55,7 +96,6 @@ ion-grid{
     border-radius: 5px;
     margin:0.5rem;
     .num-products{
-      background-color: #ff4e00;
       border-radius: 5px;
       text-align: center;
       padding: 0.2rem 0.5rem;
@@ -68,4 +108,8 @@ ion-grid{
     .price{
       align-self: center;
     }
+  }
+  .total-button.disable{
+    background-color: #c8c8c8;
+    background-image: none;
   }

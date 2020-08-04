@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="432" height="433" viewBox="0 0 432 433">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#8ef19f"/>
+      <stop offset="1" stop-color="#0dc72c"/>
+    </linearGradient>
+    <clipPath id="clip-cash">
+      <rect width="432" height="433"/>
+    </clipPath>
+  </defs>
+  <g id="cash" clip-path="url(#clip-cash)">
+    <g id="Grupo_15912" data-name="Grupo 15912" transform="translate(8464 -4225)">
+      <g id="Grupo_15910" data-name="Grupo 15910">
+        <ellipse id="Elipse_428" data-name="Elipse 428" cx="211.5" cy="211" rx="211.5" ry="211" transform="translate(-8459 4231)" fill="url(#linear-gradient)"/>
+      </g>
+      <g id="Grupo_15911" data-name="Grupo 15911" transform="translate(0 -5)">
+        <path id="Trazado_4113" data-name="Trazado 4113" d="M-8256.073,4299.064v310.623" transform="translate(4.573)" fill="none" stroke="#fff" stroke-width="20"/>
+        <path id="Trazado_4112" data-name="Trazado 4112" d="M-8175.445,4361.416s-125.034-38.472-132.248,36.548c-2.647,27.532,20.458,37.457,38.472,46.167,30.449,14.723,66.611,17.9,81.272,36.068s5.41,57.348-28.854,72.135-73.1,9.136-110.607-8.176" transform="translate(-0.09)" fill="none" stroke="#fff" stroke-width="22"/>
+      </g>
+    </g>
+  </g>
+</svg>

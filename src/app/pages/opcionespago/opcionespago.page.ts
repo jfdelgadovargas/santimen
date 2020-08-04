@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-opcionespago',
@@ -18,6 +19,24 @@ export class OpcionespagoPage implements OnInit {
   opcionEnvio = 'domicilio';
   costoEnvio = 10000;
   total = 0;
+  blDisabled = true;
+  nombreForm;
+  direccionForm1;
+  direccionForm2;
+  telefonoForm;
+  mesaForm;
+  modoEnvio = 'domicilio';
+
+  /**
+   * Variables para validar el formulario
+   */
+  blFormValido = false;
+  blNombreValido = false;
+  blDireccionValido = false;
+  blTelefonoValido = false;
+  blMesaValido = false;
+
+
   constructor(private router: Router,) { }
 
   ngOnInit() {
@@ -36,14 +55,17 @@ export class OpcionespagoPage implements OnInit {
     const modoEnvio = opcion.detail.value;
     if (!modoEnvio){
       this.blDomicilio = true;
+      this.modoEnvio = modoEnvio;
       return;
     }
+    this.modoEnvio = modoEnvio;
     switch (modoEnvio) {
       case 'domicilio':
         this.blMesa = false;
         this.blNombre = true;
         this.blTelefono = true;
         this.blDireccion = true;
+        this.validaFormulario()
         break;
 
       case 'autoservicio':
@@ -51,6 +73,7 @@ export class OpcionespagoPage implements OnInit {
         this.blNombre = true;
         this.blTelefono = true;
         this.blDireccion = false;
+        this.validaFormulario()
         break;
 
       case 'lugar':
@@ -58,6 +81,7 @@ export class OpcionespagoPage implements OnInit {
         this.blNombre = true;
         this.blTelefono = false;
         this.blDireccion = false;
+        this.validaFormulario()
         break;
 
       default:
@@ -65,6 +89,7 @@ export class OpcionespagoPage implements OnInit {
         this.blNombre = true;
         this.blTelefono = true;
         this.blDireccion = true;
+        this.validaFormulario()
         break;
     }
     this.blDomicilio = modoEnvio === 'domicilio';
@@ -73,7 +98,69 @@ export class OpcionespagoPage implements OnInit {
   }
 
   Enviarpedido(){
+    if (this.blDisabled){
+      return;
+    }
     console.log('Enviar pedido');
+  }
+
+  validaFormulario(){
+    this.blNombreValido = this.nombreForm !== undefined && this.nombreForm !== '';
+    this.blDireccionValido = this.direccionForm1 !== undefined && this.direccionForm1 !== '';
+    this.blTelefonoValido = this.telefonoForm !== undefined && this.telefonoForm !== '';
+    this.blMesaValido = this.mesaForm !== undefined && this.mesaForm !== '';
+
+    switch (this.modoEnvio) {
+      case 'domicilio':
+        this.validaFormDomicilio();
+        break;
+
+      case 'autoservicio':
+        this.validaFormAutoservicio();
+        break;
+
+      case 'lugar':
+        this.validaFormLugar();
+        break;
+
+      default:
+        this.validaFormDomicilio();
+        break;
+    }
+  }
+
+  validaFormDomicilio(){
+    if (this.blNombreValido === true &&
+        this.blDireccionValido === true &&
+        this.blTelefonoValido === true){
+          this.blFormValido = true;
+          this.blDisabled = false;
+        }else{
+          this.blFormValido = false;
+          this.blDisabled = true;
+    }
+  }
+
+  validaFormAutoservicio(){
+    if (this.blNombreValido === true &&
+      this.blTelefonoValido === true){
+        this.blFormValido = true;
+        this.blDisabled = false;
+      }else{
+        this.blFormValido = false;
+        this.blDisabled = true;
+  }
+  }
+
+  validaFormLugar(){
+    if (this.blNombreValido === true &&
+      this.blMesaValido === true){
+        this.blFormValido = true;
+        this.blDisabled = false;
+      }else{
+        this.blFormValido = false;
+        this.blDisabled = true;
+  }
   }
 
 }
