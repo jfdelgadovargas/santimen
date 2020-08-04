@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'opcionespago',
     loadChildren: () => import('./pages/opcionespago/opcionespago.module').then( m => m.OpcionespagoPageModule)
+  },
+  {
+    path: 'opcionespagomodal',
+    loadChildren: () => import('./pages/opcionespagomodal/opcionespagomodal.module').then( m => m.OpcionespagomodalPageModule)
   }
 
 

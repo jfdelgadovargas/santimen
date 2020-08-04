@@ -1,0 +1,70 @@
+ion-content{
+    --background: var(--custom-background);
+    font-family: "Roboto", Helvetica, sans-serif;
+}
+ion-list{
+    background-color: var(--custom-background);
+    margin: 0rem;
+}
+ion-item{
+    margin: 0.5rem 0;
+    --min-height: 55px;
+    --background: white;
+    ion-label{
+        white-space: break-spaces;
+    }
+    .label{
+        --color: var(--text-color);
+        font-size: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .help-text{
+        font-size: 11px;
+        font-style: italic;
+        display: block;
+        width: 100%;
+        padding: 0.5rem 0 0;
+        margin: 0rem;
+    }
+}
+.atras-btn{
+    margin: 1rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: var(--ion-color-primary);
+    ion-icon{
+        font-size: 1.2rem;
+    }
+    .texto-atras{
+        font-size: 1rem;
+    }
+}
+.titulo-seccion{
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 1rem 0.5rem 1rem;
+    color: var(--text-color);
+}
+.seccion{
+    margin: 0.5rem 0;
+    background-color: var(--custom-background);
+    padding: 1rem 0 0;
+}
+.total-label{
+    font-size: 0.9rem;
+    font-weight: lighter;
+    margin: 0 1rem;
+}
+.total{
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 0 1rem;
+}
+.cash-icon{
+    width: 30px;
+    height: 30px;
+    margin-right: 0.5rem;
+}

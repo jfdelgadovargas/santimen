@@ -1,0 +1,28 @@
+<ion-content>
+  <div class="close-button" (click)="cerrar()">
+    <div class="atras-btn">
+      <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+      <div class="texto-atras">Atrás</div>
+    </div>
+  </div>
+  <div class="seccion">
+    <div class="titulo-seccion">Selecciona tu método de pago</div>
+    <div class="total-label">Total a pagar</div>
+    <div class="total">{{15000 | currency: 'COP':'symbol-narrow' : '1.0-0'}}</div>
+    <ion-list lines="none">
+      <ion-radio-group ([ngModel])="opcionPago" value="{{opcionPago}}" (ionChange)="seleccionarOpcion($event)">
+        <ion-item *ngFor="let opcion of (opciones | async)" disabled="{{!opcion.habilitado}}">
+          <ion-label>
+            <div class="label">
+              <div class="cash-icon"><img class="img-pago" src="{{opcion.url}}"/></div>
+              {{opcion.display}}
+            </div>
+            <div class="help-text">{{opcion.ayuda}}</div>
+          </ion-label>
+          <ion-radio mode="ios" slot="end" value="{{opcion.valor}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+
+    </ion-list>
+  </div>
+</ion-content>

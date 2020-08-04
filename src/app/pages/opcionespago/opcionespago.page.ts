@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Validators } from '@angular/forms';
+import { OpcionespagomodalPage } from '../opcionespagomodal/opcionespagomodal.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-opcionespago',
@@ -26,6 +27,9 @@ export class OpcionespagoPage implements OnInit {
   telefonoForm;
   mesaForm;
   modoEnvio = 'domicilio';
+  opcionPago = 'efectivo';
+  url;
+  display = 'Efectivo';
 
   /**
    * Variables para validar el formulario
@@ -37,9 +41,10 @@ export class OpcionespagoPage implements OnInit {
   blMesaValido = false;
 
 
-  constructor(private router: Router,) { }
+  constructor(private router: Router,  private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.url = '../../../assets/images/efectivo.svg';
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
     this.canasta = totalizer.canasta;
     this.subtotal = totalizer.subtotal;
@@ -163,8 +168,21 @@ export class OpcionespagoPage implements OnInit {
   }
   }
 
-  cambiarMetodoPago(){
-    console.log('Cmabia el método de pago');
+  async cambiarMetodoPago(){
+    const modal = await this.modalCtrl.create({
+      component: OpcionespagomodalPage,
+      cssClass: 'opciones-pago-lista',
+      componentProps: {
+        opcionPago: this.opcionPago
+      }
+    });
+    await modal.present();
+
+    const data = await modal.onDidDismiss();
+    const seleccion = data.data;
+    this.opcionPago = seleccion.opcionPago;
+    this.url = seleccion.url;
+    this.display = seleccion.display;
   }
 
 }

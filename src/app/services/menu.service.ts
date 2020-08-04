@@ -17,6 +17,7 @@ export interface Plato {
 })
 export class MenuService {
   private platos: Observable<any[]>;
+  private opcionesPago: Observable<any[]>;
   private platosCollection: AngularFirestoreCollection<Plato>;
   constructor(private afs: AngularFirestore) {
     this.platosCollection = this.afs.collection<any>('menu');
@@ -72,5 +73,20 @@ export class MenuService {
         });
       })
     );
+  }
+
+  getOpcionesPago(): Observable<any[]> {
+		this.platosCollection = this.afs.collection<any>('formasPago', ref => ref.orderBy('order', 'asc'));
+		this.opcionesPago = this.platosCollection.snapshotChanges().pipe(
+		  map(actions => {
+			return actions.map(a => {
+			  const data = a.payload.doc.data();
+			  const id = a.payload.doc.id;
+			  return { id, ...data };
+			});
+		  })
+		);
+		return this.opcionesPago;
+		  
   }
 }
