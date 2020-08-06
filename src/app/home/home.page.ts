@@ -25,6 +25,8 @@ export class HomePage {
     this.subtotal = 0;
     this.categorias = this.menuService.getCategorias();
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
+    const pedidoActual = JSON.parse(localStorage.getItem('totalizer'));
+    const pedidos = JSON.parse(localStorage.getItem('pedidos'));
     if(totalizer == null){
       localStorage.setItem('totalizer', JSON.stringify({
         canasta: this.canasta,
@@ -35,6 +37,12 @@ export class HomePage {
       this.canasta = totalizer.canasta;
       this.subtotal = totalizer.subtotal;
       this.totalProductos = totalizer.totalProductos;
+    }
+    if(pedidos == null){
+      localStorage.setItem('pedidos', JSON.stringify([]));
+    }
+    if(pedidoActual == null){
+      localStorage.setItem('pedidoActual', JSON.stringify(0));
     }
   }
 

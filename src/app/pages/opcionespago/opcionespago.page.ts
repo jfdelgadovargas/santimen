@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { OpcionespagomodalPage } from '../opcionespagomodal/opcionespagomodal.page';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-opcionespago',
@@ -31,6 +32,7 @@ export class OpcionespagoPage implements OnInit {
   url;
   ayuda = '';
   display = 'Efectivo';
+  loading;
 
   /**
    * Variables para validar el formulario
@@ -42,7 +44,10 @@ export class OpcionespagoPage implements OnInit {
   blMesaValido = false;
 
 
-  constructor(private router: Router,  private modalCtrl: ModalController) { }
+  constructor(private router: Router,
+              private modalCtrl: ModalController,
+              private loadingController: LoadingController,
+              private menuService: MenuService) { }
 
   ngOnInit() {
     this.url = '../../../assets/images/efectivo.svg';
@@ -103,12 +108,41 @@ export class OpcionespagoPage implements OnInit {
     this.total = this.blDomicilio ? this.subtotal + this.costoEnvio : this.subtotal;
   }
 
-  Enviarpedido(){
+  async Enviarpedido(){
     if (this.blDisabled){
       return;
     }
-    console.log('Enviar pedido');
+    this.presentLoading();
+    this.menuService.registrarPedido({
+      canasta: this.canasta,
+      pedido: 0
+    }).then(docRef => {
+      this.loading.dismiss();
+      const totalizer = JSON.parse(localStorage.getItem('totalizer'));
+      const pedidos = JSON.parse(localStorage.getItem('pedidos'));
+      let pedidoActual = JSON.parse(localStorage.getItem('pedidoActual'));
+      pedidoActual = docRef.id;
+      totalizer.pedidoID = docRef.id;
+      pedidos.push(totalizer);
+      localStorage.setItem('totalizer', JSON.stringify(totalizer));
+      localStorage.setItem('pedidoActual', JSON.stringify(pedidoActual));
+      localStorage.setItem('pedidos', JSON.stringify(pedidos));
+      this.router.navigate(['/pedidos']);
+      console.log('Se insertó el pedido', docRef.id);
+    })
+    .catch(e => {
+      console.log('Se presentó un error', e);
+    });
   }
+
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Por favor, espere mientras el restaurante acepta el pedido.'
+    });
+    return this.loading.present();
+  }
+
 
   validaFormulario(){
     this.blNombreValido = this.nombreForm !== undefined && this.nombreForm !== '';

@@ -17,7 +17,7 @@
               <div class="cash-icon"><img class="img-pago" src="{{opcion.url}}"/></div>
               {{opcion.display}}
             </div>
-            <div class="help-text" *ngIf="opcion.ayuda">{{opcion.ayuda}}</div>
+            <div class="help-text" *ngIf="opcion.ayuda && opcion.habilitado">{{opcion.ayuda}}</div>
           </ion-label>
           <ion-radio mode="ios" slot="end" value="{{opcion.valor}}"></ion-radio>
         </ion-item>

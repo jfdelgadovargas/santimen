@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'opcionespagomodal',
     loadChildren: () => import('./pages/opcionespagomodal/opcionespagomodal.module').then( m => m.OpcionespagomodalPageModule)
+  },
+  {
+    path: 'pedidos',
+    loadChildren: () => import('./pages/pedidos/pedidos.module').then( m => m.PedidosPageModule)
   }
 
 

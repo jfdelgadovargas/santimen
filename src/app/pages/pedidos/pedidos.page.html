@@ -1,0 +1,32 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons>
+      <ion-button (click)="home()">
+        <ion-icon slot="start" name="chevron-back-outline"></ion-icon>
+        Ir al inicio
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Pedidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="success-container">
+    <div class="icono"><img class="img-pago" src="{{urlIcono}}"/></div>
+    <div class="texto activo">{{texto}}</div>
+  </div>
+  <div class="estados">
+    <div class="estado">
+      <div class="icono-estado"><img class="img-estado" src="{{urlRecibido}}"/></div>
+      <div class="texto" [ngClass]="{'activo':blRecibido}">Tu orden ha sido recibida y está pendiente por confirmar.</div>
+    </div>
+    <div class="estado">
+      <div class="icono-estado"><img class="img-estado" src="{{urlAceptado}}"/></div>
+      <div class="texto" [ngClass]="{'activo':blAceptado}">El restaurante confirmó tu pedido.</div>
+    </div>
+    <div class="estado">
+      <div class="icono-estado"><img class="img-estado" src="{{urlEntregando}}"/></div>
+      <div class="texto" [ngClass]="{'activo':blEntregando}">Tu pedido ya está en camino.</div>
+    </div>
+  </div>
+</ion-content>

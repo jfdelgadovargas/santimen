@@ -87,6 +87,13 @@ export class MenuService {
 		  })
 		);
 		return this.opcionesPago;
-		  
+  }
+
+  registrarPedido(pedido){
+    return this.afs.collection<any>('pedidos').add(pedido);
+  }
+
+  getPedidoDetail(pedidoID): Observable<any> {
+    return this.afs.collection<any>('pedidos').doc<any>(pedidoID).snapshotChanges();
   }
 }
