@@ -4,6 +4,7 @@
   </div>
   <!-- <div class="home-title">Bienvenido a Punto 7 2x3</div> -->
   <div class="intro-text">Variedad en comidas rápidas: hamburguesas, perros, asados, pizzas, lasagnas, salchipapas y mucho más.</div>
+  <div class="pedidos" (click)="pedidos()">Pedidos</div>
   <ion-grid>
     <ion-row>
       <ion-col class="category-col" *ngFor="let categoria of (categorias | async)" size-xs="6" (click)="goDetail(categoria.nombre)">

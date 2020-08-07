@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { OpcionespagomodalPage } from '../opcionespagomodal/opcionespagomodal.page';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-opcionespago',
@@ -42,6 +43,7 @@ export class OpcionespagoPage implements OnInit {
   blDireccionValido = false;
   blTelefonoValido = false;
   blMesaValido = false;
+  clienteID;
 
 
   constructor(private router: Router,
@@ -52,6 +54,7 @@ export class OpcionespagoPage implements OnInit {
   ngOnInit() {
     this.url = '../../../assets/images/efectivo.svg';
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
+    this.clienteID = JSON.parse(localStorage.getItem('clienteID'));
     this.canasta = totalizer.canasta;
     this.subtotal = totalizer.subtotal;
     this.totalProductos = totalizer.totalProductos;
@@ -115,20 +118,25 @@ export class OpcionespagoPage implements OnInit {
     this.presentLoading();
     this.menuService.registrarPedido({
       canasta: this.canasta,
-      pedido: 0
+      total: this.total,
+      totalProductos: this.totalProductos,
+      estado: 0,
+      clienteID: this.clienteID
     }).then(docRef => {
       this.loading.dismiss();
       const totalizer = JSON.parse(localStorage.getItem('totalizer'));
       const pedidos = JSON.parse(localStorage.getItem('pedidos'));
-      let pedidoActual = JSON.parse(localStorage.getItem('pedidoActual'));
-      pedidoActual = docRef.id;
-      totalizer.pedidoID = docRef.id;
+      if (!this.clienteID){
+        if(docRef){
+          localStorage.setItem('clienteID', JSON.stringify(docRef.id));
+          totalizer.pedidoID = docRef.id;
+        }
+      }
       pedidos.push(totalizer);
       localStorage.setItem('totalizer', JSON.stringify(totalizer));
-      localStorage.setItem('pedidoActual', JSON.stringify(pedidoActual));
       localStorage.setItem('pedidos', JSON.stringify(pedidos));
+      this.vaciarCanasta();
       this.router.navigate(['/pedidos']);
-      console.log('Se insertó el pedido', docRef.id);
     })
     .catch(e => {
       console.log('Se presentó un error', e);
@@ -223,6 +231,20 @@ export class OpcionespagoPage implements OnInit {
     this.url = seleccion.url;
     this.display = seleccion.display;
     this.ayuda = seleccion.ayuda;
+  }
+
+  /**
+   * Elimina los productos de la canasta
+   */
+  vaciarCanasta(){
+    this.canasta = [];
+    this.subtotal = 0;
+    this.totalProductos = 0;
+    localStorage.setItem('totalizer', JSON.stringify({
+      canasta: this.canasta,
+      subtotal: this.subtotal,
+      totalProductos: this. totalProductos
+    }));
   }
 
 }

@@ -11,22 +11,26 @@
 </ion-header>
 
 <ion-content>
-  <div class="success-container">
-    <div class="icono"><img class="img-pago" src="{{urlIcono}}"/></div>
-    <div class="texto activo">{{texto}}</div>
-  </div>
-  <div class="estados">
-    <div class="estado">
-      <div class="icono-estado"><img class="img-estado" src="{{urlRecibido}}"/></div>
-      <div class="texto" [ngClass]="{'activo':blRecibido}">Tu orden ha sido recibida y está pendiente por confirmar.</div>
-    </div>
-    <div class="estado">
-      <div class="icono-estado"><img class="img-estado" src="{{urlAceptado}}"/></div>
-      <div class="texto" [ngClass]="{'activo':blAceptado}">El restaurante confirmó tu pedido.</div>
-    </div>
-    <div class="estado">
-      <div class="icono-estado"><img class="img-estado" src="{{urlEntregando}}"/></div>
-      <div class="texto" [ngClass]="{'activo':blEntregando}">Tu pedido ya está en camino.</div>
-    </div>
+  <div class="pedidos">
+    <ion-list>
+      <ion-item *ngFor="let pedido of pedidos" (click)="mostrarDetalle(pedido)">
+        <ion-avatar slot="start">
+          <img src="{{pedido.canasta[0].imagen}}">
+        </ion-avatar>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">
+              <ion-label>
+                <div class="productos">{{pedido.totalProductos}} Productos</div>
+                <div class="total">{{pedido.total | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </ion-label>
+            </ion-col>
+            <ion-col size="4" class="estado">
+              <div class="estado">{{pedido.textoEstado}}</div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>

@@ -18,6 +18,7 @@ export interface Plato {
 export class MenuService {
   private platos: Observable<any[]>;
   private opcionesPago: Observable<any[]>;
+  private pedidos: Observable<any[]>;
   private platosCollection: AngularFirestoreCollection<Plato>;
   constructor(private afs: AngularFirestore) {
     this.platosCollection = this.afs.collection<any>('menu');
@@ -90,7 +91,33 @@ export class MenuService {
   }
 
   registrarPedido(pedido){
+    if (!pedido.clienteID){
+      return this.afs.collection<any>('pedidos').add(pedido).
+      then((docRef) => {
+        docRef.update({
+          clienteID: docRef.id
+        });
+        return docRef;
+      })
+      .catch((e) => {
+        console.log('Ocurrió un error', e);
+      });
+    }
     return this.afs.collection<any>('pedidos').add(pedido);
+  }
+
+  getPedidos(clienteID): Observable<any[]> {
+		this.platosCollection = this.afs.collection<any>('pedidos', ref => ref.where('clienteID', '==', clienteID));
+		this.pedidos = this.platosCollection.snapshotChanges().pipe(
+		  map(actions => {
+			return actions.map(a => {
+			  const data = a.payload.doc.data();
+			  const id = a.payload.doc.id;
+			  return { id, ...data };
+			});
+		  })
+		);
+		return this.pedidos;
   }
 
   getPedidoDetail(pedidoID): Observable<any> {

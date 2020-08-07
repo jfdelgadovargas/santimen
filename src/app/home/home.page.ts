@@ -25,7 +25,7 @@ export class HomePage {
     this.subtotal = 0;
     this.categorias = this.menuService.getCategorias();
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
-    const pedidoActual = JSON.parse(localStorage.getItem('totalizer'));
+    const clienteID = JSON.parse(localStorage.getItem('clienteID'));
     const pedidos = JSON.parse(localStorage.getItem('pedidos'));
     if(totalizer == null){
       localStorage.setItem('totalizer', JSON.stringify({
@@ -41,8 +41,8 @@ export class HomePage {
     if(pedidos == null){
       localStorage.setItem('pedidos', JSON.stringify([]));
     }
-    if(pedidoActual == null){
-      localStorage.setItem('pedidoActual', JSON.stringify(0));
+    if(clienteID == null){
+      localStorage.setItem('clienteID', JSON.stringify(''));
     }
   }
 
@@ -86,8 +86,7 @@ export class HomePage {
       }
 
       this.subtotal += data.data.total;
-      console.log('Su carrito va así:', this.canasta);
-    } 
+    }
   }
 
   async resumen(){
@@ -118,5 +117,9 @@ export class HomePage {
     this.canasta = totalizer.canasta;
     this.subtotal = totalizer.subtotal;
     this.totalProductos = totalizer.totalProductos;
+  }
+
+  pedidos(){
+    this.router.navigate([`/pedidos`]);
   }
 }
