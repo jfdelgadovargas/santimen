@@ -33,6 +33,30 @@
       </ion-grid>     
     </ion-item>
   </ion-list>
+  <ion-list *ngIf="(items | async) === null">
+    <ion-item *ngFor="let item of [1,1,1,1,1,1]">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4">
+            <div>
+              <ion-thumbnail slot="start" class="load-image">
+                <ion-skeleton-text animated></ion-skeleton-text>
+              </ion-thumbnail>
+            </div>
+          </ion-col>
+          <ion-col size="8">
+            <div class="food-title"><ion-skeleton-text class="load-text" animated style="width: 50%"></ion-skeleton-text></div>
+            <div class="food-text"><ion-skeleton-text class="load-text" animated style="width: 100%"></ion-skeleton-text></div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12" class="add-button">
+            <ion-skeleton-text class="load-text" animated></ion-skeleton-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>     
+    </ion-item>
+    </ion-list>
 </ion-content>
 <ion-footer *ngIf="subtotal">
   <ion-toolbar>
