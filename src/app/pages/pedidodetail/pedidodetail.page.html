@@ -2,6 +2,40 @@
   <div class="close-button" (click)="cerrarDetalle()">
     <ion-icon slot="icon-only" name="close-outline"></ion-icon>
   </div>
+  <div class="titulo-seccion">Tu compra</div>
+  <div class="success-container">
+    <div class="datos-compra">
+      <ion-avatar slot="start">
+        <img src="{{pedido.canasta[0].imagen}}">
+      </ion-avatar>
+      <div class="productos-pedido">
+        <div class="productos">{{pedido.totalProductos}} {{pedido.textoProductos}}</div>
+        <div class="total">{{pedido.total | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="titulo-seccion">Datos de entrega</div>
+  <div class="success-container">
+    <div class="datos-entrega">
+      <div class="dato-form">
+        <div class="label">Nombre:</div>
+        <div class="valor">{{pedido.nombreForm}}</div>
+      </div>
+      <div class="dato-form">
+        <div class="label">Teléfono:</div>
+        <div class="valor">{{pedido.telefonoForm}}</div>
+      </div>
+      <div class="dato-form">
+        <div class="label">Dirección:</div>
+        <div class="valor">{{pedido.direccionForm1}} - {{pedido.direccionForm2}}</div>
+      </div>
+      <div class="dato-form">
+        <div class="label">Forma de pago:</div>
+        <div class="valor">{{pedido.formaPago}}</div>
+      </div>
+    </div>
+</div>
+  <div class="titulo-seccion">Revisa el estado de tu pedido</div>
   <div class="success-container">
     <div class="icono"><img class="img-pago" src="{{urlIcono}}"/></div>
     <div class="texto activo">{{texto}}</div>

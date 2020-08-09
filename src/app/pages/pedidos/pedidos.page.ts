@@ -13,6 +13,7 @@ export class PedidosPage implements OnInit {
   pedidos: any;
   estado: any;
   estadoImg;
+  blPedidos = false;
   constructor(private router: Router,
               private modalCtrl: ModalController,
               private menuService: MenuService) { }
@@ -20,13 +21,14 @@ export class PedidosPage implements OnInit {
   ngOnInit() {
     const clienteID = JSON.parse(localStorage.getItem('clienteID'));
     if (!clienteID){
-      console.log('No hay pedidos');
+      this.blPedidos = false;
       return;
     }
     this.menuService.getPedidos(clienteID).subscribe(pedidos => {
-      console.log(pedidos);
       this.pedidos = pedidos;
+      this.blPedidos = this.pedidos.length === 0 ? false : true;
       for (const pedido of pedidos){
+        pedido.textoProductos = pedido.totalProductos > 1 ? 'Productos' : 'Producto';
         switch (pedido.estado) {
           case 0:
             pedido.textoEstado = 'Pendiente';

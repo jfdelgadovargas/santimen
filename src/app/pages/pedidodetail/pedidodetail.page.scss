@@ -20,8 +20,8 @@ ion-content{
     display: block;
     text-align: center;
     background-color: white;
-    margin: 1rem 1rem 0rem 1rem;
-    padding: 2rem 0;
+    margin: 0 1rem;
+    padding: 1rem 0;
     border-radius: 5px;
     box-shadow: 0 3px 6px rgb(255 255 255 / 16%), 0 3px 6px rgb(163 163 163 / 23%);
     .texto{
@@ -56,7 +56,6 @@ ion-content{
     padding-top: 2rem;
     border-radius: 5px;
     box-shadow: 0 3px 6px rgb(255 255 255 / 16%), 0 3px 6px rgb(163 163 163 / 23%);
-    height: 300px;
     .estado{
         display: flex;
         justify-content: flex-start;
@@ -78,5 +77,53 @@ ion-content{
                 opacity: 1;
             }
         }
+    }
+}
+.titulo-seccion{
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 1rem 1rem 0.5rem 1rem;
+    color: var(--text-color);
+}
+.datos-compra{
+    display: flex;
+    font-size: 1rem;
+    font-weight: normal;
+    color: var(--text-color);
+    height: 4rem;
+    margin: 0 1rem;
+    .productos-pedido{
+        text-align: left;
+        margin-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .total{
+            font-weight: bold;
+        }
+    
+    }
+    ion-avatar{
+        width: 60px;
+        height: 60px;
+    }
+}
+.datos-entrega{
+    display:block;
+    margin: 0 1rem;
+    font-size: 0.9rem;
+    .dato-form{
+        display: flex;
+        text-align: left;
+        align-items: center;
+        padding: 0.1rem 0;;
+        .label{
+            width: 35%;
+            font-weight: bolder;
+        }
+        .valor{
+            width: 65%;;
+        }
+
     }
 }

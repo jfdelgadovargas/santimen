@@ -121,6 +121,13 @@ export class OpcionespagoPage implements OnInit {
       total: this.total,
       totalProductos: this.totalProductos,
       estado: 0,
+      modoEnvio: this.modoEnvio,
+      nombreForm : this.nombreForm,
+      direccionForm1 : this.direccionForm1 === undefined ? '' : this.direccionForm1,
+      direccionForm2 : this.direccionForm2 === undefined ? '' : this.direccionForm2,
+      telefonoForm : this.telefonoForm === undefined ? '' : this.telefonoForm,
+      mesaForm : this.mesaForm === undefined ? '' : this.mesaForm,
+      formaPago: this.display,
       clienteID: this.clienteID
     }).then(docRef => {
       this.loading.dismiss();

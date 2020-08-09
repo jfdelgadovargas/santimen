@@ -26,6 +26,7 @@ export class PedidodetailPage implements OnInit {
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    console.log(this.pedido);
     this.urlRecibido = this.urlPendiente;
     this.urlAceptado = this.urlPendiente;
     this.urlEntregando = this.urlPendiente;
