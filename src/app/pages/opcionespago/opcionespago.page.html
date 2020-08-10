@@ -21,6 +21,7 @@
           </ion-label>
           <ion-radio mode="md" slot="end" value="domicilio"></ion-radio>
         </ion-item>
+        <div class="input-help">El costo del envío será calculado una vez se haga el pedido. Ver tarifas</div>
         <ion-item>
           <ion-label>
             <ion-icon name="car-outline" slot="start"></ion-icon>
@@ -87,19 +88,20 @@
       <ion-row>
         <ion-col size="8" class="opcion-pago">
           <div>Costo de productos</div>
+          <div class="no-domicilio input-help" *ngIf="blDireccion">(No incluye el domicilio)</div>
         </ion-col>
         <ion-col size="4" class="cambiar precio">
           <div>{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}}</div>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="blDomicilio">
+      <!-- <ion-row *ngIf="blDomicilio">
         <ion-col size="8" class="opcion-pago">
           <div>Costo de envío</div>
         </ion-col>
         <ion-col size="4" class="cambiar precio">
           {{ costoEnvio | currency: 'COP':'symbol-narrow' : '1.0-0'}}
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </ion-grid>
     </div>
 

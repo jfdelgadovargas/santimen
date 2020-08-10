@@ -4,6 +4,7 @@ import { OpcionespagomodalPage } from '../opcionespagomodal/opcionespagomodal.pa
 import { ModalController, LoadingController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { PedidodetailPage } from '../pedidodetail/pedidodetail.page';
 
 @Component({
   selector: 'app-opcionespago',
@@ -20,7 +21,7 @@ export class OpcionespagoPage implements OnInit {
   blTelefono = true;
   blDireccion = true;
   opcionEnvio = 'domicilio';
-  costoEnvio = 10000;
+  costoEnvio = 0;
   total = 0;
   blDisabled = true;
   nombreForm;

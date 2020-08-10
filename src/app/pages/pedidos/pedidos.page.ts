@@ -55,6 +55,11 @@ export class PedidosPage implements OnInit {
             pedido.estadoImg =  `../../../assets/images/entregando.svg`;
             break;
 
+          case 5:
+            pedido.textoEstado = 'Entregado';
+            pedido.estadoImg =  `../../../assets/images/entregando.svg`;
+            break;
+
           default:
             pedido.textoEstado = 'Pendiente';
             pedido.estadoImg =  `../../../assets/images/recibido.svg`;
@@ -64,12 +69,12 @@ export class PedidosPage implements OnInit {
     });
   }
 
-  async mostrarDetalle(pedido){
+  async mostrarDetalle(pedidoID){
     const modal = await this.modalCtrl.create({
       component: PedidodetailPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        pedido
+        pedidoID
       }
     });
     await modal.present();
