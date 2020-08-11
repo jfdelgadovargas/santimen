@@ -34,6 +34,7 @@ export class PedidodetailPage implements OnInit {
   direccionForm1;
   direccionForm2;
   formaPago;
+  totalCostoEnvio;
   metodoEntrega;
   texto = 'Tu orden ha sido recibida y está pendiente por confirmar.';
   constructor(private modalCtrl: ModalController, 
@@ -43,7 +44,7 @@ export class PedidodetailPage implements OnInit {
     this.menuService.getPedidoDetail(this.pedidoID).subscribe(respuesta => {
       const pedido = respuesta.payload.data();
       this.totalProductos = pedido.totalProductos;
-      this.textoProductos = pedido.textoProductos;
+      this.textoProductos = pedido.totalProductos > 1 ? 'Productos' : 'Producto';
       this.total = pedido.total;
       this.nombreForm = pedido.nombreForm;
       this.telefonoForm = pedido.telefonoForm;
@@ -158,6 +159,7 @@ export class PedidodetailPage implements OnInit {
 
   DefinirMedioEntrega(){
     this.blDomicilio = this.pedido.modoEnvio === 'domicilio';
+    this.totalCostoEnvio = this.blDomicilio ? this.pedido.totalCostoEnvio : 0;
     switch (this.pedido.modoEnvio) {
       case 'domicilio':
         this.pedido.metodoEntrega = 'Domicilio';

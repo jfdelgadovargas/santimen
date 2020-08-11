@@ -107,7 +107,7 @@ export class MenuService {
   }
 
   getPedidos(clienteID): Observable<any[]> {
-		this.platosCollection = this.afs.collection<any>('pedidos', ref => ref.where('clienteID', '==', clienteID));
+		this.platosCollection = this.afs.collection<any>('pedidos', ref => ref.where('clienteID', '==', clienteID).where('estado', '<', 5));
 		this.pedidos = this.platosCollection.snapshotChanges().pipe(
 		  map(actions => {
 			return actions.map(a => {
@@ -122,5 +122,21 @@ export class MenuService {
 
   getPedidoDetail(pedidoID): Observable<any> {
     return this.afs.collection<any>('pedidos').doc<any>(pedidoID).snapshotChanges();
+  }
+
+  aceptarPedido(pedido){
+    if (pedido){
+      return this.afs.collection<any>('pedidos').doc(pedido).update({
+        estado: 0
+      });
+    }
+  }
+
+  cancelarPedido(pedido){
+    if (pedido){
+      return this.afs.collection<any>('pedidos').doc(pedido).update({
+        estado: 7
+      });
+    }
   }
 }

@@ -10,7 +10,8 @@
       </ion-avatar>
       <div class="productos-pedido">
         <div class="productos">{{totalProductos}} {{textoProductos}}</div>
-        <div class="total">{{total | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+        <div class="total">Precio: {{total | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+        <div class="domicilio" *ngIf="totalCostoEnvio">Domicilio: {{totalCostoEnvio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
       </div>
     </div>
   </div>
@@ -51,7 +52,7 @@
     </div>
     <div class="estado">
       <div class="icono-estado"><img class="img-estado" src="{{urlAceptado}}"/></div>
-      <div class="texto" [ngClass]="{'activo':blAceptado}">El restaurante confirmó tu pedido.</div>
+      <div class="texto" [ngClass]="{'activo':blAceptado}">El restaurante confirmó tu pedido y está en preparación.</div>
     </div>
     <div class="estado">
       <div class="icono-estado"><img class="img-estado" src="{{urlEntregando}}"/></div>

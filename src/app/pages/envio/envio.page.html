@@ -1,0 +1,53 @@
+<ion-content>
+<div class="envio-container">
+  <div class="titulo-seccion">Tu pedido</div>
+  <div class="mensaje-espera" *ngIf="!blTextoEspera">Espera mientras validamos el costo del envío.</div>
+  <div class="precios-container" *ngIf="blTextoEspera">
+    <ion-grid class="grid-opciones">
+      <ion-row>
+        <ion-col size="8" class="opcion-pago">
+          <div>Costo de productos</div>
+        </ion-col>
+        <ion-col size="4" class="precio">
+          <div>{{ total | currency: 'COP':'symbol-narrow' : '1.0-0'}}</div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="8" class="opcion-pago">
+          <div>Costo de envío</div>
+        </ion-col>
+        <ion-col size="4" class="precio">
+          {{ totalEnvio | currency: 'COP':'symbol-narrow' : '1.0-0'}}
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+  <ion-grid class="grid-total" *ngIf="blTextoEspera">
+    <ion-row>
+      <ion-col size="8" class="opcion-pago">
+        <div>Total</div>
+      </ion-col>
+      <ion-col size="4" class="precio total">
+        {{ granTotal | currency: 'COP':'symbol-narrow' : '1.0-0'}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col size="6" class="col-button">
+        <div class="cancel-button" (click)="cancelarPedido()">
+          <div class="button-text">Cancelar pedido</div>
+        </div>
+      </ion-col>
+      <ion-col size="6" class="col-button">
+        <div class="total-button" (click)="confirmarPedido()" [ngClass]="{'disable':!blTextoEspera}">
+          <div class="button-text">Confirmar pedido</div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

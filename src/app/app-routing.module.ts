@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'pedidodetail',
     loadChildren: () => import('./pages/pedidodetail/pedidodetail.module').then( m => m.PedidodetailPageModule)
+  },
+  {
+    path: 'envio/:pedidoID',
+    loadChildren: () => import('./pages/envio/envio.module').then( m => m.EnvioPageModule)
   }
 
 

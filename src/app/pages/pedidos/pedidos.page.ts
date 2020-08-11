@@ -12,7 +12,6 @@ import { PedidodetailPage } from '../pedidodetail/pedidodetail.page';
 export class PedidosPage implements OnInit {
   pedidos: any;
   estado: any;
-  estadoImg;
   blPedidos = false;
   constructor(private router: Router,
               private modalCtrl: ModalController,
@@ -28,36 +27,35 @@ export class PedidosPage implements OnInit {
       this.pedidos = pedidos;
       this.blPedidos = this.pedidos.length === 0 ? false : true;
       for (const pedido of pedidos){
+        pedido.total = pedido.modoEnvio === 'domicilio' ? pedido.total + pedido.totalCostoEnvio : pedido.total;
         pedido.textoProductos = pedido.totalProductos > 1 ? 'Productos' : 'Producto';
         switch (pedido.estado) {
           case 0:
             pedido.textoEstado = 'Pendiente';
-            pedido.estadoImg =  `../../../assets/images/recibido.svg`;
             break;
 
           case 1:
-            pedido.textoEstado = 'Aceptado';
-            pedido.estadoImg =  `../../../assets/images/aceptado.svg`;
+            pedido.textoEstado = 'Confirmado';
             break;
 
           case 2:
             pedido.textoEstado = 'En camino';
-            pedido.estadoImg =  `../../../assets/images/entregando.svg`;
             break;
 
           case 3:
             pedido.textoEstado = 'Listo';
-            pedido.estadoImg =  `../../../assets/images/entregando.svg`;
             break;
 
           case 4:
             pedido.textoEstado = 'Listo';
-            pedido.estadoImg =  `../../../assets/images/entregando.svg`;
             break;
 
           case 5:
             pedido.textoEstado = 'Entregado';
-            pedido.estadoImg =  `../../../assets/images/entregando.svg`;
+            break;
+
+          case 7:
+            pedido.textoEstado = 'Cancelado';
             break;
 
           default:

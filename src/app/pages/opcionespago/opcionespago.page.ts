@@ -121,9 +121,11 @@ export class OpcionespagoPage implements OnInit {
       canasta: this.canasta,
       total: this.total,
       totalProductos: this.totalProductos,
-      estado: 0,
+      estado: this.modoEnvio === 'domicilio' ? 6 : 0,
       modoEnvio: this.modoEnvio,
       nombreForm : this.nombreForm,
+      baseCostoEnvio: this.costoEnvio,
+      totalCostoEnvio: 0,
       direccionForm1 : this.direccionForm1 === undefined ? '' : this.direccionForm1,
       direccionForm2 : this.direccionForm2 === undefined ? '' : this.direccionForm2,
       telefonoForm : this.telefonoForm === undefined ? '' : this.telefonoForm,
@@ -144,7 +146,13 @@ export class OpcionespagoPage implements OnInit {
       localStorage.setItem('totalizer', JSON.stringify(totalizer));
       localStorage.setItem('pedidos', JSON.stringify(pedidos));
       this.vaciarCanasta();
-      this.router.navigate(['/pedidos']);
+      if (this.modoEnvio === 'domicilio'){
+        if (docRef){
+          this.router.navigate([`/envio/${docRef.id}`]);
+        }
+      }else{
+        this.router.navigate(['/pedidos']);
+      }
     })
     .catch(e => {
       console.log('Se presentó un error', e);
@@ -154,7 +162,7 @@ export class OpcionespagoPage implements OnInit {
   async presentLoading() {
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',
-      message: 'Por favor, espere mientras el restaurante acepta el pedido.'
+      message: 'Por favor, espere mientras se registra su pedido.'
     });
     return this.loading.present();
   }

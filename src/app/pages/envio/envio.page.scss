@@ -1,0 +1,62 @@
+ion-content{
+    --background: var(--custom-background);
+    font-family: "Roboto", Helvetica, sans-serif;
+}
+.envio-container{
+    color: var(--text-color);
+}
+.total-button{
+    color: #ffffff;
+    background-image: var(--main-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin:0.5rem;
+    .button-text{
+        text-align: center;
+    }
+  }
+  .total-button.disable{
+    background-color: #c8c8c8;
+    background-image: none;
+  }
+.cancel-button{
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    margin:0.5rem;
+    border: solid 1px var(--ion-color-primary);
+    color: var(--ion-color-primary);
+    .button-text{
+        text-align: center;
+    }
+  }
+  .precio{
+      text-align: right;
+      &.total{
+        font-weight: bold;
+      }
+  }
+
+  .precios-container{
+    margin: 2rem 2rem 0.5rem 2rem;
+        background-color: white;
+        padding: 0.5rem;
+        border-radius: 7px;
+        box-shadow: 0 3px 6px rgb(0 0 0 / 9%), 0 3px 6px rgb(242 242 242 / 9%);
+  }
+
+  .grid-total{
+    padding: 0.5rem 0;
+    margin: 0 2.5rem;
+    font-size: 1.2rem;
+  }
+  .titulo-seccion{
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  .mensaje-espera{
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 2rem;
+  }
