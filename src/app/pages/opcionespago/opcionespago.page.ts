@@ -52,6 +52,9 @@ export class OpcionespagoPage implements OnInit {
               private loadingController: LoadingController,
               private menuService: MenuService) { }
 
+  /**
+   * Métodode inicialización de la vista, encargado de iniciar loas variables de la canasta.
+   */
   ngOnInit() {
     this.url = '../../../assets/images/efectivo.svg';
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
@@ -62,10 +65,18 @@ export class OpcionespagoPage implements OnInit {
     this.total = this.subtotal + this.costoEnvio;
   }
 
+  /**
+   * Método que direcciona a la vista del home.
+   */
   atras(){
     this.router.navigate(['/home']);
   }
 
+  /**
+   * Método que escucha el cambio en la opción de entrega del pedido.
+   * Evalua el modo de envío para mostrar el estado de cada pedido.
+   * @param opcion Opción del tipo de netrega del pedido.
+   */
   seleccionarEnvio(opcion){
     const modoEnvio = opcion.detail.value;
     if (!modoEnvio){
@@ -112,6 +123,9 @@ export class OpcionespagoPage implements OnInit {
     this.total = this.blDomicilio ? this.subtotal + this.costoEnvio : this.subtotal;
   }
 
+  /**
+   * Método encargado de registrar el pedido en la BD.
+   */
   async Enviarpedido(){
     if (this.blDisabled){
       return;

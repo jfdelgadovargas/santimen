@@ -13,16 +13,19 @@ export class DetailmodalPage implements OnInit {
   @Input() imagen;
   @Input() precio;
   @Input() opciones;
-  
   subtotal;
   cantidad = 1;
   seleccion;
   arrOpciones = [];
   blOpciones = false;
   blDisabled = true;
-  
+
   constructor(private modalCtrl: ModalController) { }
-  
+
+  /**
+   * Método de inicialización de la vista encargado
+   * de cargar las opciones de un producto seleccionado.
+   */
   ngOnInit() {
     this.subtotal = this.precio;
     this.opciones.subscribe(opciones => {
@@ -35,6 +38,10 @@ export class DetailmodalPage implements OnInit {
     });
   }
 
+  /**
+   * Método que cierra el panel de detalle de un producto y retorna los valores seleccionados.
+   * @param blPide Parámetro que indica si se realizó un pedido o no.
+   */
   cerrar(blPide){
     if (this.blDisabled && blPide){
       return;
@@ -57,35 +64,41 @@ export class DetailmodalPage implements OnInit {
     this.cantidad = 1;
   }
 
-  seleccionaCantidad($event){
-    this.subtotal = this.precio * $event.detail.value;
-    this.cantidad = $event.detail.value;
+  /**
+   * Método que resta 1 producto a la cantidad total y al total de dinero.
+   */
+  restar(){
+    if (this.cantidad === 1){
+      return;
     }
+    this.cantidad -= 1;
+    this.subtotal = this.precio * this.cantidad;
+  }
 
-    restar(){
-      if(this.cantidad === 1){
-        return;
-      }
-      this.cantidad -= 1;
-      this.subtotal = this.precio * this.cantidad;
-    }
-    adicionar(){
-      this.cantidad += 1;
-      this.subtotal = this.precio * this.cantidad;
-    }
+  /**
+   * Método que adiciona 1 producto a la cantidad total y al total de dinero.
+   */
+  adicionar(){
+    this.cantidad += 1;
+    this.subtotal = this.precio * this.cantidad;
+  }
 
-    seleccionar(id){
-      if(!id.detail.value){
-        this.blDisabled = true;
-        return;
-      }
-      this.blDisabled = false;
-      this.seleccion = id.detail.value;
-      for (const item of this.arrOpciones){
-        if (item.id === this.seleccion){
-          this.precio = item.precio;
-          this.subtotal = this.precio * this.cantidad;
-        }
+  /**
+   * Método que escucha el cambio en la selección de las opciones d eun producto.
+   * @param id Identificador de la opción del producto seleciconado.
+   */
+  seleccionar(id){
+    if (!id.detail.value){
+      this.blDisabled = true;
+      return;
+    }
+    this.blDisabled = false;
+    this.seleccion = id.detail.value;
+    for (const item of this.arrOpciones){
+      if (item.id === this.seleccion){
+        this.precio = item.precio;
+        this.subtotal = this.precio * this.cantidad;
       }
     }
+  }
 }

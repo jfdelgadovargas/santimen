@@ -24,6 +24,10 @@ export class CategoriaPage implements OnInit {
               private modalCtrl: ModalController,
               private activatedRoute: ActivatedRoute) { }
 
+  /**
+   * Método de inicialización de la vista encargado
+   * de la carga de productos de una categoría.
+   */
   ngOnInit() {
     const categoriaID = this.activatedRoute.snapshot.paramMap.get('categoriaID');
     if (categoriaID){
@@ -42,6 +46,10 @@ export class CategoriaPage implements OnInit {
     }
   }
 
+  /**
+   * Método que abre un modal con la información de detalle de un producto.
+   * @param item Objeto con la información del detalle de un producto.
+   */
   async detail(item){
     this.menuService.getMenuDetail(this.categoriaID, item.id).subscribe(opciones => {
       this.opciones = opciones;
@@ -130,10 +138,12 @@ export class CategoriaPage implements OnInit {
     }
   }
 
+  /**
+   * Muestra el detalle de los productos agregados a la canasta.
+   */
   async resumen(){
     const modalResumen = await this.modalCtrl.create({
       component: SummaryPage,
-      cssClass: 'my-custom-class',
       componentProps: {
         canasta: this.canasta,
         totalProductos: this.totalProductos,
@@ -154,6 +164,9 @@ export class CategoriaPage implements OnInit {
   }
 
 
+  /**
+   * Método encargado de direccionar al home.
+   */
   atras(){
     this.router.navigate(['/home']);
   }

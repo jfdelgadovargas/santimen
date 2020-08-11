@@ -21,7 +21,9 @@ export class EnvioPage implements OnInit {
               private menuService: MenuService,
               private activatedRoute: ActivatedRoute,
               private loadingController: LoadingController,) { }
-
+  /**
+   * Método de inicialización de la vista encargado de cargar el detalle de un pedido.
+   */
   ngOnInit() {
     const pedidoID = this.activatedRoute.snapshot.paramMap.get('pedidoID');
     if (pedidoID){
@@ -39,6 +41,10 @@ export class EnvioPage implements OnInit {
     }
   }
 
+  /**
+   * Método encargado de cambiar el estado del pedido
+   * y redireccionar a la vista de home.
+   */
   cancelarPedido(){
     this.cancelarLoading();
     this.menuService.cancelarPedido(this.pedidoID).then(docRef => {
@@ -47,6 +53,11 @@ export class EnvioPage implements OnInit {
     }).catch(e => console.log(e));
     this.router.navigate(['/home']);
   }
+
+  /**
+   * Método encargado de cambiar el estado del pedido y redireccionar
+   * a la vista de pedidos.
+   */
   confirmarPedido(){
     if (!this.blTextoEspera){
       return;
@@ -58,7 +69,9 @@ export class EnvioPage implements OnInit {
     }).catch(e => console.log(e));
   }
 
-
+  /**
+   * Método encargado de mostrar mensaje de espera para cancelar el pedido.
+   */
   async cancelarLoading() {
     this.cancelLoading = await this.loadingController.create({
       cssClass: 'my-custom-class',
@@ -67,7 +80,9 @@ export class EnvioPage implements OnInit {
     return this.cancelLoading.present();
   }
 
-
+  /**
+   * Método encargado de mostrar mensaje de espera para registrar el pedido.
+   */
   async presentLoading() {
     this.loading = await this.loadingController.create({
       cssClass: 'my-custom-class',

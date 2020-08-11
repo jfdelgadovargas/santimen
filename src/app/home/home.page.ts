@@ -21,13 +21,17 @@ export class HomePage {
               private menuService: MenuService,
               private modalCtrl: ModalController) {}
 
+  /**
+   * Método de inicialización de la vista encargado de la carga de categorías
+   * e inicialización de variables en local storage.
+   */
   ngOnInit(){
     this.subtotal = 0;
     this.categorias = this.menuService.getCategorias();
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
     const clienteID = JSON.parse(localStorage.getItem('clienteID'));
     const pedidos = JSON.parse(localStorage.getItem('pedidos'));
-    if(totalizer == null){
+    if (totalizer == null){
       localStorage.setItem('totalizer', JSON.stringify({
         canasta: this.canasta,
         subtotal: this.subtotal,
@@ -38,62 +42,20 @@ export class HomePage {
       this.subtotal = totalizer.subtotal;
       this.totalProductos = totalizer.totalProductos;
     }
-    if(pedidos == null){
+    if (pedidos == null){
       localStorage.setItem('pedidos', JSON.stringify([]));
     }
-    if(clienteID == null){
+    if (clienteID == null){
       localStorage.setItem('clienteID', JSON.stringify(''));
     }
   }
 
-  async detail(item){
-    const modal = await this.modalCtrl.create({
-      component: DetailmodalPage,
-      cssClass: 'my-custom-class',
-      componentProps: {
-        id: item.id,
-        nombre: item.nombre,
-        descripcion: item.descripcion,
-        precio: item.precio,
-        imagen: item.imagen,
-      }
-    });
-
-    await modal.present();
-
-    const data = await modal.onDidDismiss();
-    const productos = this.canasta.length;
-    if(data.data){
-      const seleccion = data.data;
-      if(productos === 0){
-        this.canasta.push(data.data);
-        this.totalProductos += data.data.cantidad;
-      }else{
-        let blFind = false;
-        for(let producto of this.canasta){
-          if(seleccion.id === producto.id){
-            blFind = true;
-            producto.cantidad += seleccion.cantidad;
-            producto.total += seleccion.total;
-            this.totalProductos += seleccion.cantidad;
-            break;
-          }
-        }
-        if(blFind == false){
-          this.canasta.push(seleccion);
-          this.totalProductos += seleccion.cantidad;
-        }
-      }
-
-      this.subtotal += data.data.total;
-    }
-  }
-
+  /**
+   * Muestra el detalle de los productos agregados a la canasta.
+   */
   async resumen(){
-    console.log('Hace el pedido');
     const modalResumen = await this.modalCtrl.create({
       component: SummaryPage,
-      cssClass: 'my-custom-class',
       componentProps: {
         canasta: this.canasta,
         totalProductos: this.totalProductos,
@@ -108,10 +70,17 @@ export class HomePage {
     this.subtotal = nuevosProductos.subtotal;
   }
 
+  /**
+   * Método que redirecciona a la lista de items de una categoría.
+   * @param sectionName Nombre de la categoría que mostrará.
+   */
   goDetail(sectionName){
     this.router.navigate([`/categoria/${sectionName}`]);
   }
 
+  /**
+   * Método para actualizar la vista home con la canasta después de entrar a la vista.
+   */
   ionViewDidEnter(){
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
     this.canasta = totalizer.canasta;
@@ -119,6 +88,9 @@ export class HomePage {
     this.totalProductos = totalizer.totalProductos;
   }
 
+  /**
+   * Método que direcciona a la vista de pedidos.
+   */
   pedidos(){
     this.router.navigate([`/pedidos`]);
   }
