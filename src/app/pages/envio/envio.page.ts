@@ -13,6 +13,7 @@ export class EnvioPage implements OnInit {
   totalEnvio;
   total;
   loading: any;
+  cancelLoading: any;
   pedidoID;
   granTotal = 0;
   blTextoEspera = false;
@@ -39,9 +40,9 @@ export class EnvioPage implements OnInit {
   }
 
   cancelarPedido(){
-    this.presentLoading();
+    this.cancelarLoading();
     this.menuService.cancelarPedido(this.pedidoID).then(docRef => {
-      this.loading.dismiss();
+      this.cancelLoading.dismiss();
       this.router.navigate(['/home']);
     }).catch(e => console.log(e));
     this.router.navigate(['/home']);
@@ -56,6 +57,16 @@ export class EnvioPage implements OnInit {
       this.router.navigate(['/pedidos']);
     }).catch(e => console.log(e));
   }
+
+
+  async cancelarLoading() {
+    this.cancelLoading = await this.loadingController.create({
+      cssClass: 'my-custom-class',
+      message: 'Por favor, espere mientras se cancela su pedido.'
+    });
+    return this.cancelLoading.present();
+  }
+
 
   async presentLoading() {
     this.loading = await this.loadingController.create({
