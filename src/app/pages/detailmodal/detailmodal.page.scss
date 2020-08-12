@@ -50,8 +50,12 @@ img{
     }
     ion-item{
         --padding-start: 0rem;
+        --inner-padding-bottom: 0.5rem;
+        --inner-padding-top: 0.5rem;
+        --inner-padding-end: 0rem;
         ion-radio{
             margin: 0.5rem;
+            --border-width: 1.2px;
         }
     }
 }
@@ -122,3 +126,63 @@ img{
     background-color: #c8c8c8;
     background-image: none;
   }
+
+  .adicionales{
+      margin: 0 1rem;
+      .adicional{
+          margin: 1.5rem 0;
+      }
+      .item{
+          ion-item{
+            --inner-padding-bottom: 0.5rem;
+            --inner-padding-top: 0.5rem;
+            --padding-start: 0rem;
+            --inner-padding-end: 0rem;
+              &.multiple{
+                --inner-padding-bottom: 0.2rem;
+                --inner-padding-top: 0.2rem;
+                --inner-padding-end: 0rem;
+              }
+              ion-label{
+                  color: var(--text-color);
+                  .display{
+                    padding: 0.3rem 0;
+                  }
+                  .precio{
+                    font-size: 0.9rem;
+                    font-weight: bold;
+                  }
+              }
+              ion-radio{
+                --border-width: 1.2px;
+              }
+          }
+          ion-checkbox{
+            --border-width: 1.2px;
+          }
+      }
+     
+  }
+  .titulo{
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  .datos-requeridos{
+      background-color: #e8e8e8;;
+      border: none;
+      color: #757575;
+      padding: 0.2rem 0.5rem;
+      width: fit-content;
+      border-radius: 1rem;
+      font-size: 0.7rem;
+      font-weight: lighter;
+  }
+  .datos-no-validos{
+      background-color: #ffdadf;
+      color: var(--ion-color-danger);
+      border: solid 1px var(--ion-color-danger);
+  }
+}

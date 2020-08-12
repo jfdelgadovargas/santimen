@@ -17,6 +17,7 @@ export interface Plato {
 })
 export class MenuService {
   private platos: Observable<any[]>;
+  private adicionales: Observable<any[]>;
   private opcionesPago: Observable<any[]>;
   private pedidos: Observable<any[]>;
   private platosCollection: AngularFirestoreCollection<Plato>;
@@ -138,5 +139,19 @@ export class MenuService {
         estado: 7
       });
     }
+  }
+
+  getAdicionales(productoID): Observable<any[]> {
+		this.platosCollection = this.afs.collection<any>('adicionales', ref => ref.where('productos', 'array-contains', productoID).orderBy('tipo', 'asc'));
+		this.adicionales = this.platosCollection.snapshotChanges().pipe(
+		  map(actions => {
+			return actions.map(a => {
+			  const data = a.payload.doc.data();
+        const id = a.payload.doc.id;
+			  return { id, ...data };
+			});
+		  })
+		);
+		return this.adicionales;
   }
 }

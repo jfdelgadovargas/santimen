@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
   selector: 'app-detailmodal',
@@ -19,14 +20,20 @@ export class DetailmodalPage implements OnInit {
   arrOpciones = [];
   blOpciones = false;
   blDisabled = true;
+  adicionales;
 
-  constructor(private modalCtrl: ModalController) { }
+  constructor(private modalCtrl: ModalController,
+              private menuService: MenuService) { }
 
   /**
    * Método de inicialización de la vista encargado
    * de cargar las opciones de un producto seleccionado.
    */
   ngOnInit() {
+    console.log(this.id);
+    this.menuService.getAdicionales(this.id).subscribe(respuesta => {
+      this.adicionales = respuesta;
+    });
     this.subtotal = this.precio;
     this.opciones.subscribe(opciones => {
       this.arrOpciones = opciones;
@@ -100,5 +107,16 @@ export class DetailmodalPage implements OnInit {
         this.subtotal = this.precio * this.cantidad;
       }
     }
+  }
+
+  seleccionarIncluido(seleccion, categoria){
+    console.log('Incluido', seleccion.detail.value);
+    console.log('Tipo', categoria.tipo);
+  }
+
+  seleccionarAdicional(seleccion, categoria){
+    console.log('Tipo', categoria.tipo);
+    console.log('Adicional', seleccion.display);
+    console.log('Precio', seleccion.precio);
   }
 }

@@ -14,6 +14,9 @@
   </div>
   <div class="price"><span class="amount">{{precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span></div>
   <div class="cantidad">
+    <div class="titulo" *ngIf="blOpciones === true">
+      Elige tu opción <div class="datos-requeridos" [ngClass]="{'datos-no-validos':false}" >Obligatorio</div>
+    </div>
       <ion-list class="radio-group-list">
         <ion-radio-group allow-empty-selection ([ngModel])="seleccion" value="{{seleccion}}" (ionChange)="seleccionar($event)">
           <div class="option" *ngFor="let opcion of (opciones | async)">
@@ -25,6 +28,45 @@
         </ion-radio-group>
       </ion-list>
     </div>
+
+<div class="adicionales">
+  <div class="adicional" *ngFor="let adicional of adicionales">
+    <div class="titulo">
+      {{adicional.display}} <div *ngIf="adicional.tipo === 1" class="datos-requeridos" [ngClass]="{'datos-no-validos':false}" >Obligatorio</div>
+    </div>
+    <ng-template [ngIf]="adicional.tipo === 1" [ngIfElse]="multiple">
+      <ion-list class="radio-group-list">
+        <ion-radio-group (ionChange)="seleccionarIncluido($event, adicional)">
+          <div class="item" *ngFor="let item of adicional.opciones">
+          <ion-item>
+              <ion-label class="option-name">{{item.display}}</ion-label>
+              <ion-radio slot="end" mode="md" class="option-value" value="{{item.display}}"></ion-radio>
+            </ion-item>
+          </div>
+        </ion-radio-group>
+      </ion-list>
+    </ng-template>
+    <ng-template #multiple>
+      <ion-list>
+        <div class="item" *ngFor="let item of adicional.opciones">
+        <ion-item class="multiple" (ionChange)="seleccionarAdicional(item, adicional)">
+          <ion-label>
+            <div class="display">
+              {{item.display}}
+            </div>
+            <div class="precio" *ngIf="adicional.tipo === 3">
+              + {{item.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}
+            </div>
+          </ion-label>
+          <ion-checkbox slot="end" mode="md"></ion-checkbox>
+        </ion-item>
+      </div>
+      </ion-list>
+    </ng-template>
+  </div>
+</div>
+
+
 </ion-content>
   <ion-footer>
     <ion-toolbar>
