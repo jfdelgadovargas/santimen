@@ -30,7 +30,6 @@ export class DetailmodalPage implements OnInit {
    * de cargar las opciones de un producto seleccionado.
    */
   ngOnInit() {
-    console.log(this.id);
     this.menuService.getAdicionales(this.id).subscribe(respuesta => {
       this.adicionales = respuesta;
     });

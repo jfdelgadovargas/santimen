@@ -34,6 +34,7 @@
     <div class="titulo">
       {{adicional.display}} <div *ngIf="adicional.tipo === 1" class="datos-requeridos" [ngClass]="{'datos-no-validos':false}" >Obligatorio</div>
     </div>
+    <div class="texto-maximo" *ngIf="adicional.textoMaximo">{{adicional.textoMaximo}}</div>
     <ng-template [ngIf]="adicional.tipo === 1" [ngIfElse]="multiple">
       <ion-list class="radio-group-list">
         <ion-radio-group (ionChange)="seleccionarIncluido($event, adicional)">
