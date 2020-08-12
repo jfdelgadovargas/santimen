@@ -20,7 +20,14 @@ export class DetailmodalPage implements OnInit {
   arrOpciones = [];
   blOpciones = false;
   blDisabled = true;
-  adicionales;
+  blOpcionPrincipal = false;
+  adicionales = [];
+
+  incluidos = [];
+  blHayIncluidos = false;
+  blIncluidos = false;
+  opcionales = [];
+  opcionalesPago = [];
 
   constructor(private modalCtrl: ModalController,
               private menuService: MenuService) { }
@@ -31,6 +38,21 @@ export class DetailmodalPage implements OnInit {
    */
   ngOnInit() {
     this.menuService.getAdicionales(this.id).subscribe(respuesta => {
+      for (const adicional of respuesta){
+        if (adicional.tipo === 1){
+          this.blHayIncluidos = true;
+          break;
+        }else{
+          this.blHayIncluidos = false;
+          this.validarAdicionales();
+        }
+      }
+      for (const adicional of respuesta){
+        adicional.blValida = false;
+        for (const opcion of adicional.opciones){
+          opcion.seleccionado = false;
+        }
+      }
       this.adicionales = respuesta;
     });
     this.subtotal = this.precio;
@@ -95,10 +117,12 @@ export class DetailmodalPage implements OnInit {
    */
   seleccionar(id){
     if (!id.detail.value){
-      this.blDisabled = true;
+      this.blOpcionPrincipal = false;
+      this.validarAdicionales();
       return;
     }
-    this.blDisabled = false;
+    this.blOpcionPrincipal = true;
+    this.validarAdicionales();
     this.seleccion = id.detail.value;
     for (const item of this.arrOpciones){
       if (item.id === this.seleccion){
@@ -109,13 +133,61 @@ export class DetailmodalPage implements OnInit {
   }
 
   seleccionarIncluido(seleccion, categoria){
-    console.log('Incluido', seleccion.detail.value);
-    console.log('Tipo', categoria.tipo);
+    if (!seleccion.detail.value){
+      return;
+    }
+    const categoriaID = categoria.id;
+    const incluidoID = seleccion.detail.value * 1;
+    const tipo = this.adicionales.find(elemento => elemento.id === categoriaID);
+    const opcion = tipo.opciones.find(elemento => elemento.id === incluidoID);
+    for (const item of tipo.opciones){
+      item.seleccionado = false;
+    }
+    opcion.seleccionado = true;
+    tipo.blValida = true;
+    this.validarAdicionales();
+  }
+
+  validarIncluidos(){
+    for (const opcion of this.adicionales){
+      if (opcion.tipo === 1){
+        if (!opcion.blValida){
+          this.blIncluidos = false;
+          break;
+        }
+        else{
+          this.blIncluidos = true;
+        }
+      }
+    }
+  }
+
+  validarAdicionales(){
+    if (!this.blHayIncluidos){
+      this.blDisabled = !this.blOpcionPrincipal;
+      return;
+    }
+    this.validarIncluidos();
+    if (this.adicionales.length > 0){
+      this.blDisabled = !(this.blOpcionPrincipal && this.blIncluidos);
+    }else{
+      this.blDisabled = !this.blOpcionPrincipal;
+    }
   }
 
   seleccionarAdicional(seleccion, categoria){
-    console.log('Tipo', categoria.tipo);
-    console.log('Adicional', seleccion.display);
-    console.log('Precio', seleccion.precio);
+    const categoriaID = categoria.id;
+    const opcionID = seleccion.id;
+    const tipo = this.adicionales.find(elemento => elemento.id === categoriaID);
+    const opcion = tipo.opciones.find(elemento => elemento.id === opcionID);
+    opcion.seleccionado = !opcion.seleccionado;
+    if(opcion.seleccionado){
+      this.precio += opcion.precio;
+      this.subtotal = this.precio * this.cantidad;
+    }else{
+      this.precio -= opcion.precio;
+      this.subtotal = this.precio * this.cantidad;
+    }
+    this.validarAdicionales();
   }
 }
