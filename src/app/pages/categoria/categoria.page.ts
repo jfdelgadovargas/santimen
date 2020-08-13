@@ -82,6 +82,7 @@ export class CategoriaPage implements OnInit {
           seleccion.arOpciones = [];
           const nuevaOpcion = Object.assign({}, seleccion.opciones.find(elemento => elemento.id === idSeleccionado));
           nuevaOpcion.cantidad = seleccion.cantidad;
+          nuevaOpcion.adicionales = seleccion.adicionales;
           seleccion.arOpciones.push(nuevaOpcion);
           this.canasta.push(seleccion);
           this.totalProductos += seleccion.cantidad;
@@ -95,12 +96,13 @@ export class CategoriaPage implements OnInit {
           for (const producto of this.canasta){
             if (seleccion.id === producto.id){
               blFind = true;
-
+              // Validar cada adicional
+              const blAdicionales = this.validarAdicionales(seleccion.adicionales, producto.adicionales);
               // Busca en las opciones del producto
               for (const opcion of producto.arOpciones){
 
                 // Si encuentra la opción le agrega 1 a la cantidad
-                if (opcion.id === idSeleccionado){
+                if ((opcion.id === idSeleccionado) && blAdicionales){
                   blFindOption = true;
                   opcion.cantidad += seleccion.cantidad;
                   break;
@@ -111,6 +113,7 @@ export class CategoriaPage implements OnInit {
               if (blFindOption === false){
                 const nuevaOpcion = Object.assign({}, producto.opciones.find(elemento => elemento.id === idSeleccionado));
                 nuevaOpcion.cantidad = seleccion.cantidad;
+                nuevaOpcion.adicionales = seleccion.adicionales;
                 producto.arOpciones.push(nuevaOpcion);
               }
 
@@ -129,6 +132,7 @@ export class CategoriaPage implements OnInit {
             if (opcion.id === idSeleccionado){
               const nuevaOpcion = Object.assign({}, opcion);
               nuevaOpcion.cantidad = seleccion.cantidad;
+              nuevaOpcion.adicionales = seleccion.adicionales;
               seleccion.arOpciones.push(nuevaOpcion);
               break;
             }
