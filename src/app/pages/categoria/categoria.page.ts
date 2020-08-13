@@ -90,27 +90,39 @@ export class CategoriaPage implements OnInit {
         else{
           let blFind = false;
           let blFindOption = false;
+
+          // Busca en la canasta el producto
           for (const producto of this.canasta){
             if (seleccion.id === producto.id){
               blFind = true;
+
+              // Busca en las opciones del producto
               for (const opcion of producto.arOpciones){
+
+                // Si encuentra la opción le agrega 1 a la cantidad
                 if (opcion.id === idSeleccionado){
                   blFindOption = true;
                   opcion.cantidad += seleccion.cantidad;
                   break;
                 }
               }
+
+              // Si no encuentra la opción, la agrega al arreglo de opciones del mismo producto
               if (blFindOption === false){
                 const nuevaOpcion = Object.assign({}, producto.opciones.find(elemento => elemento.id === idSeleccionado));
                 nuevaOpcion.cantidad = seleccion.cantidad;
                 producto.arOpciones.push(nuevaOpcion);
               }
+
+              // Suma a la cantidad del producto y al total
               producto.cantidad += seleccion.cantidad;
               producto.total += seleccion.total;
               this.totalProductos += seleccion.cantidad;
               break;
             }
           }
+
+          // Si no encuentra el producto le crea un arreglo de opcionales y le agrega la opción seleccionada.
           if (blFind === false){
           seleccion.arOpciones = [];
           for (const opcion of seleccion.opciones){
@@ -121,10 +133,14 @@ export class CategoriaPage implements OnInit {
               break;
             }
           }
+
+          // Agrega el producto a la canasta.
           this.canasta.push(seleccion);
           this.totalProductos += seleccion.cantidad;
           }
         }
+
+        // Actualiza el subtottal y la canasta en el local storage.
         this.subtotal += seleccion.total;
         localStorage.setItem('totalizer', JSON.stringify({
           canasta: this.canasta,
@@ -168,4 +184,22 @@ export class CategoriaPage implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  validarAdicionales(seleccion, productoCanasta){
+    const blIncluidos = this.compararAdicionales(seleccion.incluidos, productoCanasta.incluidos);
+    const blOpcionales = this.compararAdicionales(seleccion.opcionales, productoCanasta.opcionales);
+    const blOpcionalesPago = this.compararAdicionales(seleccion.opcionalesPago, productoCanasta.opcionalesPago);
+    return (blIncluidos && blOpcionales && blOpcionalesPago);
+  }
+
+  compararAdicionales(arSeleccion, arProductoCanasta){
+    let iguales = true;
+    for (const item of arSeleccion){
+      const resultado = arProductoCanasta.find(elemento => elemento.id === item.id && elemento.categoriaID === item.categoriaID);
+      if (!resultado){
+        iguales = false;
+        break;
+      }
+    }
+    return iguales;
+  }
 }
