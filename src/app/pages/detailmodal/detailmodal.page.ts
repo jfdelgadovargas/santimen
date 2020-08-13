@@ -22,6 +22,7 @@ export class DetailmodalPage implements OnInit {
   blDisabled = true;
   blOpcionPrincipal = false;
   adicionales = [];
+  precioAdicionales = 0;
 
   incluidos = [];
   blHayIncluidos = false;
@@ -74,7 +75,15 @@ export class DetailmodalPage implements OnInit {
     if (this.blDisabled && blPide){
       return;
     }
-    if(blPide){
+    if (blPide){
+      const incluidos = this.organizarAdicionales(1);
+      const opcionales = this.organizarAdicionales(2);
+      const opcionalesPago = this.organizarAdicionales(3);
+      const obAdicionales = {
+        incluidos,
+        opcionales,
+        opcionalesPago
+      };
       this.modalCtrl.dismiss({
       cantidad: this.cantidad * 1,
       id: this.id,
@@ -84,7 +93,8 @@ export class DetailmodalPage implements OnInit {
       precio: this.precio,
       opciones: this.opciones,
       opcionSeleccionada: this.seleccion,
-      total: this.subtotal
+      total: this.subtotal,
+      obAdicionales
       });
     }else{
       this.modalCtrl.dismiss();
@@ -100,7 +110,7 @@ export class DetailmodalPage implements OnInit {
       return;
     }
     this.cantidad -= 1;
-    this.subtotal = this.precio * this.cantidad;
+    this.subtotal = (this.precio + this.precioAdicionales) * this.cantidad;
   }
 
   /**
@@ -108,7 +118,7 @@ export class DetailmodalPage implements OnInit {
    */
   adicionar(){
     this.cantidad += 1;
-    this.subtotal = this.precio * this.cantidad;
+    this.subtotal = (this.precio + this.precioAdicionales) * this.cantidad;
   }
 
   /**
@@ -127,7 +137,7 @@ export class DetailmodalPage implements OnInit {
     for (const item of this.arrOpciones){
       if (item.id === this.seleccion){
         this.precio = item.precio;
-        this.subtotal = this.precio * this.cantidad;
+        this.subtotal = (this.precio + this.precioAdicionales) * this.cantidad;
       }
     }
   }
@@ -182,12 +192,28 @@ export class DetailmodalPage implements OnInit {
     const opcion = tipo.opciones.find(elemento => elemento.id === opcionID);
     opcion.seleccionado = !opcion.seleccionado;
     if(opcion.seleccionado){
-      this.precio += opcion.precio;
-      this.subtotal = this.precio * this.cantidad;
+      this.precioAdicionales += opcion.precio;
+      this.subtotal = (this.precio + this.precioAdicionales) * this.cantidad;
     }else{
-      this.precio -= opcion.precio;
-      this.subtotal = this.precio * this.cantidad;
+      this.precioAdicionales -= opcion.precio;
+      this.subtotal = (this.precio + this.precioAdicionales) * this.cantidad;
     }
     this.validarAdicionales();
+  }
+
+  organizarAdicionales(tipo){
+    const adicionales = [];
+    for (const item of this.adicionales){
+      if (item.tipo === tipo){
+        for (const adicional of item.opciones){
+          if (adicional.seleccionado){
+            adicional.categoriaID = item.id;
+            adicional.categoriaDisplay = item.display;
+            adicionales.push(adicional);
+          }
+        }
+      }
+    }
+    return adicionales;
   }
 }
