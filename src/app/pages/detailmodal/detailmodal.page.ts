@@ -79,7 +79,7 @@ export class DetailmodalPage implements OnInit {
       const incluidos = this.organizarAdicionales(1);
       const opcionales = this.organizarAdicionales(2);
       const opcionalesPago = this.organizarAdicionales(3);
-      const obAdicionales = {
+      const adicionales = {
         incluidos,
         opcionales,
         opcionalesPago
@@ -94,7 +94,7 @@ export class DetailmodalPage implements OnInit {
       opciones: this.opciones,
       opcionSeleccionada: this.seleccion,
       total: this.subtotal,
-      obAdicionales
+      adicionales
       });
     }else{
       this.modalCtrl.dismiss();
