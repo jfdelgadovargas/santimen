@@ -27,7 +27,7 @@
         </ion-row>
         <ion-row>
           <ion-col size="12" class="add-button">
-            <span class="food-price">{{item.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span><div class="adicionar-btn" (click)="detail(item)">Agregar</div>
+            <span class="food-price">{{item.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span><div *ngIf="modo === 0 && abierto === true" class="adicionar-btn" (click)="detail(item)">Agregar</div>
           </ion-col>
         </ion-row>
       </ion-grid>     

@@ -2,9 +2,13 @@
   <div class="logo">
     <img src="../../assets/images/header.png" alt="Punto 7">
   </div>
-  <!-- <div class="home-title">Bienvenido a Punto 7 2x3</div> -->
-  <div class="intro-text">Variedad en comidas rápidas: hamburguesas, perros, asados, pizzas, lasagnas, salchipapas y mucho más.</div>
-  <div class="pedidos" (click)="pedidos()">Pedidos</div>
+  <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
+  <div class="intro-text" *ngIf="modo === 0 || abierto === false">{{textoIntro}}</div>
+  <div class="horario" *ngIf="!abierto">
+    <div class="cerrado">Abre {{horaApertura}}</div>
+    <div class="mensaje-horario">Horario: {{textoHorario}}</div>
+  </div>
+  <div class="pedidos" (click)="pedidos()" *ngIf="modo === 0 && abierto === true">Pedidos</div>
   <ion-grid *ngIf="categorias">
     <ion-row>
       <ion-col class="category-col" *ngFor="let categoria of (categorias | async)" size-xs="6" (click)="goDetail(categoria.nombre)">

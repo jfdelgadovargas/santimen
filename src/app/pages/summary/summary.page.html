@@ -45,7 +45,7 @@
         <div class="item-multiple">
                <ion-grid>
           <ion-row *ngFor="let opcion of producto.arOpciones" class="row-multiple">
-            <ion-col size="6" class="food-image">
+            <ion-col size="8" class="food-image">
               <ion-thumbnail item-start>
                 <img src={{producto.imagen}}>
               </ion-thumbnail>
@@ -55,7 +55,7 @@
                 <div class="food-text"><p>{{opcion.precio + opcion.adicionales.precioAdicionales| currency:'COP':'symbol-narrow' : '1.0-0'}}</p></div>
               </div>
             </ion-col>
-            <ion-col size="6" class="step-col">
+            <ion-col size="4" class="step-col">
               <div class="trash" (click)="removerOpcion(producto.id, producto.cantidad, opcion.id, opcion.idInterno)" *ngIf="opcion.cantidad === 1"><ion-icon name="trash-outline"></ion-icon></div>
               <div class="step-component">
                 <div class="remove" [ngClass]="{'no-active':opcion.cantidad === 1}" (click)="restarMultiple(producto.id, opcion.id, producto.cantidad, opcion.cantidad, opcion.idInterno)">

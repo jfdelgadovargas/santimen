@@ -5,6 +5,7 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { MenuService } from 'src/app/services/menu.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { PedidodetailPage } from '../pedidodetail/pedidodetail.page';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-opcionespago',
@@ -45,7 +46,12 @@ export class OpcionespagoPage implements OnInit {
   blTelefonoValido = false;
   blMesaValido = false;
   clienteID;
-
+  configuraciones: Observable<any[]>;
+  horaApertura;
+  textoHorario = '';
+  textoIntro = '';
+  abierto = false;
+  modo;
 
   constructor(private router: Router,
               private modalCtrl: ModalController,
@@ -56,6 +62,17 @@ export class OpcionespagoPage implements OnInit {
    * Métodode inicialización de la vista, encargado de iniciar loas variables de la canasta.
    */
   ngOnInit() {
+    this.menuService.getConfiguracion('configuracion').subscribe(configuracion => {
+      if (configuracion){
+        const data = configuracion.payload.data();
+        this.configuraciones = data;
+        this.horaApertura = data.horaApertura;
+        this.textoHorario = data.textoHorario;
+        this.textoIntro = data.textoIntro;
+        this.abierto = data.abierto;
+        this.modo = data.modo;
+      }
+    });
     this.url = '../../../assets/images/efectivo.svg';
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
     this.clienteID = JSON.parse(localStorage.getItem('clienteID'));
@@ -127,7 +144,7 @@ export class OpcionespagoPage implements OnInit {
    * Método encargado de registrar el pedido en la BD.
    */
   async Enviarpedido(){
-    if (this.blDisabled){
+    if (this.blDisabled || this.modo === 1 || this.abierto === false){
       return;
     }
     this.presentLoading();

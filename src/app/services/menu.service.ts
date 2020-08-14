@@ -17,6 +17,7 @@ export interface Plato {
 })
 export class MenuService {
   private platos: Observable<any[]>;
+  private configuraciones: Observable<any[]>;
   private adicionales: Observable<any[]>;
   private opcionesPago: Observable<any[]>;
   private pedidos: Observable<any[]>;
@@ -154,4 +155,8 @@ export class MenuService {
 		);
 		return this.adicionales;
   }
+
+    getConfiguracion(configID): Observable<any> {
+      return this.afs.collection<any>('general').doc<any>(configID).snapshotChanges();
+    }
 }

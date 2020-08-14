@@ -16,6 +16,13 @@ export class HomePage {
   subtotal: number;
   canasta = [];
   totalProductos = 0;
+  configuraciones: Observable<any[]>;
+  horaApertura;
+  textoHorario = '';
+  textoIntro = '';
+  textoCarta = '';
+  abierto = false;
+  modo;
 
   constructor(private router: Router,
               private menuService: MenuService,
@@ -28,14 +35,25 @@ export class HomePage {
   ngOnInit(){
     this.subtotal = 0;
     this.categorias = this.menuService.getCategorias();
+    this.menuService.getConfiguracion('configuracion').subscribe(configuracion => {
+      if (configuracion){
+        const data = configuracion.payload.data();
+        this.configuraciones = data;
+        this.horaApertura = data.horaApertura;
+        this.textoHorario = data.textoHorario;
+        this.textoIntro = data.textoIntro;
+        this.textoCarta = data.textoCarta;
+        this.abierto = data.abierto;
+        this.modo = data.modo;
+      }
+    });
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
     const clienteID = JSON.parse(localStorage.getItem('clienteID'));
     const pedidos = JSON.parse(localStorage.getItem('pedidos'));
     if (totalizer == null){
       localStorage.setItem('totalizer', JSON.stringify({
         canasta: this.canasta,
-        subtotal: this.subtotal,
-        totalProductos: this. totalProductos
+        subtotal: this.subtotal
       }));
     }else{
       this.canasta = totalizer.canasta;

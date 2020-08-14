@@ -15,10 +15,16 @@ export class CategoriaPage implements OnInit {
   items: Observable<any[]>;
   categoriaID;
   nombreCategoria;
-  subtotal: 0;
+  subtotal = 0;
   canasta = [];
   totalProductos = 0;
   opciones = [];
+  configuraciones: Observable<any[]>;
+  horaApertura;
+  textoHorario = '';
+  textoIntro = '';
+  abierto = false;
+  modo;
   constructor(private router: Router,
               private menuService: MenuService,
               private modalCtrl: ModalController,
@@ -29,6 +35,17 @@ export class CategoriaPage implements OnInit {
    * de la carga de productos de una categoría.
    */
   ngOnInit() {
+    this.menuService.getConfiguracion('configuracion').subscribe(configuracion => {
+      if (configuracion){
+        const data = configuracion.payload.data();
+        this.configuraciones = data;
+        this.horaApertura = data.horaApertura;
+        this.textoHorario = data.textoHorario;
+        this.textoIntro = data.textoIntro;
+        this.abierto = data.abierto;
+        this.modo = data.modo;
+      }
+    });
     const categoriaID = this.activatedRoute.snapshot.paramMap.get('categoriaID');
     if (categoriaID){
       this.categoriaID = categoriaID;
@@ -51,6 +68,9 @@ export class CategoriaPage implements OnInit {
    * @param item Objeto con la información del detalle de un producto.
    */
   async detail(item){
+    if (this.modo === 1 || this.abierto === false){
+      return;
+    }
     this.menuService.getMenuDetail(this.categoriaID, item.id).subscribe(opciones => {
       this.opciones = opciones;
       return opciones;

@@ -171,7 +171,7 @@ img{
     justify-content: space-between;
     align-items: center;
   .datos-requeridos{
-      background-color: #e8e8e8;;
+      background-color: #e8e8e8;
       border: none;
       color: #757575;
       padding: 0.2rem 0.5rem;
@@ -181,12 +181,28 @@ img{
       font-weight: lighter;
   }
   .datos-no-validos{
-      background-color: #ffdadf;
-      color: var(--ion-color-danger);
-      border: solid 1px var(--ion-color-danger);
+    background-color: #ffdadf;
+    color: var(--ion-color-danger);
+    border: solid 1px var(--ion-color-danger);
   }
 }
 .texto-maximo{
   font-size: 0.8rem;
   color: var(--text-color);
+}
+.item-agotado{
+  ion-label{
+    opacity: 0.3;
+  }
+}
+.agotado{
+  background-color: #ffdadf;
+  color: var(--ion-color-danger);
+  border: solid 1px var(--ion-color-danger);
+  padding: 0.2rem 0.5rem;
+  width: fit-content;
+  border-radius: 1rem;
+  font-size: 0.7rem;
+  font-weight: lighter;
+  opacity: 0.3;
 }
