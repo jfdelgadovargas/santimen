@@ -9,8 +9,11 @@
     <div class="padre">
       
     </div>
-    <ion-item *ngFor="let producto of canasta">
-      <ng-template [ngIf]="producto.simple" [ngIfElse]="multiple">
+    <div *ngFor="let producto of canasta">
+      
+
+      
+    <!--   <ng-template [ngIf]="producto.simple" [ngIfElse]="multiple">
         <ion-grid class="normal-grid">
           <ion-row>
             <ion-col size="6" class="food-image">
@@ -38,58 +41,38 @@
             </ion-col>
           </ion-row>
         </ion-grid>  
-      </ng-template>
-      <ng-template #multiple>
+      </ng-template> -->
         <div class="item-multiple">
-          <div class="encabezado">
-            <ion-grid>
-              <ion-row>
-                <ion-col size="6" class="food-image">
-                  <ion-thumbnail item-start>
-                    <img src={{producto.imagen}}>
-                  </ion-thumbnail>
-                  <div class="product">
-                    <div class="food-title">{{producto.nombre}}</div>
-                    <div class="food-text"><p>{{producto.total | currency:'COP':'symbol-narrow' : '1.0-0'}}</p></div>
-                  </div>
-                </ion-col>
-                <ion-col size="6" class="step-col">
-                  <div class="step-component multiple">
-                    {{producto.cantidad}}
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </div>
-          <div class="opciones">        
                <ion-grid>
-          <ion-row *ngFor="let opcion of producto.arOpciones">
+          <ion-row *ngFor="let opcion of producto.arOpciones" class="row-multiple">
             <ion-col size="6" class="food-image">
+              <ion-thumbnail item-start>
+                <img src={{producto.imagen}}>
+              </ion-thumbnail>
               <div class="product">
-                <div class="food-title">{{opcion.nombre}}</div>
-                <div class="food-text"><p>{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</p></div>
+                <div class="food-title">{{producto.nombre}}</div>
+                <div class="food-title" *ngIf="opcion.default === false">{{opcion.nombre}}</div>
+                <div class="food-text"><p>{{opcion.precio + opcion.adicionales.precioAdicionales| currency:'COP':'symbol-narrow' : '1.0-0'}}</p></div>
               </div>
             </ion-col>
             <ion-col size="6" class="step-col">
-              <div class="trash" (click)="removerOpcion(producto.id, producto.cantidad, opcion.id)" *ngIf="opcion.cantidad === 1"><ion-icon name="trash-outline"></ion-icon></div>
+              <div class="trash" (click)="removerOpcion(producto.id, producto.cantidad, opcion.id, opcion.idInterno)" *ngIf="opcion.cantidad === 1"><ion-icon name="trash-outline"></ion-icon></div>
               <div class="step-component">
-                <div class="remove" [ngClass]="{'no-active':opcion.cantidad === 1}" (click)="restarMultiple(producto.id, opcion.id, producto.cantidad, opcion.cantidad)">
+                <div class="remove" [ngClass]="{'no-active':opcion.cantidad === 1}" (click)="restarMultiple(producto.id, opcion.id, producto.cantidad, opcion.cantidad, opcion.idInterno)">
                   <ion-icon name="remove-outline"></ion-icon>
                 </div>
                 <div class="number">
                   {{opcion.cantidad}}
                 </div>
-                <div class="add" (click)="adicionarMultiple(producto.id, opcion.id)">
+                <div class="add" (click)="adicionarMultiple(producto.id, opcion.id, opcion.idInterno)">
                   <ion-icon name="add-outline"></ion-icon>
                 </div>
               </div>
             </ion-col>
           </ion-row>
         </ion-grid>
-          </div>
         </div>
-      </ng-template>
-    </ion-item>
+    </div>
   </ion-list>
 </ion-content>
 <ion-footer>

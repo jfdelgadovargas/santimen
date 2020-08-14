@@ -11,6 +11,7 @@ export class SummaryPage implements OnInit {
   @Input() canasta;
   @Input() totalProductos;
   @Input() subtotal;
+  precioAdicionales;
   constructor(private router: Router, private modalCtrl: ModalController, public alertCtrl: AlertController) { }
 
   ngOnInit() {
@@ -39,15 +40,15 @@ export class SummaryPage implements OnInit {
     this.actualizarCanasta();
   }
 
-  adicionarMultiple(idProducto, idOpcion){
+  adicionarMultiple(idProducto, idOpcion, idInterno){
     for (const producto of this.canasta){
       if (idProducto === producto.id){
         producto.cantidad += 1;
         this.totalProductos += 1;
         for (const opcion of producto.arOpciones){
-          if (idOpcion === opcion.id){
-            producto.total += opcion.precio;
-            this.subtotal += opcion.precio;
+          if (idInterno === opcion.idInterno){
+            producto.total += opcion.precio + opcion.adicionales.precioAdicionales;
+            this.subtotal += opcion.precio + opcion.adicionales.precioAdicionales;
             opcion.cantidad += 1;
             break;
           }
@@ -72,9 +73,8 @@ export class SummaryPage implements OnInit {
     }
   }
 
-  removerOpcion(idProducto, cantidadProducto,  idOpcion){
+  removerOpcion(idProducto, cantidadProducto,  idOpcion, idInterno){
     if (cantidadProducto === 1){
-      console.log('Eliminar el producto');
       for (const [i, producto] of this.canasta.entries()){
         if (idProducto === producto.id){
           this.subtotal -= producto.total;
@@ -86,10 +86,10 @@ export class SummaryPage implements OnInit {
       for (const [i, producto] of this.canasta.entries()){
         if (idProducto === producto.id){
           for (const [j, opcion] of producto.arOpciones.entries()){
-            if (idOpcion === opcion.id){
-              producto.total -= opcion.precio;
+            if (idInterno === opcion.idInterno){
+              producto.total -= opcion.precio + opcion.adicionales.precioAdicionales;
               producto.cantidad -= opcion.cantidad;
-              this.subtotal -= opcion.precio;
+              this.subtotal -= opcion.precio + opcion.adicionales.precioAdicionales;
               this.totalProductos -= opcion.cantidad;
               producto.arOpciones.splice(j, 1);
               break;
@@ -121,7 +121,7 @@ export class SummaryPage implements OnInit {
     this.actualizarCanasta();
   }
 
-  restarMultiple(idProducto, idOpcion, cantidadProducto, cantidadOpcion){
+  restarMultiple(idProducto, idOpcion, cantidadProducto, cantidadOpcion, idInterno){
     if (cantidadOpcion === 1){
       return;
     }
@@ -130,9 +130,9 @@ export class SummaryPage implements OnInit {
         producto.cantidad -= 1;
         this.totalProductos -= 1;
         for (const opcion of producto.arOpciones){
-          if (opcion.id === idOpcion){
-            producto.total -= opcion.precio;
-            this.subtotal -= opcion.precio;
+          if (opcion.idInterno === idInterno){
+            producto.total -= opcion.precio + opcion.adicionales.precioAdicionales;
+            this.subtotal -= opcion.precio + opcion.adicionales.precioAdicionales;
             opcion.cantidad -= 1;
             break;
           }
@@ -185,7 +185,9 @@ export class SummaryPage implements OnInit {
 
   organizarCanasta(){
     for (const producto of this.canasta){
-      producto.simple = producto.opciones.length === 1;
+      for (const [indice, opcion] of producto.arOpciones.entries()){
+        opcion.idInterno = indice + 1;
+      }
     }
   }
 

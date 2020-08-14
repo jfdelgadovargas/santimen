@@ -91,26 +91,30 @@ export class CategoriaPage implements OnInit {
         else{
           let blFind = false;
           let blFindOption = false;
+          let blAdicionales = false;
 
           // Busca en la canasta el producto
           for (const producto of this.canasta){
             if (seleccion.id === producto.id){
               blFind = true;
-              // Validar cada adicional
-              const blAdicionales = this.validarAdicionales(seleccion.adicionales, producto.adicionales);
+
               // Busca en las opciones del producto
               for (const opcion of producto.arOpciones){
 
                 // Si encuentra la opción le agrega 1 a la cantidad
-                if ((opcion.id === idSeleccionado) && blAdicionales){
+                if (opcion.id === idSeleccionado){
                   blFindOption = true;
+                  blAdicionales = this.validarAdicionales(seleccion.adicionales, opcion.adicionales);
+                }
+                // Validar cada adicional
+                if (blFindOption && blAdicionales){
                   opcion.cantidad += seleccion.cantidad;
                   break;
                 }
               }
 
               // Si no encuentra la opción, la agrega al arreglo de opciones del mismo producto
-              if (blFindOption === false){
+              if (blFindOption === false || blAdicionales === false){
                 const nuevaOpcion = Object.assign({}, producto.opciones.find(elemento => elemento.id === idSeleccionado));
                 nuevaOpcion.cantidad = seleccion.cantidad;
                 nuevaOpcion.adicionales = seleccion.adicionales;

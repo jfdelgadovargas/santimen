@@ -1,3 +1,6 @@
+ion-content{
+    background-color: #f1f4f9;
+}
 .close-button{
     font-size: 2rem;
     text-align: right;
@@ -20,11 +23,14 @@ ion-item{
     // height: 80px;
 }
 .item-multiple{
-    width:100%;
+    ion-grid{
+        ion-row.row-multiple{
+            padding: 0.5rem 1rem;
+            border-bottom: solid 1px #e6e6e6;
+        }
+    }
 }
 .opciones{
-    padding: 0.5rem 0 0.5rem 80px;
-    background-color: #f7f7f7;
     margin: 0.5rem 0;
     .title{
         margin: 0.2rem 1rem;

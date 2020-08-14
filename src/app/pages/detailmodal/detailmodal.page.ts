@@ -82,7 +82,8 @@ export class DetailmodalPage implements OnInit {
       const adicionales = {
         incluidos,
         opcionales,
-        opcionalesPago
+        opcionalesPago,
+      precioAdicionales: this.precioAdicionales
       };
       this.modalCtrl.dismiss({
       cantidad: this.cantidad * 1,
