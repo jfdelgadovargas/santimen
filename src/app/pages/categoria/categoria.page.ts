@@ -84,6 +84,7 @@ export class CategoriaPage implements OnInit {
         descripcion: item.descripcion,
         precio: item.precio,
         imagen: item.imagen,
+        categoriaID: this.categoriaID,
         opciones: this.menuService.getMenuDetail(this.categoriaID, item.id)
       }
     });

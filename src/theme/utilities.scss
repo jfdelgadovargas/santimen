@@ -16,6 +16,9 @@ ion-item{
   }
   ion-grid{
     padding: 0.5rem 0;
+    ion-col.descripcion{
+      padding: 0;
+    }
   }
   .item{
     padding: 0.5rem;
@@ -68,6 +71,9 @@ ion-item{
      -webkit-box-orient: vertical;
      -webkit-line-clamp: 4;
      overflow: hidden;
+     &.carta{
+      -webkit-box-orient: horizontal;
+     }
   }
   .total-button{
     display: flex;

@@ -14,6 +14,7 @@ export class DetailmodalPage implements OnInit {
   @Input() imagen;
   @Input() precio;
   @Input() opciones;
+  @Input() categoriaID;
   subtotal;
   cantidad = 1;
   seleccion;
@@ -93,6 +94,7 @@ export class DetailmodalPage implements OnInit {
       imagen: this.imagen,
       precio: this.precio,
       opciones: this.opciones,
+      categoriaID: this.categoriaID,
       opcionSeleccionada: this.seleccion,
       total: this.subtotal,
       adicionales
