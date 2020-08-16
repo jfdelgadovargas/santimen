@@ -1,47 +1,221 @@
-<ion-content [fullscreen]="true">
-  <div class="logo">
-    <img src="../../assets/images/header.png" alt="Punto 7">
-  </div>
-  <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
-  <div class="intro-text" *ngIf="modo === 0 || abierto === false">{{textoIntro}}</div>
-  <div class="horario" *ngIf="!abierto">
-    <div class="cerrado">Abre {{horaApertura}}</div>
-    <div class="mensaje-horario">Horario: {{textoHorario}}</div>
-  </div>
-  <div class="pedidos" (click)="pedidos()" *ngIf="modo === 0 && abierto === true">Pedidos</div>
-  <ion-grid *ngIf="categorias">
-    <ion-row>
-      <ion-col class="category-col" *ngFor="let categoria of (categorias | async)" size-xs="6" (click)="goDetail(categoria.nombre)">
-        <ion-card class="category-card">
-          <img src="{{categoria.imagen}}" class="category-image">
-        </ion-card>
-        <div class="category-title">{{categoria.display}}{{categoria.cantidadComprada}}</div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="(categorias | async) === null">
-    <ion-row>
-      <ion-col size="6" *ngFor="let item of [1, 1, 1, 1, 1]">
-          <diV>
-            <ion-thumbnail slot="start" class="load-image">
-              <ion-skeleton-text animated></ion-skeleton-text>
-            </ion-thumbnail>
-          </diV>
-        <ion-skeleton-text class="load-text" animated style="width: 50%"></ion-skeleton-text>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
-<ion-footer *ngIf="subtotal">
-  <ion-toolbar>
-    <ion-row>
-      <ion-col size="12" class="col-button">
-        <div class="total-button" (click)="resumen()">
-          <div class="num-products">{{totalProductos}}</div>
-          <div class="icon-text">Ver canasta</div>
-          <div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency"></span></div>
+<ng-template [ngIf]="modo === 1" [ngIfElse]="carrito">
+  <ion-content [fullscreen]="true">
+    <ion-grid>
+      <div class="logo">
+        <img src="../../assets/images/header.png" alt="Punto 7">
+      </div>
+    <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
+    <div class="intro-text" *ngIf="modo === 0 || abierto === false">{{textoIntro}}</div>
+    <div class="horario" *ngIf="!abierto">
+      <div class="cerrado">Abre {{horaApertura}}</div>
+      <div class="mensaje-horario">Horario: {{textoHorario}}</div>
+    </div>
+
+    
+    <div class="categoria-carta">
+      <div class="titulo-categoria">
+        <img src="{{imagenHamburguesas}}">
+      </div>
+      <ion-row>
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let hamburguesa of (hamburguesas | async)">
+        <div class="categoria-grid">
+          <div class="ion-row">
+            <div class="imagen-carta">
+              <img [src]="hamburguesa.imagen" alt="Punto 7">
+            </div>
+            <div class="texto-carta">
+              <div class="titulo-carta">
+                <div class="titulo">{{hamburguesa.nombre}}</div>
+                <div class="linea-precio"></div>
+                <div class="precio">{{hamburguesa.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </div>
+              <div class="texto">{{hamburguesa.descripcion}}</div>
+            </div>
+          </div>
         </div>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-footer>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="categoria-carta">
+      <div class="titulo-categoria">
+        <img src="{{imagenPerros}}">
+      </div>
+      <ion-row>
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let perro of (perros | async)">
+        <div class="categoria-grid">
+          <div class="ion-row">
+            <div class="imagen-carta">
+              <img [src]="perro.imagen" alt="Punto 7">
+            </div>
+            <div class="texto-carta">
+              <div class="titulo-carta">
+                <div class="titulo">{{perro.nombre}}</div>
+                <div class="linea-precio"></div>
+                <div class="precio">{{perro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </div>
+              <div class="texto">{{perro.descripcion}}</div>
+            </div>
+          </div>
+        </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="categoria-carta">
+      <div class="titulo-categoria">
+        <img src="{{imagenPizzas}}">
+      </div>
+      <ion-row>
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let pizza of (pizzas | async)">
+        <div class="categoria-grid">
+          <div class="ion-row">
+            <div class="imagen-carta">
+              <img [src]="pizza.imagen" alt="Punto 7">
+            </div>
+            <div class="texto-carta">
+              <div class="titulo-carta">
+                <div class="titulo">{{pizza.nombre}}</div>
+                <div class="linea-precio"></div>
+                <div class="precio">{{pizza.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </div>
+              <div class="texto">{{pizza.descripcion}}</div>
+            </div>
+          </div>
+        </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+    <div class="categoria-carta">
+      <div class="titulo-categoria">
+        <img src="{{imagenAsados}}">
+      </div>
+      <ion-row>
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let asado of (asados | async)">
+        <div class="categoria-grid">
+          <div class="ion-row">
+            <div class="imagen-carta">
+              <img [src]="asado.imagen" alt="Punto 7">
+            </div>
+            <div class="texto-carta">
+              <div class="titulo-carta">
+                <div class="titulo">{{asado.nombre}}</div>
+                <div class="linea-precio"></div>
+                <div class="precio">{{asado.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </div>
+              <div class="texto">{{asado.descripcion}}</div>
+            </div>
+          </div>
+        </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="categoria-carta">
+      <div class="titulo-categoria">
+        <img src="{{imagenOtros}}">
+      </div>
+      <ion-row>
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let otro of (otros | async)">
+        <div class="categoria-grid">
+          <div class="ion-row">
+            <div class="imagen-carta">
+              <img [src]="otro.imagen" alt="Punto 7">
+            </div>
+            <div class="texto-carta">
+              <div class="titulo-carta">
+                <div class="titulo">{{otro.nombre}}</div>
+                <div class="linea-precio"></div>
+                <div class="precio">{{otro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </div>
+              <div class="texto">{{otro.descripcion}}</div>
+            </div>
+          </div>
+        </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+
+    <div class="categoria-carta">
+      <div class="titulo-categoria">
+        <img src="{{imagenBebidas}}">
+      </div>
+      <ion-row>
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let bebida of (bebidas | async)">
+        <div class="categoria-grid">
+          <div class="ion-row">
+            <div class="imagen-carta">
+              <img [src]="bebida.imagen" alt="Punto 7">
+            </div>
+            <div class="texto-carta">
+              <div class="titulo-carta">
+                <div class="titulo">{{bebida.nombre}}</div>
+                <div class="linea-precio"></div>
+                <div class="precio">{{bebida.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </div>
+              <div class="texto">{{bebida.descripcion}}</div>
+            </div>
+          </div>
+        </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+  </ion-grid>
+
+
+  </ion-content>
+  </ng-template>
+  <ng-template #carrito>
+    <ion-content [fullscreen]="true">
+      <div class="logo">
+        <img src="../../assets/images/header.png" alt="Punto 7">
+      </div>
+      <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
+      <div class="intro-text" *ngIf="modo === 0 || abierto === false">{{textoIntro}}</div>
+      <div class="horario" *ngIf="!abierto">
+        <div class="cerrado">Abre {{horaApertura}}</div>
+        <div class="mensaje-horario">Horario: {{textoHorario}}</div>
+      </div>
+      <div class="pedidos" (click)="pedidos()" *ngIf="modo === 0 && abierto === true">Pedidos</div>
+      <ion-grid *ngIf="categorias">
+        <ion-row>
+          <ion-col class="category-col" *ngFor="let categoria of (categorias | async)" size-xs="6" (click)="goDetail(categoria.nombre)">
+            <ion-card class="category-card">
+              <img src="{{categoria.imagen}}" class="category-image">
+            </ion-card>
+            <div class="category-title">{{categoria.display}}{{categoria.cantidadComprada}}</div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="(categorias | async) === null">
+        <ion-row>
+          <ion-col size="6" *ngFor="let item of [1, 1, 1, 1, 1]">
+              <diV>
+                <ion-thumbnail slot="start" class="load-image">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+              </diV>
+            <ion-skeleton-text class="load-text" animated style="width: 50%"></ion-skeleton-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+    <ion-footer *ngIf="subtotal">
+      <ion-toolbar>
+        <ion-row>
+          <ion-col size="12" class="col-button">
+            <div class="total-button" (click)="resumen()">
+              <div class="num-products">{{totalProductos}}</div>
+              <div class="icon-text">Ver canasta</div>
+              <div class="price">{{ subtotal | currency: 'COP':'symbol-narrow' : '1.0-0'}} <span class="price-currency"></span></div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+ 

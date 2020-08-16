@@ -9,7 +9,7 @@ import { SummaryPage } from '../pages/summary/summary.page';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss', '../../theme/utilities.scss'],
+  styleUrls: ['home.page.scss', '../../theme/utilities.scss', '../../theme/carta.scss'],
 })
 export class HomePage {
   categorias: Observable<any[]>;
@@ -23,6 +23,18 @@ export class HomePage {
   textoCarta = '';
   abierto = false;
   modo;
+  hamburguesas: Observable<any[]>;
+  imagenHamburguesas;
+  perros: Observable<any[]>;
+  imagenPerros;
+  pizzas: Observable<any[]>;
+  imagenPizzas;
+  bebidas: Observable<any[]>;
+  imagenBebidas;
+  otros: Observable<any[]>;
+  imagenOtros;
+  asados: Observable<any[]>;
+  imagenAsados;
 
   constructor(private router: Router,
               private menuService: MenuService,
@@ -34,6 +46,20 @@ export class HomePage {
    */
   ngOnInit(){
     this.subtotal = 0;
+    this.menuService.getCategorias().subscribe(elemento => {
+      const Hamburguesa = elemento.find(nombre => nombre.nombre === 'hamburguesas');
+      this.imagenHamburguesas = Hamburguesa.displayCarta;
+      const Perro = elemento.find(nombre => nombre.nombre === 'perros');
+      this.imagenPerros = Perro.displayCarta;
+      const Pizza = elemento.find(nombre => nombre.nombre === 'pizzas');
+      this.imagenPizzas = Pizza.displayCarta;
+      const Bebida = elemento.find(nombre => nombre.nombre === 'bebidas');
+      this.imagenBebidas = Bebida.displayCarta;
+      const Otro = elemento.find(nombre => nombre.nombre === 'otros');
+      this.imagenOtros = Otro.displayCarta;
+      const Asado = elemento.find(nombre => nombre.nombre === 'asados');
+      this.imagenAsados = Asado.displayCarta;
+    });
     this.categorias = this.menuService.getCategorias();
     this.menuService.getConfiguracion('configuracion').subscribe(configuracion => {
       if (configuracion){
@@ -66,6 +92,12 @@ export class HomePage {
     if (clienteID == null){
       localStorage.setItem('clienteID', JSON.stringify(''));
     }
+    this.hamburguesas = this.menuService.getMenu('hamburguesas');
+    this.perros = this.menuService.getMenu('perros');
+    this.pizzas = this.menuService.getMenu('pizzas');
+    this.bebidas = this.menuService.getMenu('bebidas');
+    this.otros = this.menuService.getMenu('otros');
+    this.asados = this.menuService.getMenu('asados');
   }
 
   /**

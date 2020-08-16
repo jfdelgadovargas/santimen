@@ -1,0 +1,131 @@
+.titulo-categoria{
+    margin: 1rem;
+}
+ion-grid{
+    padding: 0;
+}
+.imagen-carta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    max-width: 90px;
+    img{
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 10px;
+    }
+}
+.ion-row{
+    display: flex;
+    padding: 0;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px #ccc;
+}
+.texto-carta{
+    font-family: "Lato", Helvetica, sans-serif;
+    padding: 0;
+    padding-left: 0.5rem;
+    flex: 2;
+    .titulo-carta{
+        .titulo{
+            width: 100%;
+            color: var(--text-color);
+            font-weight: bold;
+        }
+        display: flex;
+        justify-content: space-between;
+        margin: 0 1rem 0 0;
+        .linea-precio{
+            border-bottom: solid 1px var( --text-color);
+        width: 100%;
+        margin: 0 0.5rem 0 0;
+        border-bottom-style: dashed;
+        }
+        .precio{
+            color: var(--ion-color-primary);
+            font-weight: bold;
+        }
+    }
+    .texto{
+        font-size: 0.9rem;
+        margin: 0.5rem 0.5rem 0 0;
+        color: var(--text-color);
+    }
+}
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px){
+    .categoria-carta{
+        margin: 0 0.5rem;
+    }
+}
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 480) 
+  and (max-device-width: 768){
+    .logo{
+        margin: 1rem;
+          img{
+              max-width: 400px;
+              border-radius:10px;
+          }
+      }
+    .categoria-carta{
+        margin: 0 0.5rem;
+    }
+}
+
+
+/* iPad Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1200px) 
+ {
+      .logo{
+        margin: 2rem 5rem 0 3rem;
+          img{
+              max-width: 400px;
+              border-radius:10px;
+          }
+      }
+    .categoria-carta{
+        margin: 0 3rem;
+    }
+
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) {
+      .logo{
+        margin: 2rem 5rem 0 3rem;
+        img{
+            max-width: 400px;
+            border-radius:10px;
+        }
+      }
+    .categoria-carta{
+        margin: 0 3rem;
+    }
+}
+
+@media screen 
+  and (min-device-width: 1600px) {
+      .logo{
+        margin: 2rem 5rem 0 3rem;
+        img{
+            max-width: 400px;
+            border-radius:10px;
+        }
+      }
+    .categoria-carta{
+        margin: 0 auto;
+        max-width: 1600px;
+    }
+}
