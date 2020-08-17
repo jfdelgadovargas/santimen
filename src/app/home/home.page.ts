@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { DetailmodalPage } from '../pages/detailmodal/detailmodal.page';
 import { SummaryPage } from '../pages/summary/summary.page';
+import { ReservasPage } from '../pages/reservas/reservas.page';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +23,9 @@ export class HomePage {
   textoIntro = '';
   textoCarta = '';
   abierto = false;
+  whatsapp = false;
   modo;
+  reservas = false;
   hamburguesas: Observable<any[]>;
   imagenHamburguesas;
   perros: Observable<any[]>;
@@ -35,6 +38,8 @@ export class HomePage {
   imagenOtros;
   asados: Observable<any[]>;
   imagenAsados;
+  numeroWapp;
+  mensajeWapp;
 
   constructor(private router: Router,
               private menuService: MenuService,
@@ -71,6 +76,10 @@ export class HomePage {
         this.textoCarta = data.textoCarta;
         this.abierto = data.abierto;
         this.modo = data.modo;
+        this.reservas = data.reservas;
+        this.whatsapp = data.whatsapp;
+        this.numeroWapp = data.numeroWapp;
+        this.mensajeWapp = data.mensajeWapp;
       }
     });
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
@@ -143,5 +152,18 @@ export class HomePage {
    */
   pedidos(){
     this.router.navigate([`/pedidos`]);
+  }
+
+  async goReservas(){
+    const modalReserva = await this.modalCtrl.create({
+      component: ReservasPage,
+      componentProps: {
+      }
+    });
+    await modalReserva.present();
+  }
+
+  contactar(){
+    window.open(`https://wa.me/${this.numeroWapp}?text=${this.mensajeWapp}`);
   }
 }

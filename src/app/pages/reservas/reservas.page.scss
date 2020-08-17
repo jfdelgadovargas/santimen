@@ -1,0 +1,52 @@
+.close-button{
+    font-size: 2rem;
+    text-align: right;
+    color: #ffffff;
+    background-color: #000000;
+    opacity: 0.6;
+    height: 2rem;
+    width: 2rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border-radius: 50%;
+}
+ion-content{
+    --background: var(--custom-background);
+    font-family: "Roboto", Helvetica, sans-serif;
+}
+.titulo{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 1rem 1rem 0.5rem 1rem;
+    color: var(--text-color);
+}
+.condiciones{
+    color: var(--text-color);
+    font-size: 0.9rem;
+    margin: 0.5rem 1rem;
+    .titulo-condiciones{
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+    }
+}
+.intro{
+    margin: 1rem;
+}
+.condicion{
+    padding: 0.2rem 0;
+    display: flex;
+    .icono{
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 0.5rem;
+        img{
+            color: var(--ion-color-primary);
+        }
+    }
+}
+.nota{
+    margin: 0.5rem 0rem 1rem;
+    font-style: italic;
+    font-size: 0.8rem;
+}

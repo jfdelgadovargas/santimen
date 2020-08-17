@@ -1,5 +1,8 @@
 .titulo-categoria{
-    margin: 1rem;
+    border-bottom: solid 2px var(--ion-color-primary);
+    border-top: solid 2px var(--ion-color-primary);
+    margin: 1rem 0.5rem;
+    padding: 0.5rem 0rem;
 }
 ion-grid{
     padding: 0;
@@ -9,10 +12,10 @@ ion-grid{
     justify-content: center;
     align-items: center;
     flex: 1;
-    max-width: 90px;
+    max-width: 100px;
     img{
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
         object-fit: cover;
         border-radius: 10px;
     }
@@ -26,7 +29,7 @@ ion-grid{
 .texto-carta{
     font-family: "Lato", Helvetica, sans-serif;
     padding: 0;
-    padding-left: 0.5rem;
+    padding-left: 1rem;
     flex: 2;
     .titulo-carta{
         .titulo{

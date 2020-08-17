@@ -26,7 +26,7 @@
             <div class="texto-carta">
               <div class="titulo-carta">
                 <div class="titulo">{{hamburguesa.nombre}}</div>
-                <div class="linea-precio"></div>
+                
                 <div class="precio">{{hamburguesa.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
               <div class="texto">{{hamburguesa.descripcion}}</div>
@@ -51,7 +51,7 @@
             <div class="texto-carta">
               <div class="titulo-carta">
                 <div class="titulo">{{perro.nombre}}</div>
-                <div class="linea-precio"></div>
+                
                 <div class="precio">{{perro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
               <div class="texto">{{perro.descripcion}}</div>
@@ -76,10 +76,25 @@
             <div class="texto-carta">
               <div class="titulo-carta">
                 <div class="titulo">{{pizza.nombre}}</div>
-                <div class="linea-precio"></div>
+                
                 <div class="precio">{{pizza.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
-              <div class="texto">{{pizza.descripcion}}</div>
+              <div class="texto">{{pizza.descripcion}}
+                <div class="opciones">
+                  <div class="opcion">
+                    <div class="label">Mini:</div>
+                    
+                    <div class="valor">{{13000 | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                  </div>
+                  <div class="opcion-nota">
+                    <div class="label">Junior:</div>
+                      <div class="opcion">
+                      <div class="nota">(Opción de combinar 2 sabores)</div>
+                      <div class="valor">{{18000 | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -102,7 +117,7 @@
             <div class="texto-carta">
               <div class="titulo-carta">
                 <div class="titulo">{{asado.nombre}}</div>
-                <div class="linea-precio"></div>
+                
                 <div class="precio">{{asado.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
               <div class="texto">{{asado.descripcion}}</div>
@@ -127,7 +142,7 @@
             <div class="texto-carta">
               <div class="titulo-carta">
                 <div class="titulo">{{otro.nombre}}</div>
-                <div class="linea-precio"></div>
+                
                 <div class="precio">{{otro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
               <div class="texto">{{otro.descripcion}}</div>
@@ -153,7 +168,7 @@
             <div class="texto-carta">
               <div class="titulo-carta">
                 <div class="titulo">{{bebida.nombre}}</div>
-                <div class="linea-precio"></div>
+                
                 <div class="precio">{{bebida.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
               <div class="texto">{{bebida.descripcion}}</div>
@@ -165,9 +180,34 @@
     </div>
 
   </ion-grid>
-
-
+  
+  <ion-grid *ngIf="(hamburguesas | async) === null">
+    <ion-row>
+      <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let item of [1, 1, 1, 1, 1]">
+          <diV class="row">
+            <ion-thumbnail slot="start" class="imagen-carta">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+          </diV>
+          <div class="texto-carta">
+            <ion-skeleton-text class="texto-carta" animated style="width: 100%"></ion-skeleton-text>
+          </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+<div class="whatsapp-btn" (click)="contactar()" *ngIf="whatsapp === true">
+  <img src="../../assets/images/whatsapp.svg">
+</div>
   </ion-content>
+  <ion-footer *ngIf="reservas === true" mode="ios" translucent="true">
+    <ion-toolbar>
+      <ion-row>
+        <ion-col size="12">
+          <div class="reservas-btn" (click)="goReservas()">Haz tu reserva</div>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-footer>
   </ng-template>
   <ng-template #carrito>
     <ion-content [fullscreen]="true">
@@ -191,7 +231,7 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-      <ion-grid *ngIf="(categorias | async) === null">
+      <!-- <ion-grid *ngIf="(categorias | async) === null">
         <ion-row>
           <ion-col size="6" *ngFor="let item of [1, 1, 1, 1, 1]">
               <diV>
@@ -202,7 +242,7 @@
             <ion-skeleton-text class="load-text" animated style="width: 50%"></ion-skeleton-text>
           </ion-col>
         </ion-row>
-      </ion-grid>
+      </ion-grid> -->
     </ion-content>
     <ion-footer *ngIf="subtotal">
       <ion-toolbar>

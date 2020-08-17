@@ -1,0 +1,69 @@
+<ion-content>
+  <div class="close-button" (click)="cerrarReserva()">
+    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+  </div>
+  <div class="titulo">Haz tu reserva</div>
+  <div class="condiciones">
+    <div class="titulo-condiciones">Condiciones para la reserva:</div>
+    <div class="condicion">
+      <div class="icono">
+        <img src="./../../../assets/images/edad.svg" alt="Edad">
+      </div>
+      <div class="texto">
+        Personas mayores de 14 y menores de 70 años
+      </div>
+    </div>
+    <div class="condicion">
+      <div class="icono">
+        <img src="./../../../assets/images/personas.svg" alt="Máximo">
+      </div>
+      <div class="texto">
+        Cantidad máxima de personas: 6
+      </div>
+    </div>
+    <div class="condicion">
+      <div class="icono">
+        <img src="./../../../assets/images/reloj.svg" alt="Tiempo máximo">
+      </div>
+      <div class="texto">
+        Tiempo máximo de la estadía: 2 horas
+      </div>
+    </div>
+    <div class="nota">Nota: Recuerda que con tu reserva puedes circular 
+      para llegar al restarurante y con tu factura, para retornar a tu casa.</div>
+    </div>
+    
+  <div class="intro">Ingresa los siguientes datos para tu reserva:</div>
+  <div class="formulario-reservas">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked">Nombre:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Número de identificación:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="text"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Telefono:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input required type="tel"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Fecha:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime 
+        displayFormat="DD/MMM/YYYY"
+        display-timezone="utc"
+        placeholder="Seleccionar"
+        monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-datetime display-format="h:mm A" picker-format="h:mm A" mode="md" minute-values="0,15,30,45"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Número de personas:<ion-text color="danger">*</ion-text></ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+</ion-content>

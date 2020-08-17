@@ -76,3 +76,46 @@
   margin: 0.5rem auto;
   height: 1rem;
 }
+.reservas-btn{
+  margin: 0.2rem auto;
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 8px;
+  color: #ffffff;
+  background-image: var(--main-color);
+  cursor: pointer;
+}
+.opciones{
+  margin: 0.5rem 0.5rem 0 0;
+  .opcion-nota{
+    padding-top: 0.2rem;
+    .label{
+      font-weight: bold;
+    }
+  }
+  .opcion{
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0;
+    .label{
+      font-weight: bold;
+    }
+    .linea-precio{
+      border-bottom: solid 1px var(--text-color);
+      width: 100%;
+      margin: 0 0.5rem 0 0;
+      border-bottom-style: dashed;
+    }
+    .valor{
+      color: var(--ion-color-primary);
+    }
+  }
+}
+.whatsapp-btn{
+  position: fixed;
+  cursor:pointer;
+  width: 60px;
+  height: 60px;
+  bottom: 4rem;
+  right: 2rem;
+}
