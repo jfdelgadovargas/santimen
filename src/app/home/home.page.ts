@@ -34,6 +34,8 @@ export class HomePage {
   imagenPizzas;
   bebidas: Observable<any[]>;
   imagenBebidas;
+  combos: Observable<any[]>;
+  imagenCombos;
   otros: Observable<any[]>;
   imagenOtros;
   asados: Observable<any[]>;
@@ -64,6 +66,8 @@ export class HomePage {
       this.imagenOtros = Otro.displayCarta;
       const Asado = elemento.find(nombre => nombre.nombre === 'asados');
       this.imagenAsados = Asado.displayCarta;
+      const Combo = elemento.find(nombre => nombre.nombre === 'combos');
+      this.imagenCombos = Combo.displayCarta;
     });
     this.categorias = this.menuService.getCategorias();
     this.menuService.getConfiguracion('configuracion').subscribe(configuracion => {
@@ -107,6 +111,7 @@ export class HomePage {
     this.bebidas = this.menuService.getMenu('bebidas');
     this.otros = this.menuService.getMenu('otros');
     this.asados = this.menuService.getMenu('asados');
+    this.combos = this.menuService.getMenu('combos');
   }
 
   /**

@@ -7,7 +7,17 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./reservas.page.scss'],
 })
 export class ReservasPage implements OnInit {
-  nombreForm;
+  reservador = {
+    nombre: '',
+    identificacion: '',
+    telefono: '',
+    correo: '',
+    fecha: '',
+    hora: '',
+    numeroPersonas: 1
+    };
+
+    blFormValid = false;
   constructor(private modalCtrl: ModalController) { }
 
   ngOnInit() {
@@ -18,7 +28,11 @@ export class ReservasPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-  validaFormulario(){
-
+  validaFormulario(valorEntrada, campo){
+    const valor = valorEntrada.detail.value;
+    if (!valor){
+      return;
+      this.blFormValid = false;
+    }
   }
 }

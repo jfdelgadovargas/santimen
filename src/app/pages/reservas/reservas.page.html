@@ -35,35 +35,111 @@
     
   <div class="intro">Ingresa los siguientes datos para tu reserva:</div>
   <div class="formulario-reservas">
-    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf5IIcgVYMSjgQGegqPdS_xFTS7X7y5mlZK2eSkHBs4ap9xiQ/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+    <!-- <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
-        <ion-label position="stacked">Nombre:<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="text"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
+        <ion-label position="float">Nombre:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input 
+        required 
+        type="text"  
+        maxlength="20" 
+        [(ngModel)]="reservador.nombre" 
+        value="{{reservador.nombre}}" 
+        (ionChange)="validaFormulario($event, 'nombre')" ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Número de identificación:<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="text"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
+        <ion-label position="float">Número de identificación:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input 
+        required 
+        type="text"  
+        maxlength="20" 
+        [(ngModel)]="reservador.identificacion" 
+        value="{{reservador.identificacion}}" 
+        (ionChange)="validaFormulario($event, 'identificacion')" ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Telefono:<ion-text color="danger">*</ion-text></ion-label>
-        <ion-input required type="tel"  maxlength="20" [(ngModel)]="nombreForm" value="{{nombreForm}}" (ionChange)="validaFormulario()" ></ion-input>
+        <ion-label position="float">Correo:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input 
+        required 
+        type="text"  
+        maxlength="20" 
+        [(ngModel)]="reservador.correo" 
+        value="{{reservador.correo}}" 
+        (ionChange)="validaFormulario($event, 'correo')" ></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Fecha:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-label position="float">Telefono:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-input 
+        required 
+        type="tel"  
+        maxlength="20" 
+        [(ngModel)]="reservador.telefono" 
+        value="{{reservador.telefono}}" 
+        (ionChange)="validaFormulario($event, 'telefono')" >
+      </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="float">Fecha:<ion-text color="danger">*</ion-text></ion-label>
         <ion-datetime 
         displayFormat="DD/MMM/YYYY"
         display-timezone="utc"
         placeholder="Seleccionar"
-        monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"></ion-datetime>
+        monthShortNames="Ene, Feb, Mar, Abr, May, Jun, Jul, Ago, Sep, Oct, Nov, Dic"
+        value="{{reservador.fecha}}" 
+        [(ngModel)]="reservador.fecha" 
+        (ionChange)="validaFormulario($event, 'fecha')"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Hora:<ion-text color="danger">*</ion-text></ion-label>
-        <ion-datetime display-format="h:mm A" picker-format="h:mm A" mode="md" minute-values="0,15,30,45"></ion-datetime>
+        <ion-datetime 
+        display-format="h:mm A" 
+        picker-format="h:mm A" 
+        mode="md" 
+        minute-values="0,15,30,45"
+        value="{{reservador.hora}}" 
+        [(ngModel)]="reservador.hora" 
+        (ionChange)="validaFormulario($event, 'hora')"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-label position="stacked">Número de personas:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-label position="float">Número de personas:<ion-text color="danger">*</ion-text></ion-label>
+        <ion-select value="numeroPersonas" interface="popover">
+          <ion-select-option value=1>1</ion-select-option>
+          <ion-select-option value=2>2</ion-select-option>
+          <ion-select-option value=3>3</ion-select-option>
+          <ion-select-option value=4>4</ion-select-option>
+          <ion-select-option value=5>5</ion-select-option>
+          <ion-select-option value=6>6</ion-select-option>
+        </ion-select>
       </ion-item>
-    </ion-list>
+    </ion-list> -->
   </div>
+
+  <!-- <div class="form acompanantes">
+    <div class="intro">Ingresa los datos de tus acompañantes:</div>
+    <div class="formulario-reservas">
+      <div class="persona" >
+        <ion-item>
+          <ion-label position="float">Nombre:<ion-text color="danger">*</ion-text></ion-label>
+          <ion-input 
+          required 
+          type="text"  
+          maxlength="20" 
+          [(ngModel)]="reservador.nombre" 
+          value="{{reservador.nombre}}" 
+          (ionChange)="validaFormulario($event, 'nombre')" ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="float">Número de identificación:<ion-text color="danger">*</ion-text></ion-label>
+          <ion-input 
+          required 
+          type="text"  
+          maxlength="20" 
+          [(ngModel)]="reservador.identificacion" 
+          value="{{reservador.identificacion}}" 
+          (ionChange)="validaFormulario($event, 'identificacion')" ></ion-input>
+        </ion-item>
+      </div>
+    </div>
+  </div> -->
 
 </ion-content>

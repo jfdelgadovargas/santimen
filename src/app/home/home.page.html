@@ -1,7 +1,7 @@
 <ng-template [ngIf]="modo === 1" [ngIfElse]="carrito">
   <ion-content [fullscreen]="true">
     <ion-grid>
-      <div class="logo">
+      <div class="logo" (click)="goReservas()">
         <img src="../../assets/images/header.png" alt="Punto 7">
       </div>
     <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
@@ -27,9 +27,16 @@
               <div class="titulo-carta">
                 <div class="titulo">{{hamburguesa.nombre}}</div>
                 
-                <div class="precio">{{hamburguesa.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                <div class="precio" *ngIf="hamburguesa.opcionesCarta.length === 0">{{hamburguesa.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
-              <div class="texto">{{hamburguesa.descripcion}}</div>
+              <div class="texto">{{hamburguesa.descripcion}}
+                <div class="opciones">
+                  <div class="opcion" *ngFor="let opcion of hamburguesa.opcionesCarta">
+                    <div class="label">{{opcion.nombre}}</div>
+                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -52,9 +59,16 @@
               <div class="titulo-carta">
                 <div class="titulo">{{perro.nombre}}</div>
                 
-                <div class="precio">{{perro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                <div class="precio" *ngIf="perro.opcionesCarta.length === 0">{{perro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
-              <div class="texto">{{perro.descripcion}}</div>
+              <div class="texto">{{perro.descripcion}}
+                <div class="opciones">
+                  <div class="opcion" *ngFor="let opcion of perro.opcionesCarta">
+                    <div class="label">{{opcion.nombre}}</div>
+                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -77,7 +91,7 @@
               <div class="titulo-carta">
                 <div class="titulo">{{pizza.nombre}}</div>
                 
-                <div class="precio">{{pizza.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                <div class="precio" *ngIf="pizza.opcionesCarta.length === 0">{{pizza.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
               <div class="texto">{{pizza.descripcion}}
                 <div class="opciones">
@@ -118,9 +132,16 @@
               <div class="titulo-carta">
                 <div class="titulo">{{asado.nombre}}</div>
                 
-                <div class="precio">{{asado.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                <div class="precio" *ngIf="asado.opcionesCarta.length === 0">{{asado.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
-              <div class="texto">{{asado.descripcion}}</div>
+              <div class="texto">{{asado.descripcion}}
+                <div class="opciones">
+                  <div class="opcion" *ngFor="let opcion of asado.opcionesCarta">
+                    <div class="label">{{opcion.nombre}}</div>
+                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -143,9 +164,16 @@
               <div class="titulo-carta">
                 <div class="titulo">{{otro.nombre}}</div>
                 
-                <div class="precio">{{otro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                <div class="precio" *ngIf="otro.opcionesCarta.length === 0">{{otro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
-              <div class="texto">{{otro.descripcion}}</div>
+              <div class="texto">{{otro.descripcion}}
+                <div class="opciones">
+                  <div class="opcion" *ngFor="let opcion of otro.opcionesCarta">
+                    <div class="label">{{opcion.nombre}}</div>
+                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -153,6 +181,38 @@
       </ion-row>
     </div>
 
+
+    <div class="categoria-carta">
+      <div class="titulo-categoria">
+        <img src="{{imagenCombos}}">
+      </div>
+      <ion-row>
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let combo of (combos | async)">
+        <div class="categoria-grid">
+          <div class="ion-row">
+            <div class="imagen-carta">
+              <img [src]="combo.imagen" alt="Punto 7">
+            </div>
+            <div class="texto-carta">
+              <div class="titulo-carta">
+                <div class="titulo">{{combo.nombre}}</div>
+                
+                <div class="precio" *ngIf="combo.opcionesCarta.length === 0">{{combo.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+              </div>
+              <div class="texto">{{combo.descripcion}}
+                <div class="opciones">
+                  <div class="opcion" *ngFor="let opcion of combo.opcionesCarta">
+                    <div class="label">{{opcion.nombre}}</div>
+                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </ion-col>
+      </ion-row>
+    </div>
 
     <div class="categoria-carta">
       <div class="titulo-categoria">
@@ -169,9 +229,16 @@
               <div class="titulo-carta">
                 <div class="titulo">{{bebida.nombre}}</div>
                 
-                <div class="precio">{{bebida.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                <div class="precio" *ngIf="bebida.opcionesCarta.length === 0">{{bebida.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
               </div>
-              <div class="texto">{{bebida.descripcion}}</div>
+              <div class="texto">{{bebida.descripcion}}
+                <div class="opciones">
+                  <div class="opcion" *ngFor="let opcion of bebida.opcionesCarta">
+                    <div class="label">{{opcion.nombre}}</div>
+                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -199,7 +266,7 @@
   <img src="../../assets/images/whatsapp.svg">
 </div>
   </ion-content>
-  <ion-footer *ngIf="reservas === true" mode="ios" translucent="true">
+  <!-- <ion-footer *ngIf="reservas === true" mode="ios" translucent="true">
     <ion-toolbar>
       <ion-row>
         <ion-col size="12">
@@ -207,7 +274,7 @@
         </ion-col>
       </ion-row>
     </ion-toolbar>
-  </ion-footer>
+  </ion-footer> -->
   </ng-template>
   <ng-template #carrito>
     <ion-content [fullscreen]="true">
