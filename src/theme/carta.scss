@@ -1,3 +1,29 @@
+#clase-1{
+    .header{
+    width: 100%;
+    max-width: 500px;
+    margin: 0rem;
+    position: relative;
+    img{
+      max-height: 220px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .logo{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      bottom: 50px;
+      right: 2rem;
+      margin: 0;
+      img{
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
 .titulo-categoria{
     border-bottom: solid 2px var(--ion-color-primary);
     border-top: solid 2px var(--ion-color-primary);
@@ -131,4 +157,5 @@ ion-grid{
         margin: 0 auto;
         max-width: 1600px;
     }
+}
 }

@@ -1,8 +1,11 @@
 <ng-template [ngIf]="modo === 1" [ngIfElse]="carrito">
   <ion-content [fullscreen]="true">
-    <ion-grid>
-      <div class="logo" (click)="goReservas()">
-        <img src="../../assets/images/header.png" alt="Punto 7">
+    <ion-grid id="clase-{{css}}">
+      <div class="header" (click)="goReservas()">
+        <img src="{{imagenHeader}}">
+        <div class="logo">
+          <img src="{{logo}}">
+        </div>
       </div>
     <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
     <div class="intro-text" *ngIf="modo === 0 || abierto === false">{{textoIntro}}</div>
@@ -11,17 +14,16 @@
       <div class="mensaje-horario">Horario: {{textoHorario}}</div>
     </div>
 
-    
-    <div class="categoria-carta">
+    <div class="categoria-carta" *ngFor="let categoria of datosCarta">
       <div class="titulo-categoria">
-        <img src="{{imagenHamburguesas}}">
+        <img src="{{categoria.imagen}}">
       </div>
       <ion-row>
-        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let hamburguesa of (hamburguesas | async)">
+        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let hamburguesa of categoria.productos">
         <div class="categoria-grid">
           <div class="ion-row">
             <div class="imagen-carta">
-              <img [src]="hamburguesa.imagen" alt="Punto 7">
+              <img [src]="hamburguesa.imagen">
             </div>
             <div class="texto-carta">
               <div class="titulo-carta">
@@ -43,212 +45,9 @@
         </ion-col>
       </ion-row>
     </div>
-
-    <div class="categoria-carta">
-      <div class="titulo-categoria">
-        <img src="{{imagenPerros}}">
-      </div>
-      <ion-row>
-        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let perro of (perros | async)">
-        <div class="categoria-grid">
-          <div class="ion-row">
-            <div class="imagen-carta">
-              <img [src]="perro.imagen" alt="Punto 7">
-            </div>
-            <div class="texto-carta">
-              <div class="titulo-carta">
-                <div class="titulo">{{perro.nombre}}</div>
-                
-                <div class="precio" *ngIf="perro.opcionesCarta.length === 0">{{perro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-              </div>
-              <div class="texto">{{perro.descripcion}}
-                <div class="opciones">
-                  <div class="opcion" *ngFor="let opcion of perro.opcionesCarta">
-                    <div class="label">{{opcion.nombre}}</div>
-                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ion-col>
-      </ion-row>
-    </div>
-
-    <div class="categoria-carta">
-      <div class="titulo-categoria">
-        <img src="{{imagenPizzas}}">
-      </div>
-      <ion-row>
-        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let pizza of (pizzas | async)">
-        <div class="categoria-grid">
-          <div class="ion-row">
-            <div class="imagen-carta">
-              <img [src]="pizza.imagen" alt="Punto 7">
-            </div>
-            <div class="texto-carta">
-              <div class="titulo-carta">
-                <div class="titulo">{{pizza.nombre}}</div>
-                
-                <div class="precio" *ngIf="pizza.opcionesCarta.length === 0">{{pizza.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-              </div>
-              <div class="texto">{{pizza.descripcion}}
-                <div class="opciones">
-                  <div class="opcion">
-                    <div class="label">Mini:</div>
-                    
-                    <div class="valor">{{13000 | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-                  </div>
-                  <div class="opcion-nota">
-                    <div class="label">Junior:</div>
-                      <div class="opcion">
-                      <div class="nota">(Opción de combinar 2 sabores)</div>
-                      <div class="valor">{{18000 | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ion-col>
-      </ion-row>
-    </div>
-
-
-    <div class="categoria-carta">
-      <div class="titulo-categoria">
-        <img src="{{imagenAsados}}">
-      </div>
-      <ion-row>
-        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let asado of (asados | async)">
-        <div class="categoria-grid">
-          <div class="ion-row">
-            <div class="imagen-carta">
-              <img [src]="asado.imagen" alt="Punto 7">
-            </div>
-            <div class="texto-carta">
-              <div class="titulo-carta">
-                <div class="titulo">{{asado.nombre}}</div>
-                
-                <div class="precio" *ngIf="asado.opcionesCarta.length === 0">{{asado.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-              </div>
-              <div class="texto">{{asado.descripcion}}
-                <div class="opciones">
-                  <div class="opcion" *ngFor="let opcion of asado.opcionesCarta">
-                    <div class="label">{{opcion.nombre}}</div>
-                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ion-col>
-      </ion-row>
-    </div>
-
-    <div class="categoria-carta">
-      <div class="titulo-categoria">
-        <img src="{{imagenOtros}}">
-      </div>
-      <ion-row>
-        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let otro of (otros | async)">
-        <div class="categoria-grid">
-          <div class="ion-row">
-            <div class="imagen-carta">
-              <img [src]="otro.imagen" alt="Punto 7">
-            </div>
-            <div class="texto-carta">
-              <div class="titulo-carta">
-                <div class="titulo">{{otro.nombre}}</div>
-                
-                <div class="precio" *ngIf="otro.opcionesCarta.length === 0">{{otro.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-              </div>
-              <div class="texto">{{otro.descripcion}}
-                <div class="opciones">
-                  <div class="opcion" *ngFor="let opcion of otro.opcionesCarta">
-                    <div class="label">{{opcion.nombre}}</div>
-                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ion-col>
-      </ion-row>
-    </div>
-
-
-    <div class="categoria-carta">
-      <div class="titulo-categoria">
-        <img src="{{imagenCombos}}">
-      </div>
-      <ion-row>
-        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let combo of (combos | async)">
-        <div class="categoria-grid">
-          <div class="ion-row">
-            <div class="imagen-carta">
-              <img [src]="combo.imagen" alt="Punto 7">
-            </div>
-            <div class="texto-carta">
-              <div class="titulo-carta">
-                <div class="titulo">{{combo.nombre}}</div>
-                
-                <div class="precio" *ngIf="combo.opcionesCarta.length === 0">{{combo.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-              </div>
-              <div class="texto">{{combo.descripcion}}
-                <div class="opciones">
-                  <div class="opcion" *ngFor="let opcion of combo.opcionesCarta">
-                    <div class="label">{{opcion.nombre}}</div>
-                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ion-col>
-      </ion-row>
-    </div>
-
-    <div class="categoria-carta">
-      <div class="titulo-categoria">
-        <img src="{{imagenBebidas}}">
-      </div>
-      <ion-row>
-        <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let bebida of (bebidas | async)">
-        <div class="categoria-grid">
-          <div class="ion-row">
-            <div class="imagen-carta">
-              <img [src]="bebida.imagen" alt="Punto 7">
-            </div>
-            <div class="texto-carta">
-              <div class="titulo-carta">
-                <div class="titulo">{{bebida.nombre}}</div>
-                
-                <div class="precio" *ngIf="bebida.opcionesCarta.length === 0">{{bebida.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-              </div>
-              <div class="texto">{{bebida.descripcion}}
-                <div class="opciones">
-                  <div class="opcion" *ngFor="let opcion of bebida.opcionesCarta">
-                    <div class="label">{{opcion.nombre}}</div>
-                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        </ion-col>
-      </ion-row>
-    </div>
-
   </ion-grid>
   
-  <ion-grid *ngIf="(hamburguesas | async) === null">
+  <!-- <ion-grid *ngIf="(hamburguesas | async) === null">
     <ion-row>
       <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let item of [1, 1, 1, 1, 1]">
           <diV class="row">
@@ -261,10 +60,10 @@
           </div>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 <div class="whatsapp-btn" (click)="contactar()" *ngIf="whatsapp === true">
   <img src="../../assets/images/whatsapp.svg">
-</div>
+</div> 
   </ion-content>
   <ion-footer *ngIf="reservas === true" mode="ios" translucent="true">
     <ion-toolbar>

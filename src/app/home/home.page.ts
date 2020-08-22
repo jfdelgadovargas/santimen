@@ -26,22 +26,12 @@ export class HomePage {
   whatsapp = false;
   modo;
   reservas = false;
-  hamburguesas: Observable<any[]>;
-  imagenHamburguesas;
-  perros: Observable<any[]>;
-  imagenPerros;
-  pizzas: Observable<any[]>;
-  imagenPizzas;
-  bebidas: Observable<any[]>;
-  imagenBebidas;
-  combos: Observable<any[]>;
-  imagenCombos;
-  otros: Observable<any[]>;
-  imagenOtros;
-  asados: Observable<any[]>;
-  imagenAsados;
   numeroWapp;
   mensajeWapp;
+  datosCarta = [];
+  imagenHeader = '';
+  logo = '';
+  css = 1;
 
   constructor(private router: Router,
               private menuService: MenuService,
@@ -54,20 +44,15 @@ export class HomePage {
   ngOnInit(){
     this.subtotal = 0;
     this.menuService.getCategorias().subscribe(elemento => {
-      const Hamburguesa = elemento.find(nombre => nombre.nombre === 'hamburguesas');
-      this.imagenHamburguesas = Hamburguesa.displayCarta;
-      const Perro = elemento.find(nombre => nombre.nombre === 'perros');
-      this.imagenPerros = Perro.displayCarta;
-      const Pizza = elemento.find(nombre => nombre.nombre === 'pizzas');
-      this.imagenPizzas = Pizza.displayCarta;
-      const Bebida = elemento.find(nombre => nombre.nombre === 'bebidas');
-      this.imagenBebidas = Bebida.displayCarta;
-      const Otro = elemento.find(nombre => nombre.nombre === 'otros');
-      this.imagenOtros = Otro.displayCarta;
-      const Asado = elemento.find(nombre => nombre.nombre === 'asados');
-      this.imagenAsados = Asado.displayCarta;
-      const Combo = elemento.find(nombre => nombre.nombre === 'combos');
-      this.imagenCombos = Combo.displayCarta;
+      for (const categoria of elemento){
+        const productos = this.menuService.getMenu(categoria.nombre).subscribe(datos => {
+          const objeto = {
+            imagen: categoria.displayCarta,
+            productos: datos
+          };
+          this.datosCarta.push(objeto);
+       });
+      }
     });
     this.categorias = this.menuService.getCategorias();
     this.menuService.getConfiguracion('configuracion').subscribe(configuracion => {
@@ -84,6 +69,9 @@ export class HomePage {
         this.whatsapp = data.whatsapp;
         this.numeroWapp = data.numeroWapp;
         this.mensajeWapp = data.mensajeWapp;
+        this.imagenHeader = data.imagenHeader;
+        this.logo = data.logo;
+        this.css = data.css;
       }
     });
     const totalizer = JSON.parse(localStorage.getItem('totalizer'));
@@ -105,13 +93,6 @@ export class HomePage {
     if (clienteID == null){
       localStorage.setItem('clienteID', JSON.stringify(''));
     }
-    this.hamburguesas = this.menuService.getMenu('hamburguesas');
-    this.perros = this.menuService.getMenu('perros');
-    this.pizzas = this.menuService.getMenu('pizzas');
-    this.bebidas = this.menuService.getMenu('bebidas');
-    this.otros = this.menuService.getMenu('otros');
-    this.asados = this.menuService.getMenu('asados');
-    this.combos = this.menuService.getMenu('combos');
   }
 
   /**
