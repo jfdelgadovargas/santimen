@@ -3,9 +3,9 @@
     <ion-grid id="clase-{{css}}">
       <div class="header" (click)="goReservas()">
         <img src="{{imagenHeader}}">
-        <div class="logo">
+       <!--  <div class="logo">
           <img src="{{logo}}">
-        </div>
+        </div> -->
       </div>
     <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
     <div class="intro-text" *ngIf="modo === 0 || abierto === false">{{textoIntro}}</div>
