@@ -89,12 +89,15 @@ ion-grid{
     }
 }
 
+}
 /* Portrait and Landscape */
 @media only screen 
   and (min-device-width: 320px) 
   and (max-device-width: 480px){
-    .categoria-carta{
-        margin: 0 0.5rem;
+    #clase-1{
+      .categoria-carta{
+          margin: 0 0.5rem;
+      }
     }
 }
 
@@ -102,15 +105,17 @@ ion-grid{
 @media only screen 
   and (min-device-width: 480) 
   and (max-device-width: 768){
-    .logo{
-        margin: 1rem;
-          img{
-              max-width: 400px;
-              border-radius:10px;
-          }
+    #clase-1{
+      .header{
+          margin: 1rem;
+            img{
+                max-width: 400px;
+                border-radius:10px;
+            }
+        }
+      .categoria-carta{
+          margin: 0 0.5rem;
       }
-    .categoria-carta{
-        margin: 0 0.5rem;
     }
 }
 
@@ -120,16 +125,18 @@ ion-grid{
   and (min-device-width: 768px) 
   and (max-device-width: 1200px) 
  {
-      .logo{
-        margin: 2rem 5rem 0 3rem;
-          img{
-              max-width: 400px;
-              border-radius:10px;
-          }
-      }
-    .categoria-carta{
-        margin: 0 3rem;
-    }
+   #clase-1{
+     .header{
+       margin: 2rem 5rem 0 3rem;
+         img{
+             max-width: 400px;
+             border-radius:10px;
+         }
+     }
+   .categoria-carta{
+       margin: 0 3rem;
+   }
+   }
 
 }
 
@@ -137,7 +144,8 @@ ion-grid{
 @media screen 
   and (min-device-width: 1200px) 
   and (max-device-width: 1600px) {
-      .logo{
+    #clase-1{
+      .header{
         margin: 2rem 5rem 0 3rem;
         img{
             max-width: 400px;
@@ -147,20 +155,22 @@ ion-grid{
     .categoria-carta{
         margin: 0 3rem;
     }
+    }
 }
 
 @media screen 
   and (min-device-width: 1600px) {
-      .logo{
-        margin: 2rem 5rem 0 3rem;
-        img{
-            max-width: 400px;
-            border-radius:10px;
+    #clase-1{
+      .header{
+          margin: 2rem 5rem 0 3rem;
+          img{
+              max-width: 400px;
+              border-radius:10px;
+          }
         }
+      .categoria-carta{
+          margin: 0 auto;
+          max-width: 1600px;
       }
-    .categoria-carta{
-        margin: 0 auto;
-        max-width: 1600px;
-    }
-}
+    }  
 }
