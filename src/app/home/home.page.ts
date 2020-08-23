@@ -47,7 +47,7 @@ export class HomePage {
       for (const categoria of elemento){
         const productos = this.menuService.getMenu(categoria.nombre).subscribe(datos => {
           const objeto = {
-            imagen: categoria.displayCarta,
+            display: categoria.display,
             productos: datos
           };
           this.datosCarta.push(objeto);

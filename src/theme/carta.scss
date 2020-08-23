@@ -1,4 +1,12 @@
 #clase-1{
+  font-family: "Lato", Helvetica, sans-serif;
+  ion-grid{
+    padding-top:0;
+  }
+  .intro-text{
+    font-family: "Lato", Helvetica, sans-serif;
+    color: var(--text-color);
+  }
     .header{
     width: 100%;
     max-width: 500px;
@@ -28,7 +36,11 @@
     border-bottom: solid 2px var(--ion-color-primary);
     border-top: solid 2px var(--ion-color-primary);
     margin: 1rem 0.5rem;
-    padding: 0.5rem 0rem;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 2rem;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
 }
 ion-grid{
     padding: 0;
@@ -173,4 +185,452 @@ ion-grid{
           max-width: 1600px;
       }
     }  
+}
+
+// Estilos #2
+
+#clase-2{
+  font-family: "Lato", Helvetica, sans-serif;
+  ion-grid{
+    padding-top:0;
+  }
+  .intro-text{
+    font-family: "Lato", Helvetica, sans-serif;
+    color: var(--text-color);
+  }
+  .header{
+  width: 100%;
+  max-width: 500px;
+  margin: 0rem;
+  position: relative;
+  img{
+    max-height: 220px;
+    width: 100%;
+    object-fit: cover;
+  }
+  .logo{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    bottom: 50px;
+    right: 2rem;
+    margin: 0;
+    img{
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+}
+.titulo-categoria{
+  border-bottom: solid 2px var(--ion-color-primary);
+  border-top: solid 2px var(--ion-color-primary);
+  margin: 1rem 0.5rem;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+.imagen-carta{
+  height: 220px;
+  img{
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+    border-radius: 8px 8px 0 0;
+  }
+}
+.categoria-grid{
+  margin: 0.5rem 0;
+  padding: 0px;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 3px 6px, rgba(0, 0, 0, 0.10) 0px 3px 6px;
+}
+
+.ion-row{
+  
+}
+.texto-carta{
+  padding: 1rem;
+  background-color: '#f9f9f8';
+  .titulo-carta{
+    width: 100%;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+      .titulo{
+      }
+      
+      .linea-precio{
+         
+      }
+      .precio{
+        color: var(--ion-color-primary);
+        font-weight: bold;
+      }
+  }
+  .nota{
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-top: 0.1rem;
+  }
+  .texto{
+    font-family: "Lato", Helvetica, sans-serif;
+    font-size: 0.9rem;
+    margin: 0.5rem 0.5rem 0 0;
+    color: var(--text-color);
+    text-align: justify;
+  }
+}
+
+}
+/* Portrait and Landscape */
+@media only screen 
+and (min-device-width: 320px) 
+and (max-device-width: 480px){
+  #clase-2{
+    .categoria-carta{
+        margin: 0 0.5rem;
+    }
+  }
+}
+
+/* Portrait and Landscape */
+@media only screen 
+and (min-device-width: 480) 
+and (max-device-width: 768){
+  #clase-2{
+    .categoria-grid{
+      margin: 0.5rem;
+    }
+    .header{
+        margin: 1rem;
+          img{
+              max-width: 400px;
+              border-radius:10px;
+          }
+      }
+    .categoria-carta{
+      .categoria-grid{
+        margin:0.5rem;
+      }
+        margin: 0 0.5rem;
+    }
+  }
+}
+
+
+/* iPad Portrait */
+@media only screen 
+and (min-device-width: 768px) 
+and (max-device-width: 1200px) 
+{
+ #clase-2{
+   .header{
+     margin: 2rem 5rem 0 3rem;
+       img{
+           max-width: 400px;
+           border-radius:10px;
+       }
+   }
+ .categoria-carta{
+   .categoria-grid{
+     margin:0.5rem;
+   }
+     margin: 0 3rem;
+ }
+ }
+
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+and (min-device-width: 1200px) 
+and (max-device-width: 1600px) {
+  #clase-2{
+    .header{
+      margin: 2rem 5rem 0 3rem;
+      img{
+          max-width: 400px;
+          border-radius:10px;
+      }
+    }
+  .categoria-carta{
+    .categoria-grid{
+      margin:0.5rem;
+    }
+      margin: 0 3rem;
+  }
+  }
+}
+
+@media screen 
+and (min-device-width: 1600px) {
+  #clase-2{
+    .header{
+        margin: 2rem 5rem 0 3rem;
+        img{
+            max-width: 400px;
+            border-radius:10px;
+        }
+      }
+    .categoria-carta{
+      .categoria-grid{
+        margin:0.5rem;
+      }
+        margin: 0 auto;
+        max-width: 1600px;
+    }
+  }  
+}
+
+// Estilos #3
+#clase-3{
+  font-family: "Lato", Helvetica, sans-serif;
+  --background: linear-gradient(315deg, #1f1f1f 0%, #2e2e2e 74%);
+  ion-grid{
+    padding-top: 0;
+  }
+  .intro-text{
+    font-family: "Lato", Helvetica, sans-serif;
+    color: white;
+  }
+  .horario{
+    .mensaje-horario{
+      color: white;
+    }
+  }
+    .header{
+    width: 100%;
+    max-width: 500px;
+    margin: 0rem;
+    position: relative;
+    img{
+      max-height: 220px;
+      width: 100%;
+      object-fit: cover;
+    }
+    .logo{
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      bottom: 50px;
+      right: 2rem;
+      margin: 0;
+      img{
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
+.titulo-categoria{
+  border-bottom: solid 2px #efaf20;
+  border-top: solid 2px #efaf20;
+  font-size: 2rem;
+  color: black;
+  background-color: #efaf20;
+  font-weight: bold;
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+}
+ion-grid{
+    padding: 0;
+}
+.imagen-carta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    min-width: 120px;
+    min-height: 120px;;
+    img{
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}
+.ion-row{
+    display: flex;
+    padding: 0;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px #ccc;
+}
+.texto-carta{
+    font-family: "Roboto", Helvetica, sans-serif;
+    padding: 0;
+    padding-left: 1rem;
+    flex: 2;
+    .nota{
+      color: white;
+    }
+    .titulo-carta{
+        .titulo{
+        }
+        width: 100%;
+        font-size: 1.2rem;
+        color: #efaf20;
+        font-weight: bold;
+        display: flex;
+        justify-content: space-between;
+        margin: 0 1rem 0 0;
+        .linea-precio{
+            border-bottom: solid 1px white;
+        width: 100%;
+        margin: 0 0.5rem 0 0;
+        border-bottom-style: dashed;
+        }
+        .precio{
+            color: #efaf20;
+            font-weight: bold;
+        }
+    }
+    .nota{
+      font-size: 0.8rem;
+      font-style: italic;
+      margin-top: 0.1rem;
+    }
+    .texto{
+        font-size: 0.9rem;
+        margin: 0.5rem 0.5rem 0 0;
+        color: white;
+        font-family: "Lato", Helvetica, sans-serif;
+        .opciones{
+          .opcion{
+            .valor{
+              color: #efaf20;
+            }
+          }
+        }
+    }
+}
+
+}
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px){
+    #clase-3{
+      .categoria-carta{
+          margin: 0 0.5rem;
+      }
+    }
+}
+
+/* Portrait and Landscape */
+@media only screen 
+  and (min-device-width: 480) 
+  and (max-device-width: 768){
+    #clase-3{
+      .header{
+          margin: 1rem;
+            img{
+                max-width: 400px;
+                border-radius:10px;
+            }
+        }
+      .categoria-carta{
+          margin: 0 0.5rem;
+      }
+    }
+}
+
+
+/* iPad Portrait */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1200px) 
+ {
+   #clase-3{
+     .header{
+       margin: 2rem 5rem 0 3rem;
+         img{
+             max-width: 400px;
+             border-radius:10px;
+         }
+     }
+   .categoria-carta{
+       margin: 0 3rem;
+   }
+   }
+
+}
+
+/* ----------- Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) {
+    #clase-3{
+      .header{
+        margin: 2rem 5rem 0 3rem;
+        img{
+            max-width: 400px;
+            border-radius:10px;
+        }
+      }
+    .categoria-carta{
+        margin: 0 3rem;
+    }
+    }
+}
+
+@media screen 
+  and (min-device-width: 1600px) {
+    #clase-3{
+      .header{
+          margin: 2rem 5rem 0 3rem;
+          img{
+              max-width: 400px;
+              border-radius:10px;
+          }
+        }
+      .categoria-carta{
+          margin: 0 auto;
+          max-width: 1600px;
+      }
+    }  
+}
+
+.footer-1{
+  --background:white;
+  .reservas-btn{
+    margin: 0.2rem auto;
+    width: fit-content;
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: #ffffff;
+    background-image: var(--main-color);
+    cursor: pointer;
+  }
+}
+.footer-2{
+  --background:white;
+  .reservas-btn{
+    margin: 0.2rem auto;
+    width: fit-content;
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: #ffffff;
+    background-image: var(--main-color);
+    cursor: pointer;
+  }
+}
+.footer-3{
+  --background: #1f1f1f;
+  .reservas-btn{
+    margin: 0.2rem auto;
+    width: fit-content;
+    padding: 0.5rem;
+    border-radius: 8px;
+    color: #1f1f1f;
+    background: none;
+    background-color: #efaf20 !important;
+    cursor: pointer;
+  }
 }
