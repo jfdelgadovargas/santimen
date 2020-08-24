@@ -2,7 +2,7 @@
   <ion-content [fullscreen]="true" id="clase-{{css}}">
     <ion-grid>
       <div class="header" (click)="goReservas()">
-        <img src="{{imagenHeader}}">
+        <img *ngIf="imagenHeader" src="{{imagenHeader}}">
        <!--  <div class="logo">
           <img src="{{logo}}">
         </div> -->
@@ -22,7 +22,7 @@
         <ion-col size-sm="12" size-xs="12" size-md="6" size-lg="6" size-xl="4" *ngFor="let producto of categoria.productos">
         <div class="categoria-grid">
           <div class="ion-row">
-            <div class="imagen-carta">
+            <div class="imagen-carta" *ngIf="producto.imagen">
               <img [src]="producto.imagen">
             </div>
             <div class="texto-carta">
@@ -77,9 +77,9 @@
   </ng-template>
   <ng-template #carrito>
     <ion-content [fullscreen]="true">
-      <div class="logo">
+      <!-- <div class="logo">
         <img src="../../assets/images/header.png" alt="Punto 7">
-      </div>
+      </div> -->
       <div class="intro-carta" *ngIf="modo === 1 && abierto === true">{{textoCarta}}</div>
       <div class="intro-text" *ngIf="modo === 0 || abierto === false">{{textoIntro}}</div>
       <div class="horario" *ngIf="!abierto">
