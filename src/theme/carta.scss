@@ -652,9 +652,29 @@ ion-grid{
   text-transform: uppercase;
   padding-bottom: 0;
   margin: 0 auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   width: fit-content;
   text-align: center;
+}
+.subtitulo-categoria{
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin: auto;
+}
+.foto-categoria{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
 ion-grid{
     padding: 0;

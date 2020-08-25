@@ -48,6 +48,9 @@ export class HomePage {
         const productos = this.menuService.getMenu(categoria.nombre).subscribe(datos => {
           const objeto = {
             display: categoria.display,
+            subtitulo: categoria.subtitulo,
+            displayCarta: categoria.displayCarta,
+            blSubtitulo: categoria.blSubtitulo,
             productos: datos
           };
           this.datosCarta.push(objeto);
