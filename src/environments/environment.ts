@@ -5,14 +5,14 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyBMUr84tMn7SM9Q1LgfMMlkBc2rIcuWjSk',
-    authDomain: 'menumrbenny.firebaseapp.com',
-    databaseURL: 'https://menumrbenny.firebaseio.com',
-    projectId: 'menumrbenny',
-    storageBucket: 'menumrbenny.appspot.com',
-    messagingSenderId: '150337426956',
-    appId: '1:150337426956:web:c6c9ed819c4437d0ac8029',
-    measurementId: 'G-ZQ5Q6BGSQQ'
+    apiKey: 'AIzaSyAjVsWDF6YIIk15d-oIVoBW0lZBaeYhqBI',
+    authDomain: 'domiciliospunto7.firebaseapp.com',
+    databaseURL: 'https://domiciliospunto7.firebaseio.com',
+    projectId: 'domiciliospunto7',
+    storageBucket: 'domiciliospunto7.appspot.com',
+    messagingSenderId: '189030245393',
+    appId: '1:189030245393:web:a42f512b01626a63f3bdb0',
+    measurementId: 'G-13409T33X5'
   }
 };
 

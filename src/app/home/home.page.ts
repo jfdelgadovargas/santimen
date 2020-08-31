@@ -45,7 +45,7 @@ export class HomePage {
     this.subtotal = 0;
     this.menuService.getCategorias().subscribe(elemento => {
       for (const categoria of elemento){
-        const productos = this.menuService.getMenu(categoria.id).subscribe(datos => {
+        const productos = this.menuService.getMenu(categoria.nombre).subscribe(datos => {
           const objeto = {
             display: categoria.display,
             subtitulo: categoria.subtitulo,
