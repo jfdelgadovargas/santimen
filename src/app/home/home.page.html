@@ -16,10 +16,10 @@
 
     <div class="categoria-carta" *ngFor="let categoria of datosCarta">
       <div class="titulo-categoria">
-        {{categoria.display}}
+        <span class="notranslate">{{categoria.display}}</span>
       </div>
       <div class="subtitulo-categoria" *ngIf="categoria.blSubtitulo && css === 4">
-        {{categoria.subtitulo}}
+        <span class="notranslate">{{categoria.subtitulo}}</span>
       </div>
       <div class="foto-categoria" *ngIf="categoria.displayCarta && css === 4">
         <img src="{{categoria.displayCarta}}">
@@ -33,15 +33,15 @@
             </div>
             <div class="texto-carta">
               <div class="titulo-carta">
-                <div class="titulo">{{producto.nombre}}</div>
-                <div class="precio" *ngIf="producto.opcionesCarta.length === 0">{{producto.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                <div class="titulo"><span class="notranslate">{{producto.nombre}}</span></div>
+                <div class="precio" *ngIf="producto.opcionesCarta.length === 0"><span class="notranslate">{{producto.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span></div>
               </div>
-              <div class="nota" *ngIf="producto.nota">{{producto.nota}}</div>
-              <div class="texto">{{producto.descripcion}}
+              <div class="nota" *ngIf="producto.nota"><span class="notranslate">{{producto.nota}}</span></div>
+              <div class="texto"><span class="notranslate">{{producto.descripcion}}</span>
                 <div class="opciones">
                   <div class="opcion" *ngFor="let opcion of producto.opcionesCarta">
-                    <div class="label">{{opcion.nombre}}</div>
-                    <div class="valor">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</div>
+                    <div class="label"><span class="notranslate">{{opcion.nombre}}</span></div>
+                    <div class="valor"><span class="notranslate">{{opcion.precio | currency:'COP':'symbol-narrow' : '1.0-0'}}</span></div>
                   </div>
                 </div>
               </div>

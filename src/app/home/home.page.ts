@@ -42,10 +42,19 @@ export class HomePage {
    * e inicialización de variables en local storage.
    */
   ngOnInit(){
+    if (!window.location.hash) {
+      window.location.href = window.location + '#loaded';
+      window.location.reload();
+    }
     this.subtotal = 0;
     this.menuService.getCategorias().subscribe(elemento => {
       for (const categoria of elemento){
         const productos = this.menuService.getMenu(categoria.nombre).subscribe(datos => {
+          for (const producto of datos){
+            producto.opcionesCarta.sort((a, b) => {
+              return (a.precio - b.precio);
+            });
+          }
           const objeto = {
             display: categoria.display,
             subtitulo: categoria.subtitulo,
