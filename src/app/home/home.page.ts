@@ -20,6 +20,7 @@ export class HomePage {
   configuraciones: Observable<any[]>;
   horaApertura;
   textoHorario = '';
+  textoHorarioEspecial = '';
   textoIntro = '';
   textoCarta = '';
   abierto = false;
@@ -60,6 +61,7 @@ export class HomePage {
             subtitulo: categoria.subtitulo,
             displayCarta: categoria.displayCarta,
             blSubtitulo: categoria.blSubtitulo,
+            order: categoria.order,
             productos: datos
           };
           this.datosCarta.push(objeto);
@@ -73,6 +75,7 @@ export class HomePage {
         this.configuraciones = data;
         this.horaApertura = data.horaApertura;
         this.textoHorario = data.textoHorario;
+        this.textoHorarioEspecial = data.textoHorarioEspecial;
         this.textoIntro = data.textoIntro;
         this.textoCarta = data.textoCarta;
         this.abierto = data.abierto;

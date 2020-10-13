@@ -12,13 +12,14 @@
     <div class="horario" *ngIf="!abierto">
       <div class="cerrado">Abre {{horaApertura}}</div>
       <div class="mensaje-horario">Horario: {{textoHorario}}</div>
+      <div class="mensaje-horario">{{textoHorarioEspecial}}</div>
     </div>
 
     <div class="categoria-carta" *ngFor="let categoria of datosCarta">
-      <div class="titulo-categoria">
+      <div class="titulo-categoria" [ngClass]="{'destacado': categoria.order === 0}">
         <span class="notranslate">{{categoria.display}}</span>
       </div>
-      <div class="subtitulo-categoria" *ngIf="categoria.blSubtitulo && css === 4">
+      <div class="subtitulo-categoria" *ngIf="categoria.blSubtitulo">
         <span class="notranslate">{{categoria.subtitulo}}</span>
       </div>
       <div class="foto-categoria" *ngIf="categoria.displayCarta && css === 4">
@@ -116,7 +117,7 @@
         </ion-row>
       </ion-grid> -->
     </ion-content>
-    <ion-footer *ngIf="subtotal">
+    <!-- <ion-footer *ngIf="subtotal">
       <ion-toolbar>
         <ion-row>
           <ion-col size="12" class="col-button">
@@ -128,6 +129,6 @@
           </ion-col>
         </ion-row>
       </ion-toolbar>
-    </ion-footer>
+    </ion-footer> -->
   </ng-template>
  
