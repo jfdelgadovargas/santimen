@@ -1,7 +1,7 @@
 <ng-template [ngIf]="modo === 1" [ngIfElse]="carrito">
   <ion-content [fullscreen]="true" id="clase-{{css}}">
     <ion-grid>
-      <div class="header" (click)="goReservas()">
+      <div class="header">
         <img *ngIf="imagenHeader" src="{{imagenHeader}}">
        <!--  <div class="logo">
           <img src="{{logo}}">
@@ -31,6 +31,9 @@
           <div class="ion-row">
             <div class="imagen-carta" *ngIf="producto.imagen">
               <img [src]="producto.imagen">
+            </div>
+            <div class="imagen-carta" *ngIf="producto.imagen === '' && categoria.display !== 'Bebidas'">
+              <img src="../../assets/images/empty.jpg">
             </div>
             <div class="texto-carta">
               <div class="titulo-carta">

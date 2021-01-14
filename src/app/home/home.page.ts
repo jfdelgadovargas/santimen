@@ -50,7 +50,7 @@ export class HomePage {
     this.subtotal = 0;
     this.menuService.getCategorias().subscribe(elemento => {
       for (const categoria of elemento){
-        const productos = this.menuService.getMenu(categoria.nombre).subscribe(datos => {
+        const productos = this.menuService.getMenu(categoria.id).subscribe(datos => {
           for (const producto of datos){
             producto.opcionesCarta.sort((a, b) => {
               return (a.precio - b.precio);
